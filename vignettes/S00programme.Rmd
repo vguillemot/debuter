@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 
 ## Nous nous présentons {.columns-2}
 
-![Vincent Guillemot](img/S00programme/moi.001.jpeg){width=75%}
+![Vincent Guillemot](img/S00programme/vincent.jpeg){width=75%}
 
  * Biostatisticien
  * Intégration de données
@@ -42,7 +42,16 @@ knitr::opts_chunk$set(
 ![Allez sur www.kahoot.it ou sur l'application Kahoot!](img/S00programme/Kahoot_Logo.svg){width=100%}
 
 
-## Au programme {.columns-2 .bigger}
+## Au programme {.bigger}
+
+ * Lundi 15 : Bases de R
+ * Mardi 16 : Manipulation de données
+ * Jeudi 18 : Réprésentations graphiques
+ * Vendredi 19 : Analyses statistiques de base
+ * Vendredi 26 : analyse de vos propres données
+
+
+## Au programme... bis {.bigger}
 
 Plutôt le matin
 
@@ -58,6 +67,14 @@ Plutôt l'après-midi
  * Explications avec exemples 
  * Exercices
  * Discussion de fin de journée
+
+## Au programme... ter {.bigger}
+
+Entre le vendredi 19 et le vendredi 26 : 
+
+ * Entraînement à la maison
+ * Première version de l'analyse de vos données
+ * Préparation de questions pour le vendredi 26
 
 ## Déroulement du cours
 

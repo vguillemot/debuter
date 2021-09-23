@@ -1,7 +1,7 @@
 ---
 title: "Premier jour: visualisation(s)"
-author: "Vincent Guillemot"
-date: "Mardi 25 mai 2021"
+author: "Vincent Guillemot & Amaury Vaysse"
+date: "Lundi 15 novembre 2021"
 output: 
     ioslides_presentation:
         css: styles.css
@@ -23,46 +23,47 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Je me présente {.columns-2 .bigger}
+## Nous nous présentons {.columns-2}
 
 ![Vincent Guillemot](img/S00programme/moi.001.jpeg){width=75%}
 
  * Biostatisticien
  * Intégration de données
- * Machine Learning
- * Cours de statistiques et de R
+
+<p class="forceBreak"></p>
+
+![Amaury Vaysse](img/S00programme/amaury.jpg){width=75%}
+
+ * Bioinformaticien
+ * Analyse de données de séquençage
 
 ## Quiz de bienvenue
 
-![Voir le lien et le code sur le chat !](img/S00programme/Kahoot_Logo.svg){width=100%}
+![Allez sur www.kahoot.it ou sur l'application Kahoot!](img/S00programme/Kahoot_Logo.svg){width=100%}
 
 
 ## Au programme {.columns-2 .bigger}
 
 Plutôt le matin
 
- * Quiz de bienvenue
- * `dplyr` : pour manipuler des données
- * `ggplot2` : pour les graphiques de base
- * retour sur les couleurs dans R
- * `ggpubr` pour combiner des graphes
-
+ * Quiz du matin
+ * Explications avec exemples
+ * Exercices
 
 <p class="forceBreak"></p>
 
 Plutôt l'après-midi
 
- * `pheatmap` : pour les cartes de chaleur et la classification hiérarchique
- * Diagrammes de Venn et *UpSet* plots
- * `gggenes` 
- * `trackViewer::lolliplot`
- * Quiz de fin
+ * Quiz de l'après-midi
+ * Explications avec exemples 
+ * Exercices
+ * Discussion de fin de journée
 
 ## Déroulement du cours
 
-Pour favoriser l'interactivité de ce cours en distanciel, voici ce que je vous propose : 
+Pour favoriser l'interactivité de ce cours, voici ce que je vous propose : 
 
- * Deux quiz (Kahoot, cf. programme)
+ * Des quiz (Kahoot, cf. programme)
  * Des exercices réguliers
  * Les étudiant·e·s sont sollicités régulièrement
  * Tutoriels interactifs pour s'entraîner "à la maison"
@@ -72,6 +73,10 @@ Pour favoriser l'interactivité de ce cours en distanciel, voici ce que je vous 
 
 ![Composition de produits alimentaires (https://ciqual.anses.fr/)](img/S00programme/ciqual.jpg){width=100%}
 
+
+## Des données simples... pour moi
+
+![Nutriwi (https://www.nutriwi.com/)](img/S00programme/nutriwi.png){width=40%}
 
 ## Ressources
 

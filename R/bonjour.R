@@ -1,9 +1,9 @@
 #' La fonction qui dit bonjour
-#' 
+#'
 #' "Bonjour !" : Cette fonction est un exemple de fonction graphique avec deux paramètres simples : la couleur du texte et la couleur du fond.
-#' 
+#'
 #' PS : cette fonction ne servira jamais pour le cours, elle sert juste à dire bonjour !
-#' 
+#'
 #' @param couleur la couleur du texte
 #' @param fond la couleur du fond
 #'
@@ -20,10 +20,10 @@ bonjour <- function(couleur = "pink", fond = "limegreen") {
 }
 
 #' Le jeu de données fruits
-#' 
+#'
 #' Composition nutritionnelle de 51 composés alimentaires issus du groupe "fruits" défini dans les données Ciqual de 2020.
 #'
-#' La table fruits est de classe "tibble" et contient les colonnes suivantes : 
+#' La table fruits est de classe "tibble" et contient les colonnes suivantes :
 #'\itemize{
 #'  \item nom : Nom du fruit
 #'  \item groupe : Groupe de fruit
@@ -44,47 +44,10 @@ bonjour <- function(couleur = "pink", fond = "limegreen") {
 #'  \item VitamineE : Vitamine E (mg/100 g)
 #'  \item VitamineC : Vitamine C (mg/100 g)
 #'}
-#'  
+#'
 #' @name fruits
 #' @docType data
 #' @references \url{https://ciqual.anses.fr/}
 #' @keywords data
 NULL
-
-#' Exemple de données de méthylation (méthylation)
-#' 
-#' Ces données de méthylation ont été sauvées sous une forme plus pratique pour le cours. methy est un objet de classe GRanges qui contient des sites de méthylation,
-#'  
-#' @name methy
-#' @format GRanges
-#' @docType data
-#' @references \url{https://bioconductor.org/packages/release/bioc/vignettes/trackViewer/inst/doc/dandelionPlot.html}
-#' @keywords data
-"methy"
-
-#' Exemple de données de méthylation (features)
-#' 
-#' Ces données de méthylation ont été sauvées sous une forme plus pratique pour le cours. features est un objet de classe GRanges qui contient l'information de deux gènes,
-#'  
-#' @name features
-#' @format GRanges
-#' @docType data
-#' @references \url{https://bioconductor.org/packages/release/bioc/vignettes/trackViewer/inst/doc/dandelionPlot.html}
-#' @keywords data
-NULL
-
-
-#' Exemple de données de méthylation (gr)
-#' 
-#' Ces données de méthylation ont été sauvées sous une forme plus pratique pour le cours. gr est un objet de classe GRanges qui contient la position sur le gène TYMP à laquelle le graphe doit commencer.
-#'  
-#' @name gr
-#' @format GRanges
-#' @docType data
-#' @references \url{https://bioconductor.org/packages/release/bioc/vignettes/trackViewer/inst/doc/dandelionPlot.html}
-#' @keywords data
-NULL
-
-
-
 

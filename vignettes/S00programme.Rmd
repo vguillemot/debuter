@@ -1,5 +1,5 @@
 ---
-title: "Premier jour: visualisation(s)"
+title: "Le programme du cours"
 author: "Vincent Guillemot & Amaury Vaysse"
 date: "Lundi 15 novembre 2021"
 output: 
@@ -95,6 +95,14 @@ Pour favoriser l'interactivité de ce cours, voici ce que je vous propose :
 
 ![Nutriwi (https://www.nutriwi.com/)](img/S00programme/nutriwi.png){width=40%}
 
+## Mais aussi...
+
+ * La page du cours : https://vguillemot.github.io/debuter/
+ * Les présentations au format PDF (et HTML)
+ * Les exercices et leur solution
+ * Des tutoriels interactifs
+ * Des feuilles de triches
+
 ## Ressources
 
 
@@ -102,11 +110,7 @@ Pour favoriser l'interactivité de ce cours, voici ce que je vous propose :
     - [dplyr](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) (EN)
     - [ggplot2](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) (EN)
   * La page STDHA sur [les couleurs](http://www.sthda.com/french/wiki/couleurs-dans-r) (FR)
-  * La page de [ggpubr](https://rpkgs.datanovia.com/ggpubr/) (EN)
-  * La vignette de [gggenes](https://cran.r-project.org/web/packages/gggenes/vignettes/introduction-to-gggenes.html) (EN)
-  * La vignette de [trackViewer](https://bioconductor.org/packages/release/bioc/vignettes/trackViewer/inst/doc/trackViewer.html) (EN)
   * [R pour les débutants d'Emmanuel Paradis](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_fr.pdf) (FR)
-  
   
 
 ## moRe ! {.columns-2 .smaller}

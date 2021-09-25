@@ -1,5 +1,5 @@
 ---
-title: "Installation de packages"
+title: "R t Rstudio"
 author: "Vincent Guillemot & Amaury Vaysse"
 date: "Lundi 15 novembre 2021"
 output: 
@@ -11,6 +11,10 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+<style>
+.forceBreak { -webkit-column-break-after: always; break-after: column; }
+</style>
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -20,89 +24,24 @@ knitr::opts_chunk$set(
 ```
 
 
-## 
-
-![](img/S01packages/fripouille.001.jpeg){width=100%}
-
-## 
-
-![](img/S01packages/fripouille.002.jpeg){width=100%}
-
-## 
-
-![](img/S01packages/fripouille.003.jpeg){width=100%}
-
-## 
-
-![](img/S01packages/fripouille.004.jpeg){width=100%}
-
-## 
-
-![](img/S01packages/fripouille.005.jpeg){width=100%}
-
-## 
-
-![](img/S01packages/fripouille.006.jpeg){width=100%}
-
-## 
-
-![](img/S01packages/fripouille.007.jpeg){width=100%}
-
-## 
-
-![](img/S01packages/fripouille.008.jpeg){width=100%}
-
-## 
-
-![](img/S01packages/fripouille.009.jpeg){width=100%}
-
-## 
-
-![](img/S01packages/fripouille.010.jpeg){width=100%}
-
-## Comment installer des packages depuis... {.smaller}
+## La différence entre R et Rstudio {.columns-2}
 
 
-  * Bioconductor ?
-    1. Installer le package `BiocManager` depuis le CRAN
-    2. Exécuter la commande `BiocManager::install("le_nom_du_package")`
-  * GitHub ?
-    1. Installer `devtools`
-    2. Exécuter la commande `devtools::install_github("username/repository")`.
-  * Du code source ?
-    1. Mettre le `source.tar.gz` dans son dossier de travail...
-    2. ou l'inverse.
-    3. Exécuter la commande `install.package("source.tar.gz", repos = NULL, type = "source")`.
+R est d'abord un **langage de programmation** qui a pour but principal de permettre d'analyser des données et de produire des représentations graphiques.
 
-# Exercices
+Mais c'est également un logiciel Open Source, libre et gratuit qui peut s'installer sur tous les systèmes d'exploitation classiques (Mac, Windows et Linux).
 
-## Installez le package du cours
+De plus la communauté des utilisateurs de R met à disposition 18261 (le 24/09/2021) packages qui permettent d'appliquer toutes les procédures statistiques imagineables, des plus classiques aux plus récentes.
 
-Dans le cadre de ce cours, j'ai créé un package R contenant :
+<p class="forceBreak"></p>
 
- * les slides (`html`)
- * les données fruits (`csv`, `xlsx`, et `RData`)
- * des TDs interactifs (`html`)
+Rstudio est à la fois le nom d'une entreprise à but non lucratif (*B Corps™*) qui met à disposition de la communauté, entre autres, des logiciels Open Source, libres et gratuits. Parmi ces logiciels : l'éditeur de programme éponyme Rstudio.
 
-Installez ce package avec la commande
+Rstudio est disponible également sur tous les systèmes d'exploitation classiques (Mac, Windows et Linux).
 
-```{r install, eval = FALSE}
-remotes::install_github(
-  "vguillemot/debuter",
-  build_vignettes = TRUE
-)
-```
+Rstudio permet de programmer en R dans un environnement fiable, riche et très complet. SOn interface graphique a été pensée pour permettre aux utilisateurs débutants de bénéficier de fonctionnalités permettant de les aider à maîtriser le langage, et beaucoup de fonctionnalités avancées pour les utilistauers aguerris!
 
-## Explorez la documentation du package
 
-  1. Charger le package :  `library(debuter)`
-  2. Regardez l'aide "générale" du package : \u0060`?debuter-package`\u0060
-  3. Explorez la première vignette : `vignette("S00programme")`
-  4. Accédez à la liste complète des vignettes : `browseVignettes("debuter")`, cette interface permet d'accéder au code source (R Markdown et R)...
-  5. ... que vous pouvez également accéder avec la commande : `edit(vignette("S00programme"))`
-  
-# Les tutoriels !
 
-Vous pouvez y accéder sur la page du site, mais ils sont aussi disponibles dans un onglet spécial si vous travaillez avec Rstudio > 1.3
 
 

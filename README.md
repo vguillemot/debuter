@@ -6,18 +6,18 @@
 
 ## Supports de cours
 
-| Thématique| Intervenant | Lien vers la présentation | Tutoriel |
-|-----------|-------------|---------------------------|----------|
-| Programme | ???  | [[HTML](vignettes/S00programme.html) [PDF](vignettes/S00programme.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T00tuto/)] |
-| R & Rstudio  | ???  | [[HTML](vignettes/S01rstudio.html) [PDF](vignettes/S01rstudio.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T01rstudio/)] |
-| Packages  | ???  | [[HTML](vignettes/S01packages.html) [PDF](vignettes/S01packages.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T01packages/)] |
-| Objets     | ???  | [[HTML](vignettes/S02dplyr.html) [PDF](vignettes/S02dplyr.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T02dplyr/)] |
-| dplyr     | ???  | [[HTML](vignettes/S02dplyr.html) [PDF](vignettes/S02dplyr.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T02dplyr/)] |
-| ggplot2   | ???  | [[HTML](vignettes/S03ggplot2.html) [PDF](vignettes/S03ggplot2.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T03ggplot2/)] |
-| couleurs  | ???  | [[HTML](vignettes/S04couleurs.html) [PDF](vignettes/S04couleurs.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T04couleurs)] |
-| pheatmap  | ???  | [[HTML](vignettes/S05pheatmap.html) [PDF](vignettes/S05pheatmap.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T05pheatmap)] |
-| upset     | ???  | [[HTML](vignettes/S06upset.html) [PDF](vignettes/S06upset.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T06upset)] |
-| gggenes   | ???  | [[HTML](vignettes/S07gggenes.html) [PDF](vignettes/S07gggenes.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T07gggenes)] |
+|  Date  | Thématique | Intervenant | Lien vers la présentation | Tutoriel |
+|--------|------------|-------------|---------------------------|----------|
+| Lu. AM | Programme | Amaury & Vincent  | [[HTML](vignettes/S00programme.html) [PDF](vignettes/S00programme.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T00tuto/)] |
+| Lu. AM | R & Rstudio  | ???  | [[HTML](vignettes/S01rstudio.html) [PDF](vignettes/S01rstudio.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T01rstudio/)] |
+| Ma. AM | Packages  | ???  | [[HTML](vignettes/S01packages.html) [PDF](vignettes/S01packages.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T01packages/)] |
+| Ma. PM | Objets     | ???  | [[HTML](vignettes/S02dplyr.html) [PDF](vignettes/S02dplyr.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T02dplyr/)] |
+| Je. AM | dplyr     | ???  | [[HTML](vignettes/S02dplyr.html) [PDF](vignettes/S02dplyr.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T02dplyr/)] |
+| Je. PM | ggplot2   | ???  | [[HTML](vignettes/S03ggplot2.html) [PDF](vignettes/S03ggplot2.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T03ggplot2/)] |
+| Ve. AM | couleurs  | ???  | [[HTML](vignettes/S04couleurs.html) [PDF](vignettes/S04couleurs.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T04couleurs)] |
+| Lu. PM | pheatmap  | ???  | [[HTML](vignettes/S05pheatmap.html) [PDF](vignettes/S05pheatmap.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T05pheatmap)] |
+| Ve. AM | upset     | ???  | [[HTML](vignettes/S06upset.html) [PDF](vignettes/S06upset.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T06upset)] |
+| Ve. PM | gggenes   | ???  | [[HTML](vignettes/S07gggenes.html) [PDF](vignettes/S07gggenes.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T07gggenes)] |
 
 ****
 

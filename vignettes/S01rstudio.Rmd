@@ -1,5 +1,5 @@
 ---
-title: "R t Rstudio"
+title: "R et Rstudio"
 author: "Vincent Guillemot & Amaury Vaysse"
 date: "Lundi 15 novembre 2021"
 output: 
@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   echo = TRUE
 )
+library(ggplot2)
 ```
 
 
@@ -39,9 +40,99 @@ Rstudio est à la fois le nom d'une entreprise à but non lucratif (*B Corps™*
 
 Rstudio est disponible également sur tous les systèmes d'exploitation classiques (Mac, Windows et Linux).
 
-Rstudio permet de programmer en R dans un environnement fiable, riche et très complet. SOn interface graphique a été pensée pour permettre aux utilisateurs débutants de bénéficier de fonctionnalités permettant de les aider à maîtriser le langage, et beaucoup de fonctionnalités avancées pour les utilistauers aguerris!
+Rstudio permet de programmer en R dans un environnement fiable, riche et très complet. Son interface graphique a été pensée pour permettre aux utilisateurs débutants de bénéficier de fonctionnalités permettant de les aider à maîtriser le langage, et beaucoup de fonctionnalités avancées pour les utilisateurs aguerris!
 
 
+## Comprehensive R Archive Network
 
 
+![Le site : https://cran.r-project.org/](img/S01rstudio/Rlogo.svg){width=25%}
+
+
+ * Installation : https://cran.r-project.org/bin/
+ * Packages : https://cran.r-project.org/web/packages/index.html
+ * Task Views : https://cran.r-project.org/web/views/
+
+## Sans Rstudio (Mac OS X) {.columns-2}
+
+### Avec un Terminal
+
+![Taper R, puis "Entrée"](img/S01rstudio/Terminal.png){width=100%}
+
+<p class="forceBreak"></p>
+
+### Avec le "GUI"$^\star$ {.smaller}
+
+
+![Démarrer l'application "R"](img/S01rstudio/RGUI.png){width=90%}
+
+> $^\star$GUI = *Graphical User Interface*
+
+
+## Rstudio 
+
+
+![Le site : https://www.rstudio.com/](img/S01rstudio/RStudio_Logo.png){width=25%}
+
+ * Installation : https://www.rstudio.com/products/rstudio/download/#download
+ * Tutoriels : https://www.rstudio.com/collections/rstudio-essentials/
+ * Feuilles de triche : https://www.rstudio.com/resources/cheatsheets/
+
+## Explorons Rstudio
+
+![Après avoir démarré l'application](img/S01rstudio/Rstudio.png){width=80%}
+
+## Les 4 panneaux
+
+![Après avoir créé un nouveau script](img/S01rstudio/Rstudio4panneaux.png){width=80%}
+
+## Les 4 panneaux -bis 
+
+
+```{r 4panneaux bis, echo = FALSE, out.width = "100%", cache = TRUE}
+dat <- data.frame(x = rep(1:2, 2), y = rep(2:1, e = 2), P = factor(1:4))
+img <- png::readPNG("img/S01rstudio/Rstudio4panneaux.png")
+g <- ggplot(dat, aes(x, y, fill = P, label = P)) +
+  ggpubr::background_image(img) +
+  geom_tile(show.legend = FALSE, alpha = 0.5) + 
+  geom_point(aes(color = P), size = 30, shape = 21, fill = "white", 
+             show.legend = FALSE) +
+  geom_text(aes(color = P), vjust = 0.5, hjust = 0.5, size = 20, 
+            show.legend = FALSE) + 
+  theme_void()
+print(g)
+```
+
+## Les 4 panneaux -ter {.columns-2}
+
+
+```{r 4panneaux ter, echo = FALSE, out.width = "100%", cache = TRUE}
+print(g)
+```
+
+<p class="forceBreak"></p>
+
+  1. Script
+  2. Environnement, historique, tutoriels
+  3. Console (le cerveau !)
+  4. Plots, packages, (fichiers)
+
+## Créer un projet
+
+![Créez un projet au début de chaque cours !](img/S01rstudio/Projet.gif){width=80%}
+
+
+## Pourquoi créer un projet ?
+
+### Réponse courte 
+
+> "*Parce que ça facilite la vie !*" -Anonyme
+
+### Réponse moins courte : 
+
+ * Pas besoin de (trop) réfléchir au répertoire de travail
+ * Un projet Rstudio = un projet d'analyse
+ * C'est plus facile à organiser
+ * Cela vous force à ranger vos analyses ...
+ * Dans des dossiers dont les noms ont du sens !
 

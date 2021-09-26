@@ -119,8 +119,7 @@ print(g)
 
 ## Créer un projet
 
-![Créez un projet au début de chaque cours !](img/S01rstudio/Projet.gif){width=80%}
-
+![Créez un projet au début de chaque cours !](img/S01rstudio/Projet.gif){width=80% loop=10}
 
 ## Pourquoi créer un projet ?
 
@@ -135,4 +134,14 @@ print(g)
  * C'est plus facile à organiser
  * Cela vous force à ranger vos analyses ...
  * Dans des dossiers dont les noms ont du sens !
+
+## Exercice 1
+
+
+### Créez un projet pour le lundi matin. Quel est votre répertoire de travail pour ce projet ?
+
+## Exercice 2
+
+### Allez dans le menu "Help" puis sélectionnez "About Rstudio". Quelle est votre version de Rstudio ? Renseignez-la dans le document partagé : LIEN
+
 

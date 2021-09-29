@@ -1,7 +1,7 @@
 ---
 title: "Le programme du cours"
-author: "Vincent Guillemot & Amaury Vaysse"
-date: "Lundi 15 novembre 2021"
+author: "Vincent Guillemot<br/>Amaury Vaysse"
+date: "Lundi 15/11/2021"
 output: 
     ioslides_presentation:
         css: styles.css

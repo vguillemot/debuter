@@ -1,7 +1,7 @@
 ---
-title: "Manipulation de données avec dplyr"
-author: "Vincent Guillemot"
-date: "Mardi 25 mai 2021"
+title: "Commandes et objets de base"
+author: "Vincent Guillemot<br/>Amaury Vaysse"
+date: "Lundi 15/11/2021"
 output: 
   ioslides_presentation:
     css: styles.css
@@ -23,208 +23,63 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Enchaîner les commandes avec magrittr {.columns-2}
+## Bien se préparer à coder
 
- * On utilise un opérateur 
- 
-<div class="centered">
-`%>%`
-</div>
+  * Créer un projet dans ce dossier : 
+     * Bien réfléchir au nom de ce projet
+     * Bien réfléchir à l'endroit où ce projet sera situé
+  * Créer un script
+  * Savoir où sont les données, et sous quel format
+  * Savoir ce que l'on veut faire !
   
- * Avant : `f(g(x))` 
- * Après :  `g(x) %>% f()`
+# C'est parti pour les commandes de base !
 
-![](img/S02dplyr/maggritr.jpeg){width=30%}
+## Le(s) prompt(s)
 
-## Exemple {.columns-2 .bigger}
+  * `>` : R attend une commande à exécuter
+  * `+` : la commande qui a été entrée n'est pas complète car
+    * il manque une parenthèse fermante
+    * il manque un crochet fermant
+    * il manque une accolade fermante
+  * ` ` : la commande est en cours de traitement. On peut l'arrêter en cliquant sur le bouton "Stop"
 
-```{r, out.width="70%", fig.align='center'}
-set.seed(7895)
+## Une commande, c'est quoi ?
 
-hist(rnorm(10))
-```
+C'est une séquence d'opérations appliquées à des objets ou des valeurs qui sera donnée au compilateur de R pour interprétation.
 
-```{r, out.width="70%", fig.align='center'}
-library(magrittr)
-set.seed(7895)
-rnorm(10) %>% hist()
-```
+  * "opération" : permet de transformer des entrées en sorties, p.ex. : la fonction `log`;
+  * "objets" : structures de données, p.ex. : plus tard ;
+  * "valeurs" : des briques de base, p.ex. : la valeur `0`. 
 
-## Le tidyverse {.bigger}
+Une fois la commande écrite dans la console, on l'exécute en appuyant sur "Entrée".
 
-<div class="centered">
-![Tidyverse: https://www.tidyverse.org/](img/S02dplyr/tidyverse.jpg){width=70%}
-</div>
+## Exercice
 
-## Avant toute chose
+Exécutez les commandes suivantes : 
 
-Charger le package `dplyr`...
+  1. `1 + 1`
+  2. `1+1`
+  3. `log(10)`
+  4. `log10(10)`
 
-```{r charger dplyr, message = FALSE}
-library(dplyr) # ou require(dplyr)
-```
+Remarquez l'utilisation des parenthèses pour appliquer une fonction !
 
-Ou bien charger `tidyverse`...
+## Opérations de base
 
-```{r charger tidyverse, eval = FALSE}
-library(tidyverse)
-```
+On peut effectuer toutes les opérations de base en R : 
 
-... mais cela chargera d'autres packages en plus
+  * addition (`+`), soustraction (`-`), multiplication (`*`), division (`/`), exponentiation (`**` ou `^`)...
+  
+appliquer les fonctions mathématiques de base :
 
-Et charger les données.
+  * logarithme (`log`, `log2`, `log10`), exponentielle (`exp`) sinus (`sin`), cosinus (`cos`), tangente (`tan`)
+  
+On peut combiner les opérations et les fonctions, et gérer les priorités avec des parenthèses !
 
-```{r fruits}
-data("fruits", package = "tidyViz")
-```
+## Exercice
 
-## Le format "tibble" {.smaller}
+Imaginez une commande incluant le plus d'opérations et de fonctions de base et dont le résultat serait 2 !
 
-Les données sont au format "tibble" : c'est comme des "data-frames" mais en mieux !
-
-```{r fruitibble}
-fruits
-```
-
-## Les fonctions de dplyr {.bigger}
-
-Nous allons voir ensemble quelques fonctions très pratiques de la librairie `dplyr`.
+## Un opérateur bien pratique, le `:`
 
 
- # | Fonction (US) | Fonction (UK) | Description
----|:-------------:|:-------------:|:----------
- 1 |    `mutate`   |    `mutate`   | Créer ou modifier des colonnes
- 2 |    `select`   |    `select`   | Sélectionner des colonnes
- 3 |   `arrange`   |    `arrange`  | Trier les lignes
- 4 |    `filter`   |    `filter`   | Sélectionner des lignes
- 5 |   `group_by`  |   `group_by`  | Grouper des lignes
- 6 |   `summarize` |   `summarise` | Résumer des groupes
-
-## Créer ou modifier des colonnes {.columns-2 .smaller}
-
-
-Avec la fonction `mutate`.
-
-```{r mutate1}
-fruits2 <- fruits %>% 
-  mutate(Sucres_ratio = Sucres / 100)
-
-head(fruits2[, "Sucres_ratio"])
-```
-
-
-Avec les fonctions classiques.
-
-```{r mutate_classic}
-fruits2 <- fruits
-fruits2$Sucres_ratio <- 
-  fruits2$Sucres / 100
-head(fruits2[, "Sucres_ratio"])
-```
-
-## Sélectionner des colonnes {.columns-2 }
-
-Avec la fonction `select`.
-
-```{r select, eval = FALSE}
-fruits %>% 
-  select(
-    Energie,
-    Sucres,
-    Lipides,
-    Proteines)
-```
-
-Avec les fonctions classiques.
-
-```{r select_classic, eval = FALSE}
-fruits[, 
-  c(
-    "Energie",
-    "Sucres",
-    "Lipides",
-    "Proteines")]
-```
-
-## Trier des lignes {.columns-2 .smaller}
-
-Avec les fonctions `arrange` et `desc`.
-
-```{r arrange}
-fruits %>% 
-  select(Energie, Sucres, Fibres) %>%
-  arrange(desc(Fibres))
-```
-
-Avec les fonctions classiques 
-
-```{r arrange_classic}
-fruits[
-  order(fruits$Fibres, decreasing = TRUE),
-  c("Energie", "Sucres", "Fibres")]
-```
-
-
-## Sélectionner des lignes {.columns-2 .smaller}
-
-Avec la fonction `filter`.
-
-```{r filter}
-fruits %>% 
-  filter(Sucres > 60)
-```
-
-Avec les fonctions classiques.
-
-```{r filter_classic}
-fruits[fruits$Sucres > 60, ]
-```
-
-## Agréger des colonnes {.smaller}
-
-Avec la fonction `group_by` : 
-
-```{r group}
-fruits %>% group_by(groupe)
-```
-
-Les données sont prêtes à être "traitées" groupe par groupe.
-PS : L'opération `ungroup()` permet d'enlever les groupes.
-
-## Calculer une moyenne {.columns-2 .smaller}
-
-Avec la fonction `summarize`.
-
-```{r summarize}
-fruits %>% 
-  group_by(groupe) %>%
-  summarize(SucreMoyen = mean(Sucres))
-```
-
-Avec les fonctions classiques.
-
-```{r summarize_classic}
-aggregate(fruits$Sucres, 
-          by = list(fruits$groupe), 
-          FUN = mean)
-```
-
-## Exercice(s)
-
-Calculer l'énergie moyenne, la teneur en sucres médiane et le maximum de la teneur en Fibres par groupe de fruits et trier le tout par ordre décroissant du maximum de la teneur en Fibres !
-
-## Deux autres fonctions {.columns-2 .center}
-
------------------ -----------  -------------------
-                  Sélectionne  Ne sélectionne pas
-Ne transforme pas `select`     `rename`
-Peut transformer  `transmute`  `mutate`
------------------ -----------  -------------------
-
-<p class="forceBreak"></p>
-
-![](img/S02dplyr/DavidRobinson.png){width=100%}
-
-# [Mais il y en a tellement d'autres !](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) {data-background=#ffffff}
-
-![](img/S02dplyr/cheatsheet.png){width=50%}

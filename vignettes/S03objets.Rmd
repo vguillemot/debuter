@@ -82,4 +82,34 @@ Imaginez une commande incluant le plus d'opérations et de fonctions de base et 
 
 ## Un opérateur bien pratique, le `:`
 
+Comment créer une suite d'entier ?
+
+  * `c(1, 2, 3, 4)`
+  * `seq(1, 4, 1`
+  * `1:4`
+
+L'opérateur `:` est très utilisé en R. Sa syntaxe est la suivante
+
+  * $i$`:`$j$ va créer une suite d'entiers de $i$ à $j$. Les entiers peuvent être négatifs ou positifs, et on peut peut avoir $i < j$ ou $i > j$, ou même $i = j$.
+
+Attention à bien mettre des **parenthèses** dans le cas d'entiers négatifs!
+
+## Exemples
+
+ * `3:7` : les entiers de 3 à 7
+ * `7:3` : les entiers de 7 à 7
+ * `-3:7` : les entiers de -3 à 7
+ * `-3:-7` : les entiers de -3 à -7
+ * `-(3:7)` : les entiers de -3 à -7
+ 
+## Mini exercices
+
+ 1. Créez un vecteur d'entiers de 0 à 3
+ 2. Créez un autre vecteur d'entiers de 3 à 1
+ 3. *Combinez* ces deux suites pour obtenir le vecteur suivant :
+ 
+```{r vecteur, echo = FALSE, results='asis'}
+pander::pandoc.table(c(3:1, 0:3))
+```
+
 

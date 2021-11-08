@@ -21,6 +21,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   echo = TRUE
 )
+library(ggplot2)
+library(tidyr)
 ```
 
 ## Bien se préparer à coder
@@ -102,7 +104,7 @@ Attention à bien mettre des **parenthèses** dans le cas d'entiers négatifs!
  * `-3:-7` : les entiers de -3 à -7
  * `-(3:7)` : les entiers de -3 à -7
  
-## Mini exercices
+## Exercice
 
  1. Créez un vecteur d'entiers de 0 à 3
  2. Créez un autre vecteur d'entiers de 3 à 1
@@ -111,5 +113,107 @@ Attention à bien mettre des **parenthèses** dans le cas d'entiers négatifs!
 ```{r vecteur, echo = FALSE, results='asis'}
 pander::pandoc.table(c(3:1, 0:3))
 ```
+
+## Assignation avec `<-`
+
+Comment "sauvegarder" ces objets ?
+
+En utilisant l'**opérateur d'assignation**
+
+```{r assign, echo = FALSE, fig.width = 3, fig.height = 3, fig.align='center'}
+data.frame(x = 0, y = 0, lab = "<-") %>% 
+  ggplot(aes(x, y, label = lab)) + 
+  geom_text(size = 50, family = "Courier", fontface = "bold") + 
+  theme_void() + 
+  theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
+```
+
+## Utilisation de l'opération d'assignation
+
+ * A gauche : l'objet que l'on veut créer
+ * A droite : sa définition
+ * Lecture de l'opération : "assigner à cet objet (à gauche) le résultat de cette commande (à droite)"
+ * Assigner deux fois de suite écrasera la première valeur assignée
+ * Alternative : `=`
+ * Exemples : `a <- 1`, `b <- 1:10`, `a <- 2` etc.
+ 
+## Les noms d'objets
+
+Règles absolues : 
+
+ * Commence par une lettre ou un point, si le premier caractère est un point, le deuxième ne peut pas être un chiffre,
+ * Pas d'espace
+ * Pas de caractères correspondant à des opérations (`+`, `-`, `*`, `/`, `^`, `**`, etc.)
+ * Les minuscules et les majuscules sont différentes !
+ * Certains "mots-clefs" sont strictement interdits (`NA`, `TRUE`, `FALSE`, `for`, `if`, `else` etc.)
+ * MAIS on peut utiliser un nom d'objet qui existe déjà !
+
+Bonnes pratiques : 
+
+ * Utiliser un nom qui a du sens
+ * Ne pas utiliser des noms  d'objets qui existent déjà et que l'on ne souhaite pas écraser !
+
+## Mini exercice
+
+ 1. Créez un vecteur d'entiers de 0 à 3, appelez le `a`
+ 2. Créez un autre vecteur d'entiers de 3 à 1, appelez le `b`
+ 3. *Combinez* ces deux vecteurs pour obtenir un vecteur `ab` selon le modèle suivant :
+ 
+```{r vecteur2, echo = FALSE, results='asis'}
+pander::pandoc.table(c(3:1, 0:3))
+```
+
+## Opérations
+
+On peut appliquer des opérations à ces "vecteurs" !
+
+```{r}
+a <- 1:5
+a + 1
+a * 2
+```
+
+Ces "vecteurs" sont des **objets**.
+
+# Les Objets
+
+## Classes d'objets
+
+Nom | Appelation officielle | Exemple
+---|---|---
+Vecteur | ??? | `1:10`
+Facteur | `factor` | `gl(2, 2)`
+Matrice | `matrix` | `matrix(1:4, 2, 2)`  
+Tableau | `data.frame` | `mtcars`  
+Liste | `list` |  `list(a = 1, b = 1:10, c = "Hello!")`
+
+Pour connaître la classe d'un objet : `class(objet)`.
+
+
+## Types de données
+
+Nom | Appellation officielle | Exemple
+---|---|---
+Entier ($\mathbb Z$) | `integer` | `1:10`, (ou `1L`)
+Réel ($\mathbb R$)  | `double` | `2.3`, `1/3`, etc...
+Caractères | `character` | `month.name`, `"Bonjour"`
+
+## "Classification" des objets
+
+
+Les objets qui ne contiennent qu'un seul type de données : vecteurs et matrices.
+
+Les objets pouvant contenir des données mixtes : tableaux et listes.
+
+La flexibilité a un coût : on ne peut plus faire certaines opérations !
+
+## Petit détour par les tableaux {.smaller}
+
+```{r fruits}
+data("fruits", package = "debuter")
+fruits
+```
+
+
 
 

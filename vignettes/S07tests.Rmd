@@ -1,0 +1,54 @@
+---
+title: "Les tests d'hypothèses"
+author: "Vincent Guillemot<br/>Amaury Vaysse"
+date: "Vendredi 18/11/2021"
+output: 
+    ioslides_presentation:
+        css: styles.css
+vignette: >
+  %\VignetteIndexEntry{07tests}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<style>
+.forceBreak { -webkit-column-break-after: always; break-after: column; }
+</style>
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = TRUE
+)
+library(ggplot2)
+```
+
+## Rappels {.columns-2 .smaller}
+
+ * Hypothèse nulle $\mathcal H_0$, c'est l'hypothèse du *statu quo*
+ * Hypothèse alternative $\mathcal H_1$, c'est la situation intéressante ! (signal)
+ * $\alpha$ : risque de première espèce, rejeter $\mathcal H_0$ lorsqu'elle est vraie ("erreur de détection")
+ * $\beta$ : risque de deuxième espèce, ne pas rejeter $\mathcal H_0$ alors que $\mathcal H_1$ est vraie ("rater un signal")
+ * Puissance : $1 - \beta$
+
+<p class="forceBreak"></p>
+
+Décision / Verité | Non rejet de $\mathcal H_0$| Rejet $\mathcal H_0$
+-----------------:|:--------------------------:|:--------------------:
+$\mathcal H_0$    | Confiance                  | Erreur de 1ère esp.
+$\mathcal H_1$    | Erreur de 2ème esp.        | Puissance
+
+## Expérience de Chastaing 
+
+## L'hypothèse nulle
+
+# Comparer des proportions
+
+## Avec la fonction `prop.test`
+
+
+
+
+

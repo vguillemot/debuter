@@ -207,6 +207,18 @@ Booléen | `logical` | `TRUE`
 >
 > -- *Trésor de la Langue Française informatisé*
 
+ * `TRUE` (ou bien `T`) et `FALSE` (ou bien `F`)
+ * Résultat d'une comparaison : `==`, `!=`, `<`, `>`, `<=`, `>=`
+ * Opérations logiques : `!`, `&`, `|`, `xor`
+
+## Exercice
+
+ 1. Effectuez les opérations suivantes : 
+   * `1 == 2`
+   * `!(5 > -6)`
+   * `(1 <= 10) | (1 > 0)`
+ 2. Prédisez le résultat de la commande suivante : `log(1) != 0`
+
 
 ## "Classification" des objets
 
@@ -305,4 +317,202 @@ Je veux deux solutions : une "normale" et une "créative" !
   * Pour enlever les lignes 5 et 7 : `fruits[-c(5, 7), ]`
   * Pour enlever les colonnes 6 et 8 : `fruits[, -c(6, 8)]`
 
-## 
+## De l'utilité des deux points
+
+Pour sélectionner une plage entière de lignes ou de colonnes adjacentes : 
+
+  * Pour sélectionner les lignes 11 à 17 : `fruits[11:17, ]`
+  * Pour sélectionner les colonnes 3 à 5 : `fruits[, 3:5]`
+  * Pour enlever les trois premiers fruits : `fruits[-(1:3), ]`
+  * Pour enlever les cinq premières variables : `fruits[, -(1:5)]`
+
+## Exercice
+
+Que se passe-t-il quand on oublie les parenthèses dans la commande `fruits[-(1:3), ]` ? Commentez !
+
+Faites de même avec le jeu de données `mtcars`.
+
+## Pour extraire une seule colonne : le `$`
+
+La syntaxe `donnees$cible` permet de sélectionner la colonne `cible` du tableau `donnees`.
+
+ * Par exemple : `fruits$Eau`
+ * Autre exemple : `fruits$groupe`
+ 
+## Exercice
+
+Extrayez la colonne de la teneur en sucres de la table des fruits... de deux façons différentes !
+
+Créez un objets contenant la teneur en sucres : quelle est la classe de cet objet ?
+
+## Les vecteurs...
+
+ * ... sont "unidimensionnels"
+ * ... ont une classe qui est égale au type de données qu'ils contiennent (R !!!)
+ * ... sont indexés avec des crochets simples
+ 
+Exemples : 
+
+ * `i <- 1:10`
+ * `eau <- fruits$Eau`
+ * `eau[i]`
+
+## Exercice
+
+Créez un vecteur `groupe` contenant les groupes de fruits. Donnez deux façons différentes d'extraire les dix premières valeurs de ce vecteur.
+
+## Extraction avec des Booléens
+
+Comment extraire les fruits ... 
+ * dont la teneur en eau est supérieure à 60 ?
+ * exotiques ?
+ * secs contenant moins de 40g/100g de sucres ?
+
+Réponse : en utilisant des vecteurs booléens
+
+ 1. Créer le vecteur de booléens `fruits$Eau >= 60`
+ 2. Utiliser le résultat dans les crochets carrés `fruits[fruits$Eau >= 60, ]`
+ 
+Ne pas oublier la virgule ! 
+
+## Le principe
+
+Pour un vecteur `v` : 
+
+  * `v[bool]` extrait les valeurs de `v` pour lesquelles `bool` est vrai (`TRUE`). Contrainte : `v` et `bool` doivent contenir **le même nombre d'élements**.
+
+Pour un tableau `tab` : 
+
+  * `tab[brow, ]` pour extraire les lignes
+  * `tab[, bcol]`
+  * Contrainte 1 : `brow` doit avoir autant d'éléments que `tab` de lignes
+  * Contrainte 2 : `bcol` doit avoir autant d'éléments que `tab` de colonnes
+
+## Attention
+
+Vous verrez souvent des opérations logiques à l'intérieur des crochets carrés : cela permet d'aller plus vite !
+
+Par exemple, en deux étapes : 
+
+ 1. `bool <- fruits$groupe == "secs" & fruits$Sucres < 40`
+ 2. `fruits[bool, ]`
+ 
+Devient, en une étape :
+
+  * `fruits[fruits$groupe == "secs" & fruits$Sucres < 40, ]` 
+
+## Attention bis
+
+On peut combiner deux méthodes d'extraction de données pour un tableau : une sur les lignes et une sur les colonnes !
+
+Par exemple : `tab[brow, icol]`, où `brow` est un vecteur de booléens et `icol` un vecteur d'indices.
+
+## Exercice
+
+Construisez la sous-table contenant la teneur en protéines, en glucides et en lipides des fruits secs.
+
+
+## Les objets nommés
+
+En R, on peut donner des "noms"...
+
+  * aux éléments d'un vecteur, 
+  * aux lignes d'un tableau ou d'une matrice,
+  * aux colonnes d'un tableau ou d'une matrice,
+  * aux éléments d'une liste
+
+Pourquoi ? Pour pouvoir disposer d'une nouvelle méthode d'extraction de données !
+
+## Pour un tableau
+
+On utilise :
+
+ * `rownames(tab)` pour connaître le nom des lignes
+ * `colnames(tab)` pour connaître le nom des colonnes
+
+Et, en bonus, on peut : 
+
+ * changer les noms des lignes `rownames(tab) <- new1`
+ * changer les noms des colonnes `colnames(tab) <- new2`
+
+Et, en super bonus, on peut :
+
+ * modifier quelques noms de lignes `rownames(tab)[sel1] <- new1`
+ * modifier quelques noms de colonnes `rownames(tab)[sel1] <- new2`
+
+## Modifier un objet ou son contenu
+
+La syntaxe `obj[i] <- newvalue` (et ses variations) peut être utilisée pour tous les types d'objets indiçables. Mais il faut l'utiliser avec prudence !
+
+Exemple : `fruits$Energie[1:10] <- 0`
+
+Que s'est-il passé ? 
+**Au secours !!!!**
+
+Pour revenir en arrière : `data("fruits", package = "debuter")`
+
+## Extraction avec des noms
+
+Exemple : 
+
+  * Pour extraire l'énergie : `fruits[, "Energie"]`,
+  * Pour extraire le groupe : `fruits[, "groupe"]`,
+  * Pour extraire l'énergie et le groupe : `fruits[, c("Energie", "groupe")]`,
+  * Pour enlever le groupe : `fruits[, -"groupe"]` ?
+
+## Bilan
+
+Mode d'extraction | Exemples
+---|---
+Indices | `fruits[, 2]`
+Booléens | `fruits[fruits$nom == "Abricot", ]`
+Noms | `fruits$nom` ou `fruits[,"nom"]`
+
+## Exercice
+
+Lister le maximum de façons possibles d'extraire du tableau `fruits` les fruits crus sucrés riches en Vitamine C !
+
+# Estimation ponctuelle
+
+## Définition {.smaller}
+
+Il s'agit d'estimer un caractéristique statistique d'un ensemble de données avec une seule valeur.
+
+Paramètre | Grandeur statistique | Commande 
+---|---|---
+Position | Moyenne |  `mean`
+Position | Médiane |  `median`
+Position | Minimum |  `min`
+Position | Maximum |  `max`
+Dispersion | Variance |  `var`
+Dispersion | Ecart-type |  `sd`
+Dispersion | Intervalle inter-quartiles |  `IQR`
+Lien | Covariance |  `cov`
+Lien | Corrélation |  `cor`
+
+## Exercice
+
+Calculez
+
+ * la médiane de la teneur en sucres
+ * la moyenne de la teneur en eau
+ * l'écart-type de la teneur en eau
+
+Appliquez la fonction `summary` aux données `fruits`.
+
+## Les fonctions astucieuses
+
+ * `summary` pour obtenir des statistiques
+ * `str` pour la structure des données
+ * `table` pour faire des tables de comptage
+ * `seq_along` pour créer un vecteur d'indices de même longueur qu'un vecteur donné
+ 
+## Les graphes de base
+
+ * `barplot` : diagrammes en bâtons
+ * `hist` : histogrammes
+ * `plot` : nuages de points
+
+## Exercice
+
+Faire un histogramme de la teneur en Vitamine C des fruits crus.

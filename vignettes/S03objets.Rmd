@@ -186,6 +186,8 @@ Facteur | `factor` | `gl(2, 2)`
 Matrice | `matrix` | `matrix(1:4, 2, 2)`  
 Tableau | `data.frame` | `mtcars`  
 Liste | `list` |  `list(a = 1, b = 1:10, c = "Hello!")`
+Fonction | `function` | `sin`, `exp`, `log`
+
 
 Pour connaître la classe d'un objet : `class(objet)`.
 
@@ -197,6 +199,14 @@ Nom | Appellation officielle | Exemple
 Entier ($\mathbb Z$) | `integer` | `1:10`, (ou `1L`)
 Réel ($\mathbb R$)  | `double` | `2.3`, `1/3`, etc...
 Caractères | `character` | `month.name`, `"Bonjour"`
+Booléen | `logical` | `TRUE`
+
+## Bouh les quoi ?
+
+> MATH., néol. Qui est relatif aux théories du logicien et mathématicien anglais George Boole.
+>
+> -- *Trésor de la Langue Française informatisé*
+
 
 ## "Classification" des objets
 
@@ -207,6 +217,10 @@ Les objets pouvant contenir des données mixtes : tableaux et listes.
 
 La flexibilité a un coût : on ne peut plus faire certaines opérations !
 
+Les objets ayant des "dimensions" : vecteurs, tableaux et matrices
+
+Les objets pour qui cela ne signifie rien ou presque : listes et fonctions
+
 ## Petit détour par les tableaux {.smaller}
 
 ```{r fruits}
@@ -214,6 +228,81 @@ data("fruits", package = "debuter")
 fruits
 ```
 
+## Importer des données en R
 
+ * Des données de *packages* : `data`
+ * Des données au format R (`RData`) : `load`
+ * Des données "tabulées" : `read.table`
+ * Des données Excel : `readxl::read_excel`
+ * Des données Stata, SPSS, images etc.
 
+## Les données "de R"
 
+ * Utiliser la commande `data()` pour avoir une liste (presque ?) exhaustive.
+ * Bonne pratique : pour charger un jeu de données, utiliser la commande complète `data("nom_des_data", package = "nom_du_package")`
+ * Mais ces alternatives fonctionnent également : 
+   + `data(mtcars)`
+   + `DNase`
+   + `library(ggplot2) ; data(diamonds)`
+   
+## Utilisation des guillemets
+
+  * Obligation : quand l'argument doit être une chaîne de caractères
+  * Oubli : `library`, `require`, `data`
+  * Guillemets simples : fonctionnent comme les guillemets doubles. Ex.: `"bonjour"` est équivalent à `'bonjour'`.
+  * Le "backtick" ou "backquote" : "`"
+
+# Bref, c'est quoi un `tibble` ?
+
+## Mise à jour de la table des classes d'objets !
+
+Nom | Appelation officielle | Exemple
+---|---|---
+Vecteur | ??? | `1:10`
+Facteur | `factor` | `gl(2, 2)`
+Matrice | `matrix` | `matrix(1:4, 2, 2)`  
+Tableau | `data.frame` | `mtcars`  
+Tableau | `tibble` | `fruits`  
+Liste | `list` |  `list(a = 1, b = 1:10, c = "Hello!")`
+Fonction | `function` | `sin`, `exp`, `log`
+
+## Explorer les données `fruits`
+
+```{r brackets, echo = FALSE, fig.width = 6, fig.height = 4, fig.align='center'}
+data.frame(x = c(0, 1, 0, 1), y = c(1, 1, 0, 0), lab = c("[ ]", "[ , ]", "[[ ]]", "$")) %>% 
+  ggplot(aes(x, y, label = lab, color = lab)) + 
+  geom_text(aes(hjust = x, vjust = y), size = 20, family = "Courier", fontface = "bold", show.legend = FALSE) + 
+  theme_void() + 
+  theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
+```
+
+## Sur quels objets les utiliser ?
+
+Opérateur | Vecteurs | Matrices | Tableaux | Listes
+----------|:--------:|:--------:|:--------:|:------:
+`[ ]`     |     x    |          |     x    |    x 
+`[ , ]`   |          |     x    |     x    |    
+`[[ ]]`   |          |          |     x    |    x 
+`$`       |          |          |     x    |    x
+
+## L'opérateur de sélection classique : `[ , ]`
+
+  * Pour sélectioner la première ligne : `fruits[1, ]`
+  * Pour sélectionner la deuxième colonne : `fruits[, 2]`
+  * Pour enlever la troisième ligne : `fruits[-3, ]`
+  * Pour enlever la quatrième colonne : `fruits[, -4]`
+  
+## Exercice
+
+Comment faire pour sélectionner les fruits numéro 1, 3 et 5 ?
+
+Je veux deux solutions : une "normale" et une "créative" !
+
+## Sélectionner plusieurs lignes / colonnes
+
+  * Pour sélectioner les lignes 1 et 3 : `fruits[c(1, 3), ]`
+  * Pour sélectionner les colonnes 2 et 4 : `fruits[, c(2, 4)]`
+  * Pour enlever les lignes 5 et 7 : `fruits[-c(5, 7), ]`
+  * Pour enlever les colonnes 6 et 8 : `fruits[, -c(6, 8)]`
+
+## 

@@ -23,6 +23,7 @@ knitr::opts_chunk$set(
   echo = TRUE
 )
 library(ggplot2)
+data("fruits", package = "debuter")
 ```
 
 ## Rappels {.columns-2 .smaller}
@@ -44,10 +45,47 @@ $\mathcal H_1$    | Erreur de 2ème esp.        | Puissance
 
 ## L'hypothèse nulle
 
-# Comparer des proportions
+## Création d'un exemple {.columns-2 .smaller}
 
-## Avec la fonction `prop.test`
+```{r histvitC, fig.width = 3, fig.height=3}
+hist(fruits$VitamineC)
+vitcqual <- cut(fruits$VitamineC, 
+                c(0, 10, 90))
+```
 
+```{r histEau, fig.width = 3, fig.height=3}
+hist(fruits$Eau)
+eauqual <- cut(fruits$Eau, 
+               c(0, 85, 100))
+```
+
+
+
+
+## Comparer des proportions
+
+Avec la fonction `prop.test`
+
+## Analyser des données de comptage
+
+Avec la fonction `chisq.test`
+Avec la fonction `fisher.test`
+
+## Comparer des moyennes
+
+## Les formules
+
+## Comparer des moyennes sur données appariées
+
+## Equivalent non-paramétrique
+
+## ANOVA
+
+
+## ANOVA non paramétrique
+
+
+## Modèles linéaires
 
 
 

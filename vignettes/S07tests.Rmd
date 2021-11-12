@@ -47,33 +47,138 @@ $\mathcal H_1$    | Erreur de 2ème esp.        | Puissance
 
 ## Création d'un exemple {.columns-2 .smaller}
 
-```{r histvitC, fig.width = 3, fig.height=3}
-hist(fruits$VitamineC)
-vitcqual <- cut(fruits$VitamineC, 
-                c(0, 10, 90))
+```{r histvitC, fig.width = 3, fig.height=3, message=FALSE}
+qplot(fruits$Energie)
+energiequal <- cut(fruits$Energie, 
+                c(0, 250, 2000))
 ```
 
-```{r histEau, fig.width = 3, fig.height=3}
-hist(fruits$Eau)
+```{r histEau, fig.width = 3, fig.height=3, message=FALSE}
+qplot(fruits$Eau)
 eauqual <- cut(fruits$Eau, 
                c(0, 85, 100))
 ```
 
+## Table de contingence
 
+Une table de contingence, ou table de comptage, est un tableau croisé (de comptage) entre deux variables qualitatives ou plus. 
 
+```{r table}
+(tab <- table(energiequal, eauqual))
+```
+
+On peut aussi calculer les proportions
+```{r prop.table}
+prop.table(tab)
+```
+
+## Profils lignes et profils colonnes {.columns-2 .smaller}
+
+Proportions conditionnellement aux lignes :
+
+```{r prop.table1}
+prop.table(tab, margin = 1)
+```
+
+<p class="forceBreak"></p>
+
+Proportions conditionnellement aux colonnes :
+
+```{r prop.table2}
+prop.table(tab, margin = 2)
+```
 
 ## Comparer des proportions
 
-Avec la fonction `prop.test`
+Avec la fonction `prop.test` : 
 
-## Analyser des données de comptage
+```{r prop.test}
+prop.test(table(energiequal, eauqual))
+```
 
-Avec la fonction `chisq.test`
-Avec la fonction `fisher.test`
+Attention, le test des proportions a besoin de données de comptage, pour lui :
+\[
+  \frac{2}{4} \neq \frac{50}{100}
+\]
+
+## La fonction `prop.test` {.smaller}
+
+  * Accepte des tables de contingences,
+  * Ou bien deux vecteurs : `x` pour les "succès", `n` pour le nombre total,
+  * Eventuellement un vecteur de proportions de référence `p`
+
+Un des exemples de la fonction (cf. `?prop.test`) :
+
+```{r propex}
+smokers  <- c( 83, 90, 129, 70 )
+patients <- c( 86, 93, 136, 82 )
+prop.test(smokers, patients)
+```
+
+
+## Test du "khi-deux"
+
+Avec la fonction `chisq.test` : 
+
+```{r chisq.test}
+chisq.test(energiequal, eauqual)
+```
+
+## La fonction `chisq.test` {.smaller}
+
+  * Accepte deux variables qualitatives,
+  * Ou une table de contingence
+  
+Un des exemples de la fonction (cf. `?chisq.test`) :
+
+```{r exchi2}
+M <- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))
+dimnames(M) <- list(gender = c("F", "M"),
+                    party = c("Democrat","Independent", "Republican"))
+(Xsq <- chisq.test(M))  # Prints test summary
+Xsq$expected   # expected counts under the null
+```
+
+## La statistique du $\chi^2$
+
+Elle compare les fréquences observées aux fréquences attendues. Les fréquences attendues sont calculées à partir des fréquences marginales sous hypothèse d'indépendance.
+
+\[
+ X^2 = \displaystyle \sum \frac{\left(n_{ij} - \displaystyle \frac{n_{i\cdot} n_{\cdot j}}{n} \right)^2}{\displaystyle \frac{n_{i\cdot} n_{\cdot j}}{n}},
+\]
+avec $n_{ij}$ l'effectif observé, $n_{i\cdot}$ l'effectif marginal ligne, $n_{\cdot j}$ l'effectif marginal colonne et $n$ l'effectif total.
+
+Rappel : quand $A$ et $B$ son indépendants, $P(A\cap B) = P(A)P(B)$.
+
+## Test exact de Fisher
+
+Avec la fonction `fisher.test` : 
+
+```{r fisher.test}
+fisher.test(energiequal, eauqual)
+```
 
 ## Comparer des moyennes
 
+Avec la fonction `t.test` :
+
+```{r t.test}
+t.test(fruits$VitamineC ~ eauqual)
+```
+
 ## Les formules
+
+Les formules permettent à l'utilisateur de décrire un modèle : 
+\[
+  Y = X_1 + X_2 + X_3 + X_2*X_3 + X_3*X_4
+\]
+deviendra
+```
+  y ~ x1 + x2 * x3 + x3:x4 
+```
+
+Repérez le tilde sur votre clavier, il est très important en R !
+
 
 ## Comparer des moyennes sur données appariées
 

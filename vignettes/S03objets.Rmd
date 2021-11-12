@@ -507,6 +507,14 @@ Appliquez la fonction `summary` aux données `fruits`.
  * `table` pour faire des tables de comptage
  * `seq_along` pour créer un vecteur d'indices de même longueur qu'un vecteur donné
  
+## D'autres fonctions très utilies
+
+ * `sum` pour calculer la somme de nombres
+ * `rowSums` et `colSums` pour calculer les sommes des lignes et colonnes d'une table,
+ * `rowMeans` et `colMeans` pour calculer les moyennes des lignes et colonnes d'une table,
+
+
+
 ## Les graphes de base
 
  * `barplot` : diagrammes en bâtons

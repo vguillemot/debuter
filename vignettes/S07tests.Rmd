@@ -250,6 +250,11 @@ deviendra
 
 Repérez le tilde sur votre clavier, il est très important en R !
 
+Exemple : 
+```
+  y ~ x + age + sex + SCL:disease 
+```
+
 ## La fonction `t.test` {.smaller}
 
 
@@ -310,6 +315,29 @@ kruskal.test(fruits$VitamineC, fruits$groupe)
 
 Récupérer la p-valeur s'effectue de la même façon que pour un test de Student.
 
+
+## Corrélation {.smaller}
+
+Avec la fonction `cor.test`. Exemple : 
+
+```{r cor.test}
+cor.test(fruits$Eau, fruits$Energie)
+```
+
+## La fonction `cor.test` {.smaller}
+
+ * Accepte deux vecteurs `x` et `y` de même longueur,
+ * Permet de tester les trois types de corrélation (Pearson, Sparman et Kendall)
+
+Un des exemples de la fonction (cf. `?cor.test`) :
+
+```{r excortest}
+x <- c(44.4, 45.9, 41.9, 53.3, 44.7, 44.1, 50.7, 45.2, 60.1)
+y <- c( 2.6,  3.1,  2.5,  5.0,  3.6,  4.0,  5.2,  2.8,  3.8)
+
+cor.test(x, y, method = "kendall", alternative = "greater")
+```
+
 ## Modèles linéaires {.smaller}
 
 Avec la fonction `lm`. Exemple : 
@@ -319,6 +347,5 @@ res.lm <- lm(Energie ~Proteines + Sucres + Fibres + Eau,
              data = fruits)
 summary(res.lm)
 ```
-
 
 

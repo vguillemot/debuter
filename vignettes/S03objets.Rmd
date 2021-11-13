@@ -490,6 +490,19 @@ Dispersion | Intervalle inter-quartiles |  `IQR`
 Lien | Covariance |  `cov`
 Lien | Corrélation |  `cor`
 
+## Rappel : corrélation de Pearson
+
+
+
+## Rappel : corrélation de Spearman
+
+
+
+## Rappel (?) : corrélation de Kendall
+
+
+
+
 ## Exercice
 
 Calculez
@@ -499,6 +512,10 @@ Calculez
  * l'écart-type de la teneur en eau
 
 Appliquez la fonction `summary` aux données `fruits`.
+
+ * Calculez la corrélation de Pearson entre la teneur en eau et la teneur en sucres,
+ * Calculez la corrélation de Spearman
+ 
 
 ## Les fonctions astucieuses
 
@@ -512,7 +529,6 @@ Appliquez la fonction `summary` aux données `fruits`.
  * `sum` pour calculer la somme de nombres
  * `rowSums` et `colSums` pour calculer les sommes des lignes et colonnes d'une table,
  * `rowMeans` et `colMeans` pour calculer les moyennes des lignes et colonnes d'une table,
-
 
 
 ## Les graphes de base

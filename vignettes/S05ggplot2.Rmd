@@ -1,7 +1,7 @@
 ---
 title: "Graphiques avec ggplot2"
-author: "Vincent Guillemot"
-date: "Mardi 25 mai 2021"
+author: "Vincent Guillemot<br/>Amaury Vaysse"
+date: "Mardi 16/11/2021"
 output: 
     ioslides_presentation:
         css: styles.css
@@ -40,16 +40,16 @@ library(ggplot2)
 Nous allons également avoir besoin des données fruits : 
 
 ```{r data}
-data("fruits", package = "tidyViz")
+data("fruits", package = "debuter")
 ```
 
 ## Bien choisir sa représentation graphique {.centered}
 
-![From Data to Viz : https://www.data-to-viz.com/](img/S03ggplot2/data-viz.png){width=50%}
+![From Data to Viz : https://www.data-to-viz.com/](img/S05ggplot2/data-viz.png){width=50%}
 
 ## Un échantillon de ce qu'il est possible de faire avec ggplot2 {.center}
 
-![](img/S03ggplot2/sample.png){width=100%}
+![](img/S05ggplot2/sample.png){width=100%}
 
 # Diagramme en bâtons
 
@@ -85,23 +85,23 @@ ggplot(data = fruits, aes(x = groupe, fill = groupe)) +
 
 ## Les données {.center}
 
-![](img/S03ggplot2/ggplot.001.jpeg){width=100%}
+![](img/S05ggplot2/ggplot.001.jpeg){width=100%}
 
 ## Les paramètres esthétiques {.center}
 
-![](img/S03ggplot2/ggplot.002.jpeg){width=100%}
+![](img/S05ggplot2/ggplot.002.jpeg){width=100%}
 
 ## Les géométries {.center}
 
-![](img/S03ggplot2/ggplot.003.jpeg){width=100%}
+![](img/S05ggplot2/ggplot.003.jpeg){width=100%}
 
 ## L'image à retenir {.center}
 
-![](img/S03ggplot2/ggplot2_masterpiece.jpg){width=80%}
+![](img/S05ggplot2/ggplot2_masterpiece.jpg){width=80%}
 
 ## [G]rammar of [G]raphics {.center}
 
-![](img/S03ggplot2/grammar-of-graphics.png){width=100%}
+![](img/S05ggplot2/grammar-of-graphics.png){width=100%}
 
 ## Implémentation dans ggplot2
 
@@ -124,7 +124,7 @@ Comment corriger la commande suivante pour obtenir le graphe à droite ?
 ```
 
 
-![](img/S03ggplot2/barplotSucres.png){width=100%}
+![](img/S05ggplot2/barplotSucres.png){width=100%}
 
 ## Un peu d'histoire {.columns-2}
 
@@ -136,7 +136,7 @@ Comment corriger la commande suivante pour obtenir le graphe à droite ?
 <p class="forceBreak"></p>
 
 
-![Hadley Wickham](img/S03ggplot2/wickham.png){width=50%}
+![Hadley Wickham](img/S05ggplot2/wickham.png){width=50%}
  
 ## Quelques géométries
 
@@ -227,7 +227,7 @@ Pour ce genre de graphe, il est important de choisir les intervalles sur lesquel
    - des *rectangles* gris foncé
    - un *message*
 
-![](img/S03ggplot2/message.png){width=80%}
+![](img/S05ggplot2/message.png){width=80%}
 
 <p class="forceBreak"></p>
 
@@ -237,12 +237,12 @@ ggplot(fruits, aes(Sucres)) +
 ```
    
    
-## Exercice qui n'a (presque) rien à voir!
+## C'est quoi ce message ?
 
+Pour faire un histogramme, on a besoin de répartir des valeurs numériques dans des classes.
 
-Dans un document R Markdown, comment faire pour ne pas afficher le message dans votre rapport ?
-
-*... il y a plusieurs solutions possibles...*
+ * La fonction `hist` le fait automatiquement avec l'algorithme de Sturges (ou Scott, ou Friedman-Diaconis si l'utilisateur le souhaite). Si on spécifie `n`, la fonction décidera un nombre de classes "approprié" proche de `n`. Pour forcer les classes, il faut utiliser `breaks`.
+ * La fonction `geom_histogram` crée par défaut 30 classes, charge à l'utilisateur de changer cela.
 
 ## Modification des intervalles
 
@@ -288,7 +288,7 @@ ggplot(fruits, aes(Sucres)) +
 
 ## Boxplot
 
-![](img/S03ggplot2/boxplot.png){width=100%}
+![](img/S05ggplot2/boxplot.png){width=100%}
 
 ## Boxplot d'une variable
 
@@ -334,7 +334,7 @@ ggplot(fruits,
 
 <p class="forceBreak"></p>
 
-![](img/S03ggplot2/violonfibres.png){width=100%}
+![](img/S05ggplot2/violonfibres.png){width=100%}
 
 # Personnalisation
 
@@ -390,7 +390,7 @@ ggplot(fruits, aes(y = Fibres)) +
 
 <p class="forceBreak"></p>
 
-![](img/S03ggplot2/theme.png){width=100%}
+![](img/S05ggplot2/theme.png){width=100%}
 
 ## Autres personnalisations "simples"
 
@@ -496,7 +496,7 @@ ggplot(fruits,
 
 <p class="forceBreak"></p>
 
-![](img/S03ggplot2/latotale.png){width=100%}
+![](img/S05ggplot2/latotale.png){width=100%}
 
 ## Au secours, mes points se superposent! {.columns-2}
 
@@ -561,7 +561,7 @@ ggplot(fruits,
 
 <p class="forceBreak"></p>
 
-![](img/S03ggplot2/scalelog.png){width=100%}
+![](img/S05ggplot2/scalelog.png){width=100%}
 
 ## Avec les fonctions `coord_***`
 
@@ -688,4 +688,4 @@ Nous avons vu un package de représentations graphiques très puissant ! `ggplot
 
 # [N'oubliez pas la feuille de triche !](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf) {data-background=#ffffff}
 
-![](img/S03ggplot2/cheatsheet.png){width=50%}
+![](img/S05ggplot2/cheatsheet.png){width=50%}

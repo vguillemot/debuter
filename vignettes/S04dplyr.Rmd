@@ -1,7 +1,7 @@
 ---
 title: "Manipulation de données avec dplyr"
-author: "Vincent Guillemot"
-date: "Mardi 25 mai 2021"
+author: "Vincent Guillemot<br/>Amaury Vaysse"
+date: "Mardi 16/11/2021"
 output: 
   ioslides_presentation:
     css: styles.css
@@ -34,7 +34,7 @@ knitr::opts_chunk$set(
  * Avant : `f(g(x))` 
  * Après :  `g(x) %>% f()`
 
-![](img/S02dplyr/maggritr.jpeg){width=30%}
+![](img/S04dplyr/maggritr.jpeg){width=30%}
 
 ## Exemple {.columns-2 .bigger}
 
@@ -45,15 +45,15 @@ hist(rnorm(10))
 ```
 
 ```{r, out.width="70%", fig.align='center'}
-library(magrittr)
 set.seed(7895)
+library(magrittr)
 rnorm(10) %>% hist()
 ```
 
 ## Le tidyverse {.bigger}
 
 <div class="centered">
-![Tidyverse: https://www.tidyverse.org/](img/S02dplyr/tidyverse.jpg){width=70%}
+![Tidyverse: https://www.tidyverse.org/](img/S04dplyr/tidyverse.jpg){width=70%}
 </div>
 
 ## Avant toute chose
@@ -75,7 +75,7 @@ library(tidyverse)
 Et charger les données.
 
 ```{r fruits}
-data("fruits", package = "tidyViz")
+data("fruits", package = "debuter")
 ```
 
 ## Le format "tibble" {.smaller}
@@ -86,10 +86,9 @@ Les données sont au format "tibble" : c'est comme des "data-frames" mais en mie
 fruits
 ```
 
-## Les fonctions de dplyr {.bigger}
+## Les fonctions de dplyr {.smaller}
 
 Nous allons voir ensemble quelques fonctions très pratiques de la librairie `dplyr`.
-
 
  # | Fonction (US) | Fonction (UK) | Description
 ---|:-------------:|:-------------:|:----------
@@ -99,6 +98,11 @@ Nous allons voir ensemble quelques fonctions très pratiques de la librairie `dp
  4 |    `filter`   |    `filter`   | Sélectionner des lignes
  5 |   `group_by`  |   `group_by`  | Grouper des lignes
  6 |   `summarize` |   `summarise` | Résumer des groupes
+ 7 |     `count`   |     `count`   | Compter
+
+## 
+
+![](img/S04dplyr/dplyr_wrangling.jpeg){width=100%}
 
 ## Créer ou modifier des colonnes {.columns-2 .smaller}
 
@@ -146,6 +150,19 @@ fruits[,
     "Proteines")]
 ```
 
+## Sélectionner des colonnes - bis
+
+la fonction `select` est très versatile !
+
+```{r selectbis, eval = FALSE}
+fruits %>% 
+  select(Energie:Proteines, - Sucres)
+```
+
+On peut sélectionner des plages entières de colonnes sur la base de leurs noms, en enlever avec le `-`, combiner tout cela avec la fonction `c()`... ou pas !
+
+**Attention, la flexibilité a un coût !**
+
 ## Trier des lignes {.columns-2 .smaller}
 
 Avec les fonctions `arrange` et `desc`.
@@ -180,7 +197,23 @@ Avec les fonctions classiques.
 fruits[fruits$Sucres > 60, ]
 ```
 
-## Agréger des colonnes {.smaller}
+## Sélectionner des plages de lignes {.columns-2 .smaller}
+
+Avec la fonction `slice`.
+
+```{r slice}
+fruits %>% 
+  slice(3:10)
+```
+
+Avec les fonctions classiques.
+
+```{r slice_classic}
+fruits[3:10, ]
+```
+
+
+## Grouper des lignes {.smaller}
 
 Avec la fonction `group_by` : 
 
@@ -213,7 +246,7 @@ aggregate(fruits$Sucres,
 
 Calculer l'énergie moyenne, la teneur en sucres médiane et le maximum de la teneur en Fibres par groupe de fruits et trier le tout par ordre décroissant du maximum de la teneur en Fibres !
 
-## Deux autres fonctions {.columns-2 .center}
+## Deux autres fonctions pour sélectionner ou transformer des colonnes {.columns-2 .center}
 
 ----------------- -----------  -------------------
                   Sélectionne  Ne sélectionne pas
@@ -223,8 +256,70 @@ Peut transformer  `transmute`  `mutate`
 
 <p class="forceBreak"></p>
 
-![](img/S02dplyr/DavidRobinson.png){width=100%}
+![](img/S04dplyr/DavidRobinson.png){width=100%}
 
-# [Mais il y en a tellement d'autres !](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) {data-background=#ffffff}
+## Compter {.columns-2}
 
-![](img/S02dplyr/cheatsheet.png){width=50%}
+Avec le "verbe" `count` : 
+
+```{r count}
+fruits %>% count(groupe)
+```
+
+<p class="forceBreak"></p>
+
+On peut ensuite ranger les résultats par ordre décroissant : 
+
+```{r countArrange}
+fruits %>%
+  count(groupe) %>%
+  arrange(desc(n))
+```
+
+## Compter deux choses à la fois
+
+Par exemple, compter dans chaque groupe le nombre de fruits dont la teneur en Vitamine C est inférieure ou supérieure à 50 : 
+
+```{r compte2choses}
+fruits %>%
+  mutate(VitCqual = cut(VitamineC, c(0, 50, 100))) %>%
+  count(groupe, VitCqual, name = "N")
+```
+
+## Super bonus : la table de contingence
+
+Ce n'est pas facile, il vaut mieux utiliser la fonction `table` :
+
+```{r contingence, message=FALSE}
+library(tidyr)
+fruits %>%
+  mutate(VitCqual = cut(VitamineC, c(0, 50, 100))) %>%
+  count(groupe, VitCqual, name = "N") %>%
+  pivot_wider(id_cols = groupe, 
+              names_from = VitCqual, 
+              values_from = N)
+```
+
+# D'autres fonctions utiles en bonus  {data-background=#ffffff}
+
+Avec les illustrations de Allison Horst (https://www.allisonhorst.com/)
+
+##
+
+![](img/S04dplyr/dplyr_relocate.jpeg){width=100%}   
+
+##
+
+![](img/S04dplyr/dplyr_across.jpeg){width=100%}
+
+##
+
+![](img/S04dplyr/dplyr_case_when.jpeg){width=100%}   
+
+
+
+# [Il y a tellement d'autres fonctions !](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) {data-background=#ffffff}
+
+![](img/S04dplyr/cheatsheet.png){width=50%}
+
+

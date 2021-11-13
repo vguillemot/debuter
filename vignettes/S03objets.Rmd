@@ -560,6 +560,30 @@ Appliquez la fonction `summary` aux données `fruits`.
  * `hist` : histogrammes
  * `plot` : nuages de points
 
+## La fonction `barplot`
+
+Permet de réaliser des diagrammes en bâtons : 
+
+```{r barplot}
+barplot(table(fruits$groupe))
+```
+
+## La fonction `hist`
+
+Permet de réaliser des histogrammes : 
+
+```{r hist}
+hist(fruits$Eau)
+```
+
+## La fonction `plot`
+
+Permet de tracer des nuages de points : 
+
+```{r plot}
+plot(fruits$Eau, fruits$Sucres)
+```
+
 ## Exercice
 
 Faire un histogramme de la teneur en Vitamine C des fruits crus.

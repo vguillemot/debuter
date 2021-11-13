@@ -26,6 +26,8 @@ Les essentiels :
   * Rstudio : www.rstudio.com
   * Comprehensive R Archive Network : https://cran.r-project.org/
   * Bioconductor : https://www.bioconductor.org/
+  * L'[aide-mémoire créé par Julien Chiquet)(inst/extdata/CommandesUsuelles.pdf)
+  * Les données [fruits](inst/extdata/fruits.xlsx) et les données de [recettes](inst/extdata/nutriwi.xlsx)
 
 ****
 

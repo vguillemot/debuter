@@ -476,6 +476,10 @@ fisher.test(Convictions, alternative = &quot;less&quot;)
 
 <p>Repérez le tilde sur votre clavier, il est très important en R !</p>
 
+<p>Exemple :</p>
+
+<pre >  y ~ x + age + sex + SCL:disease </pre>
+
 </article></slide><slide class=""><hgroup><h2>La fonction <code>t.test</code></h2></hgroup><article  class="smaller" id="la-fonction-t.test">
 
 <ul>
@@ -553,6 +557,46 @@ res[[1]]$`Pr(&gt;F)`[1]
 #&gt; 0.0004609</pre>
 
 <p>Récupérer la p-valeur s’effectue de la même façon que pour un test de Student.</p>
+
+</article></slide><slide class=""><hgroup><h2>Corrélation</h2></hgroup><article  class="smaller" id="corrélation">
+
+<p>Avec la fonction <code>cor.test</code>. Exemple :</p>
+
+<pre class = 'prettyprint lang-r'>cor.test(fruits$Eau, fruits$Energie)
+#&gt; 
+#&gt;  Pearson&#39;s product-moment correlation
+#&gt; 
+#&gt; data:  fruits$Eau and fruits$Energie
+#&gt; t = -49.719, df = 49, p-value &lt; 2.2e-16
+#&gt; alternative hypothesis: true correlation is not equal to 0
+#&gt; 95 percent confidence interval:
+#&gt;  -0.9944420 -0.9828672
+#&gt; sample estimates:
+#&gt;        cor 
+#&gt; -0.9902339</pre>
+
+</article></slide><slide class=""><hgroup><h2>La fonction <code>cor.test</code></h2></hgroup><article  class="smaller" id="la-fonction-cor.test">
+
+<ul>
+<li>Accepte deux vecteurs <code>x</code> et <code>y</code> de même longueur,</li>
+<li>Permet de tester les trois types de corrélation (Pearson, Sparman et Kendall)</li>
+</ul>
+
+<p>Un des exemples de la fonction (cf. <code>?cor.test</code>) :</p>
+
+<pre class = 'prettyprint lang-r'>x &lt;- c(44.4, 45.9, 41.9, 53.3, 44.7, 44.1, 50.7, 45.2, 60.1)
+y &lt;- c( 2.6,  3.1,  2.5,  5.0,  3.6,  4.0,  5.2,  2.8,  3.8)
+
+cor.test(x, y, method = &quot;kendall&quot;, alternative = &quot;greater&quot;)
+#&gt; 
+#&gt;  Kendall&#39;s rank correlation tau
+#&gt; 
+#&gt; data:  x and y
+#&gt; T = 26, p-value = 0.05972
+#&gt; alternative hypothesis: true tau is greater than 0
+#&gt; sample estimates:
+#&gt;       tau 
+#&gt; 0.4444444</pre>
 
 </article></slide><slide class=""><hgroup><h2>Modèles linéaires</h2></hgroup><article  class="smaller" id="modèles-linéaires">
 

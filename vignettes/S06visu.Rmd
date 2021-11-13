@@ -1,7 +1,7 @@
 ---
-title: "Les couleurs dans R"
-author: "Vincent Guillemot"
-date: "Mardi 25 mai 2021"
+title: "Visualisation"
+author: "Vincent Guillemot<br/>Amaury Vaysse"
+date: "Jeudi 18/11/2021"
 output: 
     ioslides_presentation:
         css: styles.css
@@ -39,8 +39,16 @@ library(RColorBrewer)
 Nous allons également avoir besoin des données fruits : 
 
 ```{r data}
-data("fruits", package = "tidyViz")
+data("fruits", package = "debuter")
 ```
+
+## Au programme
+
+  * Les couleurs, avec ou sans `RColorBrewer`
+  * La personnalisation avancée de ses `ggplot`favoris
+  * Les diagrammes de Venn avec `ggplot2`
+  * Les cartes de chaleur avec `pheatmap`
+
 
 # Trois façons de colorier des objets
 
@@ -142,7 +150,7 @@ barplot(rep(1, 3), col = 2:4)
 
 Reproduisez le graphe ci-dessous avec le système de couleurs de votre choix : 
 
-![](img/S04couleurs/barplot.png){width=80%}
+![](img/S06visu/barplot.png){width=80%}
 
 # ATTENTION !
 
@@ -175,7 +183,7 @@ brewer.pal(n = 3, name = "Set3")
 
 <p class="forceBreak"></p>
 
-![](img/S04couleurs/brewerdisplay.png){width=100%}
+![](img/S06visu/brewerdisplay.png){width=100%}
 
 ## En quelques mots
 
@@ -199,7 +207,7 @@ barplot(rep(1, 7),
 
 <p class="forceBreak"></p>
 
-![](img/S04couleurs/exo1.png){width=100%}
+![](img/S06visu/exo1.png){width=100%}
 
 
 # Extrapoler des couleurs
@@ -228,7 +236,310 @@ barplot(rep(1, 100),
 
 <p class="forceBreak"></p>
 
-![](img/S04couleurs/colz.png){width=100%}
+![](img/S06visu/colz.png){width=100%}
+
+## Paramètre d'opacité
+
+Dans `ggplot2`, l'opacité se gère avec `alpha` : 0 = invisible, 1 = opaque.
+
+De manière générale : on peut opacifier sa couleur préférée avec le code HEX : on ajoute deux chiffres héxadécimaux **OPTIONNELS** pour régler l'opacité à la fin d'un code couleur.
+
+```{r hexalpha, echo = FALSE, fig.height = 2.5, fig.width = 6}
+hexdat <- data.frame(
+  x = 1:8,
+  col = rep(c("#FF0000", "#00FF00", "#0000FF", "#11111170"), each = 2)
+)
+
+zesize <- 20
+
+ggplot(hexdat, aes(x = x)) + 
+  geom_point(aes(color = I(col)), y = 1, size = zesize) + 
+  annotate("text", x = 0, y = 1, label = "#", size = zesize) + 
+  theme_minimal() + 
+  xlim(c(-0.2, 8.2)) + 
+  theme_void()
+```
+
+## Exercice {.columns-2}
+
+Reproduisez le graphe ci-contre en modifiant la commande ci-dessous.
+
+```{r couleuralphaexo3, eval = FALSE}
+colfun <- colorRampPalette(
+  c("#FFAA00FF", ***), 
+  alpha = TRUE)
+barplot(***, 
+        col = colfun(100), 
+        axes = F, border = NA)
+
+```
+
+<p class="forceBreak"></p>
+
+![](img/S06visu/alpha.png){width=100%}
+
+
+# Personnalisation de graphes `ggplot2`
+
+## Avant toutes choses
+
+Nous aurons besoin du package `ggpubr` :
+
+ * Vérifier que le package `ggpubr` est bien installé
+ * Si non, l'installer, puis le charger
+
+```{r ggpubr, message = FALSE}
+library(ggpubr)
+```
+
+## Ajouter des p-valeurs {.smaller}
+
+```{r signif, warning=FALSE, fig.height=4}
+ggplot(fruits, aes(groupe, VitamineC)) + 
+  geom_boxplot(aes(color = groupe)) + 
+  geom_signif(comparisons = list(c("crus", "exotique"))) + 
+  theme_bw()
+```
+
+## Mosaïque de graphes {.smaller}
+
+```{r ggarrange, warning=FALSE, message=FALSE, fig.height=4}
+g1 <- ggplot(fruits, aes(Eau)) + geom_histogram()
+g2 <- ggplot(fruits, aes(Energie)) + geom_histogram()
+ggarrange(g1, g2, labels = "AUTO")
+```
+
+
+# Diagrammes de Venn avec `ggvenn`
+
+
+## Avant toutes choses
+
+Nous aurons besoin du package `ggvenn` :
+
+ * Vérifier que le package `ggvenn` est bien installé
+ * Si non, l'installer, puis le charger
+
+```{r UpSetR, message = FALSE}
+library(ggvenn)
+```
+
+## Visualiser des relations entre listes 
+
+Créons une liste d'objets :
+
+```{r flist}
+flist <- with(fruits,
+  list(
+    Sucres = nom[Sucres > 20],
+    Fibres = nom[Fibres > 2],
+    Energie = nom[Energie > 50],
+    Potassium = nom[Potassium > 100]
+))
+```
+
+
+## Diagramme de Venn {.smaller}
+
+Compliqués à lire à partir de 4 ensembles : 
+
+```{r venn, fig.height = 4, fig.width = 8}
+ggvenn(flist, set_name_size = 4)
+```
+
+## Sauvegarder un diagramme de Venn
+
+En utilisant la (très pratique) fonction `ggsave` : 
+
+```{r sauvenn, eval = FALSE}
+g <- ggvenn(flist, set_name_size = 4)
+ggsave(filename = "fruit_venn.pdf", plot = g)
+```
+
+## Pour le personnaliser...
+
+Voir l'aide de la fonction `?ggvenn`
+
+  * `fill_color`, `fill_alpha` pour les couleurs à l'intérieur des cercles,
+  * `stroke_color`, `stroke_alpha`, `stroke_size`, `stroke_linetype` pour le contour des cercles,
+  * `set_name_color`, `set_name_size` pour les noms des ensembles,
+  * `text_color`, `text_size` pour le texte à l'intérieur des intersections
+
+# Cartes de chaleur avec `heatmap`
+
+## Avant toutes choses
+
+Nous aurons besoin du package `pheatmap` :
+
+ * Vérifier que le package `pheatmap` est bien installé
+ * Si non, l'installer, puis le charger
+
+```{r pheatmap}
+library(pheatmap)
+```
+
+
+## Premier essai
+
+```{r essai1, eval = FALSE}
+pheatmap(fruits)
+```
+
+```
+Error in hclust(d, method = method) : 
+  NA/NaN/Inf dans un appel à une fonction externe (argument 10)
+De plus : Warning messages:
+1: In dist(mat, method = distance) :
+  NAs introduits lors de la conversion automatique
+2: In dist(mat, method = distance) :
+  NAs introduits lors de la conversion automatique
+```
+
+# Pourquoi ça ne fonctionne pas ?
+
+
+## Deuxième essai : C'est déjà mieux ? {.columns-2}
+
+```{r essai2, eval = FALSE}
+pheatmap(fruits[, -(1:2)])
+```
+
+<p class="forceBreak"></p>
+
+```{r essai2eval, echo = FALSE, fig.width = 4, fig.height = 5}
+pheatmap(fruits[, -(1:2)])
+```
+
+## Les arguments
+
+ * `cluster_rows = FALSE` : enlever le dendrogramme sur les lignes
+ * `scale = "column"`  : pour standardiser les variables
+ * `show_rownames = FALSE` : pour cacher les noms des lignes
+ * `cellwidth = 10` : pour avoir des plus petites cellules
+
+Pour avoir une liste complète des arguments : `?pheatmap`
+
+## Troisième essai {.columns-2}
+
+```{r essai3, eval = FALSE}
+pheatmap(
+  fruits[, -(1:2)],
+  cluster_rows = FALSE,
+  scale = "column",
+  show_rownames = FALSE,
+  cellwidth = 10
+)
+```
+
+<p class="forceBreak"></p>
+
+```{r essai3eval, echo = FALSE, fig.width = 4, fig.height = 5}
+pheatmap(
+  fruits[, -(1:2)],
+  cluster_rows = FALSE,
+  scale = "column",
+  show_rownames = FALSE,
+  cellwidth = 10
+)
+```
+
+
+## Quatrième essai : changer les couleurs {.columns-2 .smaller}
+
+```{r essai4, eval = FALSE}
+colfun <- colorRampPalette(
+  c("darkorchid", 
+    "white", 
+    "limegreen"))
+  
+pheatmap(
+  fruits[, -(1:2)],
+  cluster_rows = FALSE,
+  scale = "column",
+  show_rownames = FALSE,
+  cellwidth = 10,
+  color = colfun(20)
+)
+```
+
+<p class="forceBreak"></p>
+
+```{r essai4eval, echo = FALSE, fig.width = 4, fig.height = 5}
+colfun <- colorRampPalette(
+  c("darkorchid", 
+    "white", 
+    "limegreen"))
+
+pheatmap(
+  fruits[, -(1:2)],
+  cluster_rows = FALSE,
+  scale = "column",
+  show_rownames = FALSE,
+  cellwidth = 10,
+  color = colfun(20)
+)
+```
+
+
+## Cinquième essai : ajouter des informations "qualitatives" {.columns-2 .smaller}
+
+```{r essai5, eval = FALSE}
+colfun <- colorRampPalette(
+  c("darkorchid", 
+    "white", 
+    "limegreen"))
+fruitsDF <- data.frame(
+  fruits[,-1], 
+  row.names = make.unique(fruits$nom))
+annotLignes <- fruitsDF[, "groupe", 
+                        drop = FALSE]
+
+pheatmap(
+  fruitsDF[, -1],
+  cluster_rows = FALSE,
+  scale = "column",
+  show_rownames = FALSE,
+  cellwidth = 10,
+  color = colfun(20), 
+  annotation_row = annotLignes
+)
+```
+
+<p class="forceBreak"></p>
+
+```{r essai5eval, echo = FALSE, fig.width = 4, fig.height = 5}
+colfun <- colorRampPalette(c("darkorchid", "white", "limegreen"))
+fruitsDF <- data.frame(fruits[,-1], row.names = make.unique(fruits$nom))
+annotLignes <- fruitsDF[, "groupe", drop = FALSE]
+
+pheatmap(
+  fruitsDF[, -1],
+  cluster_rows = FALSE,
+  scale = "column",
+  show_rownames = FALSE,
+  cellwidth = 10,
+  color = colfun(20), 
+  annotation_row = annotLignes
+)
+```
+
+## A vous !
+
+Changez la commande suivante pour obtenir un joli graphe.
+
+```{r avous, eval = FALSE}
+pheatmap(
+  t(fruits),
+  scale = "row",
+  color = c("black", "black"),
+  legend_breaks = c(-6, 0,+6),
+  border_color = "pink",
+  cellheight = 100,
+  cellwidth = 0.1,
+  show_colnames = "FALSE"
+)
+```
+
 
 
 

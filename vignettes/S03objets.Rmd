@@ -490,18 +490,40 @@ Dispersion | Intervalle inter-quartiles |  `IQR`
 Lien | Covariance |  `cov`
 Lien | Corrélation |  `cor`
 
+## Rappel : la covariance
+
+Permet de mesurer le degré de co-variation de deux variables : 
+
+\[
+  \operatorname{cov}(x, y)=\frac{1}{n-1} \sum_{i=1}^{n}\left(x_{i}-m_{x}\right)\left(y_{i}-m_{y}\right)
+\]
+
 ## Rappel : corrélation de Pearson
 
+C'est une covariance normalisée entre -1 et 1 !
 
+\[
+  \operatorname{cor}(x, y)=\frac{\operatorname{cov}(x, y)}{\sqrt{\operatorname{var}(x)} \sqrt{\operatorname{var}(y)}}
+\]
 
 ## Rappel : corrélation de Spearman
 
+C'est la corrélation (de Pearson) calculée sur les rangs !
 
+\[
+  \rho = \operatorname{cor}(r_x, r_y),
+\]
+avec $r_x$ le vecteur des rangs de $x$ (`rank(x)`), et $r_y$ le vecteur des rangs de $y$ (`rank(y)`).
 
 ## Rappel (?) : corrélation de Kendall
 
-
-
+ * Paire concordante : $\left(x_{i}<x_{j} \text { et } y_{i}<y_{j}\right)$ OU $\left(x_{i}>x_{j} \text { et } y_{i}>y_{j}\right)$
+ * Paire discordante : $\left(x_{i}<x_{j} \text { et } y_{i}>y_{j}\right)$ OU $\left(x_{i}>x_{j} \text { et } y_{i}<y_{j}\right)$
+ 
+\[
+  \tau = \displaystyle \frac{n_C - n_D}{n_0},
+\]
+avec $n_C$ le nombre de paires concordantes, $n_D$ le nombre de paires discordantes et $n_0$ le nombre total de paires de points.
 
 ## Exercice
 
@@ -527,6 +549,7 @@ Appliquez la fonction `summary` aux données `fruits`.
 ## D'autres fonctions très utilies
 
  * `sum` pour calculer la somme de nombres
+ * `sort`, `order` et `rank` pour ordonner, et calculer les rangs
  * `rowSums` et `colSums` pour calculer les sommes des lignes et colonnes d'une table,
  * `rowMeans` et `colMeans` pour calculer les moyennes des lignes et colonnes d'une table,
 

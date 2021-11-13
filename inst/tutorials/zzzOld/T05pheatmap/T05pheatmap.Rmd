@@ -12,30 +12,31 @@ knitr::opts_chunk$set(echo = FALSE)
 library(corrplot)
 library(pheatmap)
 library(RColorBrewer)
-data("fruits", package = "tidyViz")
-vitafruits <- data.frame(
-  fruits[, grep("Vitamine", colnames(fruits))],
-  row.names = make.unique(fruits$nom))
-annotFruit <- data.frame(
-  groupe = fruits$groupe,
-  row.names = rownames(vitafruits))
+data("nutrimenu", package = "debuter")
+compo <- data.frame(
+  nutrimenu[, c("Proteines", "Glucides", "Lipides", "Fibres")],
+  row.names = nutrimenu$ID)
+annot <- data.frame(
+  Type = nutrimenu$Type, 
+  Nutriscore = nutrimenu$Nutriscore,
+  row.names = nutrimenu$ID)
 ```
 
 Ce tutoriel vous permettra de vous entraîner à réaliser des cartes de chaleur.
 
-## Carte des Vitamines
+## Carte de chaleur
 
-Tout d'abord, concentrons nous sur un petit sous-ensemble de variables : les vitamines contenues dans les fruits.
+Tout d'abord, concentrons nous sur un petit sous-ensemble de variables : la teneur en Proteines, Glucides, Lipides et Fibres des recettes de "nutrimenu".
 
-J'ai créé pour vous une table vitafruits à l'aide de la commande suivante. Prenez quelques instants pour décortiquer cette commande et comprendre comment elle fonctionne. Comprenez vous le rôle de la fonction grep ?
+J'ai créé pour vous une table `compo` à l'aide de la commande suivante. Prenez quelques instants pour décortiquer cette commande et comprendre comment elle fonctionne.
 
 ```
-vitafruits <- data.frame(
-  fruits[, grep("Vitamine", colnames(fruits))],
-  row.names = make.unique(fruits$nom))
+compo <- data.frame(
+  nutrimenu[, c("Proteines", "Glucides", "Lipides", "Fibres")],
+  row.names = nutrimenu$ID)
 ```
 
-Maintenant, utilisez la fonction `pheatmap` du package `pheatmap` pour faire une carte de chaleur de la table `vitafruits`.
+Maintenant, utilisez la fonction `pheatmap` du package `pheatmap` pour faire une carte de chaleur de la table `compo`.
 
 
 ```{r pheatmap, exercise = TRUE}
@@ -44,12 +45,12 @@ Maintenant, utilisez la fonction `pheatmap` du package `pheatmap` pour faire une
 
 ```{r pheatmap-solution}
 library(pheatmap)
-pheatmap(vitafruits)
+pheatmap(compo)
 ```
 
 ## Dendrogrammes
 
-La carte de chaleur en elle-même consiste en une image rectangulaire composée de cellules colorées en fonction d'une échelle de couleur représentée sur la droite. Cette échelle est très souvent une échelle allant du bleu ou du blanc pour les petites valeurs à du rouge pour les grandes valeurs. La carte est agrémentée sur le côté et en haut de deux figures en forme d'arbre appelées dendrogrammes. Elles sont le résultat d'une méthode dite de classification ascendante hiérarchique (CAH) qui regroupe les lignes et/ou les colonnes en fonction de leur similarité. Nous en verrons plus sur la CAH dans la suite du cours.
+La carte de chaleur en elle-même consiste en une image rectangulaire composée de cellules colorées en fonction d'une échelle de couleur représentée sur la droite. Cette échelle est très souvent une échelle allant du bleu ou du blanc pour les petites valeurs à du rouge pour les grandes valeurs. La carte est agrémentée sur le côté et en haut de deux figures en forme d'arbre appelées dendrogrammes. Elles sont le résultat d'une méthode dite de classification ascendante hiérarchique (CAH) qui regroupe les lignes et/ou les colonnes en fonction de leur similarité. 
 
 Enlevez les dendrogrammes avec les arguments `cluster_rows` et `cluster_rows`.
 
@@ -58,18 +59,18 @@ Enlevez les dendrogrammes avec les arguments `cluster_rows` et `cluster_rows`.
 ```
 
 ```{r pheatmapClust-solution}
-pheatmap(vitafruits, cluster_rows = FALSE, cluster_cols = FALSE)
+pheatmap(compo, cluster_rows = FALSE, cluster_cols = FALSE)
 ```
 
 ## Standardisation
 
 Pour représenter des variables ou des individus très différents, il est important de pouvoir transformer les données pour les placer dans un référentiel similaire. C'est tout l'intérêt de l'argument `scale`, dont la valeur est `none` par défaut, c'est-à-dire qu'aucune transformation n'est appliquée. 
 
-Modifiez l'argument `scale` de la commande suivante et observez le résultat. N'oubliez pas que vous pouvez soit regarder l'aide de la fonction pour avoir plus de détails sur cet argument (`?scale`), soit vous servir de la complétion automatique !
+Modifiez l'argument `scale` de la commande suivante et observez le résultat. N'oubliez pas que vous pouvez soit regarder l'aide de la fonction pour avoir plus de détails sur cet argument (`?pheatmap`), soit vous servir de la complétion automatique !
 
 
 ```{r pheatmapScale, exercise = TRUE}
-pheatmap(vitafruits, cluster_rows = FALSE,
+pheatmap(compo, cluster_rows = FALSE,
          cluster_cols = FALSE, show_rownames = FALSE,
          border_color = "black", cellwidth = 15,
          scale = "row")
@@ -110,11 +111,11 @@ Complétez le code suivant pour utiliser cette nouvelle palette sur les données
 mycolz <- brewer.pal(9, "YlOrRd")
 colzRamp <- colorRampPalette(mycolz)(50)
 
-pheatmap(vitafruits)
+pheatmap(compo)
 ```
 
 ```{r pheatmapPalette-solution}
-pheatmap(vitafruits, cluster_rows = FALSE,
+pheatmap(compo, cluster_rows = FALSE,
          cluster_cols = FALSE, show_rownames = FALSE,
          border_color = "black", cellwidth = 15,
          scale = "column", color = colzRamp)
@@ -126,29 +127,30 @@ La carte de chaleur permet de représenter des données quantitatives, mais trè
 
 Nous allons nous entraîner sur un cas très simple : représenter àquel groupe l'aliment à base de fruits appartient.
 
-Pour cela, j'ai créé une table annexe qui a les mêmes noms de lignes que la table `vitafruits` et qui contient une colonne `groupe` qui contient le groupe.
+Pour cela, j'ai créé une table annexe qui a les mêmes noms de lignes que la table `compo` et qui contient une colonne `Type` et une colonne `Nutriscore`.
 
 ```{r cruoupas, echo = TRUE}
-annotFruit <- data.frame(
-  groupe = fruits$groupe,
-  row.names = rownames(vitafruits))
+annot <- data.frame(
+  Type = nutrimenu$Type, 
+  Nutriscore = nutrimenu$Nutriscore,
+  row.names = nutrimenu$ID)
 ```
 
 La fonction `pheatmap` va ensuite prendre comme argument cette table et ajouter l'information sous forme d'une ou plusieurs lignes de couleurs, avec une légende supplémentaire. Modifiez la commande suivante pour faire un joli graphe !
 
 ```{r vitafruitsCrus, exercise = TRUE}
-pheatmap(vitafruits, annotation_row = annotFruit)
+pheatmap(compo, annotation_row = annot)
 ```
 
 ```{r vitafruitsCrus-solution}
 mycolz <- RColorBrewer::brewer.pal(9, "YlOrRd")
 colzRamp <- colorRampPalette(mycolz)(50)
 
-pheatmap(vitafruits, cluster_rows = TRUE, 
+pheatmap(compo, cluster_rows = TRUE, 
          cluster_cols = FALSE, show_rownames = FALSE,
          cellwidth = 10, border_color = "black",
          scale = "column", color = colzRamp,
-         annotation_row = annotFruit)
+         annotation_row = annot)
 ```
 
 ## Classification ascendante hiérarchique
@@ -159,7 +161,7 @@ Changez la méthode réalisant la classification ascendante hiérarchique (des l
   * `clustering_method` : à choisir parmi `"ward.D"`, `"ward.D2"`, `"single"`, `"complete"`, `"average"`, `"mcquitty"`, `"median"` ou `"centroid"`.
 
 ```{r vitafruitsClassif, exercise = TRUE}
-pheatmap(vitafruits, 
+pheatmap(compo, 
          cluster_rows = TRUE, 
          cluster_cols = FALSE, 
          show_rownames = FALSE,
@@ -169,7 +171,7 @@ pheatmap(vitafruits,
 ```
 
 ```{r vitafruitsClassif-solution}
-pheatmap(vitafruits, cluster_rows = TRUE, 
+pheatmap(compo, cluster_rows = TRUE, 
          cluster_cols = FALSE, show_rownames = FALSE,
          cellwidth = 10, border_color = "black",
          scale = "column", 

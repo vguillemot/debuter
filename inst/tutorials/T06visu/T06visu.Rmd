@@ -1,0 +1,233 @@
+---
+title: "Visualition"
+output: learnr::tutorial
+runtime: shiny_prerendered
+description: >
+  Cartes de chaleur, corrélogrammes et diagrammes de Venn
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+library(corrplot)
+library(pheatmap)
+library(ggvenn)
+library(RColorBrewer)
+data("nutrimenu", package = "debuter")
+compo <- data.frame(
+  nutrimenu[, c("Proteines", "Glucides", "Lipides", "Fibres")],
+  row.names = nutrimenu$ID)
+annot <- data.frame(
+  Type = nutrimenu$Type, 
+  Nutriscore = nutrimenu$Nutriscore,
+  row.names = nutrimenu$ID)
+lip <- nutrimenu$ID[nutrimenu$Lipides > 10]
+glu <- nutrimenu$ID[nutrimenu$Glucides > 10]
+
+compolist <- list(Lipides = lip, Glucides = glu)
+```
+
+Ce tutoriel vous permettra de vous entraîner à réaliser des cartes de chaleur.
+
+## Carte de chaleur
+
+Tout d'abord, concentrons nous sur un petit sous-ensemble de variables : la teneur en Proteines, Glucides, Lipides et Fibres des recettes de "nutrimenu".
+
+J'ai créé pour vous une table `compo` à l'aide de la commande suivante. Prenez quelques instants pour décortiquer cette commande et comprendre comment elle fonctionne.
+
+```
+compo <- data.frame(
+  nutrimenu[, c("Proteines", "Glucides", "Lipides", "Fibres")],
+  row.names = nutrimenu$ID)
+```
+
+Maintenant, utilisez la fonction `pheatmap` du package `pheatmap` pour faire une carte de chaleur de la table `compo`.
+
+
+```{r pheatmap, exercise = TRUE}
+
+```
+
+```{r pheatmap-solution}
+library(pheatmap)
+pheatmap(compo)
+```
+
+## Dendrogrammes
+
+La carte de chaleur en elle-même consiste en une image rectangulaire composée de cellules colorées en fonction d'une échelle de couleur représentée sur la droite. Cette échelle est très souvent une échelle allant du bleu ou du blanc pour les petites valeurs à du rouge pour les grandes valeurs. La carte est agrémentée sur le côté et en haut de deux figures en forme d'arbre appelées dendrogrammes. Elles sont le résultat d'une méthode dite de classification ascendante hiérarchique (CAH) qui regroupe les lignes et/ou les colonnes en fonction de leur similarité. 
+
+Enlevez les dendrogrammes avec les arguments `cluster_rows` et `cluster_rows`.
+
+```{r pheatmapClust, exercise = TRUE}
+
+```
+
+```{r pheatmapClust-solution}
+pheatmap(compo, cluster_rows = FALSE, cluster_cols = FALSE)
+```
+
+## Standardisation
+
+Pour représenter des variables ou des individus très différents, il est important de pouvoir transformer les données pour les placer dans un référentiel similaire. C'est tout l'intérêt de l'argument `scale`, dont la valeur est `none` par défaut, c'est-à-dire qu'aucune transformation n'est appliquée. 
+
+Modifiez l'argument `scale` de la commande suivante et observez le résultat. N'oubliez pas que vous pouvez soit regarder l'aide de la fonction pour avoir plus de détails sur cet argument (`?pheatmap`), soit vous servir de la complétion automatique !
+
+
+```{r pheatmapScale, exercise = TRUE}
+pheatmap(compo, cluster_rows = FALSE,
+         cluster_cols = FALSE, show_rownames = FALSE,
+         border_color = "black", cellwidth = 15,
+         scale = "row")
+```
+
+## Couleurs
+
+Comme R est très utilisé pour réaliser des représentations graphiques, il existe énormément de façon de travailler les couleurs des graphes. Nous allons voir **une** façon de modifier les couleurs d'un carte de chaleur, en travaillant sur sa palette, avec l'excellent package `RColorBrewer`. 
+
+> Attention, le package `RColorBrewer` est adapté à des palettes pour lesquels on sera capable de très bien distinguer deux couleurs différentes, c'est pour cela qu'on doit combiner ses fonctions avec la fonction d'interpolation `colorRampPalette`.
+
+J'ai utilisé ci-dessous la commande `display.brewer.all` qui permet de représenter toutes les palettes de couleurs disponibles dans `RColorBrewer`.
+
+```{r display.brewer.all, echo = TRUE, fig.height=10}
+library(RColorBrewer)
+display.brewer.all()
+```
+
+Il y en a trois types : 
+
+ * les palettes "séquentielles" (en haut) qui sont adaptées à des échelles de valeurs allant d'un minimum (associée à un ton clair) à un maximum (associé à un ton foncé),
+ * les palettes "qualitatives" (au milieu) qui contiennent des couleurs toutes facilement différentiables les unes des autres,
+ * les palettes "divergentes" (en bas) qui sont adaptées à la représentation d'échelles de valeurs qui vont d'un minimum (foncé) à un maximum (foncé) en passant par une valeur intermédiaire (claire).
+
+Nous allons transformer la palette séquentielle `YlOrRd` (qui va donc du jaune au rouge) qui contient seulement 9 couleurs en une palette contenant 50 couleurs grâce à la fonction `colorRampPalette`.
+
+Testez le code ci-dessous qui générera la nouvelle palette.
+
+```{r newpalette, exercise = TRUE}
+mycolz <- brewer.pal(9, "YlOrRd")
+colzRamp <- colorRampPalette(mycolz)(50)
+barplot(rep(1, 50), col = colzRamp, border = NA, axes = F)
+```
+
+Complétez le code suivant pour utiliser cette nouvelle palette sur les données `compo` !
+
+```{r pheatmapPalette, exercise = TRUE}
+mycolz <- brewer.pal(9, "YlOrRd")
+colzRamp <- colorRampPalette(mycolz)(50)
+
+pheatmap(compo)
+```
+
+```{r pheatmapPalette-solution}
+pheatmap(compo, cluster_rows = FALSE,
+         cluster_cols = FALSE, show_rownames = FALSE,
+         border_color = "black", cellwidth = 15,
+         scale = "column", color = colzRamp)
+```
+
+## Ajouter des informations
+
+La carte de chaleur permet de représenter des données quantitatives, mais très souvent, nous avons en plus de ces données des données qualitatives qui décrivent les lignes ou les colonnes de nos données !
+
+Nous allons nous entraîner sur un cas très simple : représenter le type de recette et le nutriscore.
+
+Pour cela, j'ai créé une table annexe qui a les mêmes noms de lignes que la table `compo` et qui contient une colonne `Type` et une colonne `Nutriscore`.
+
+```
+annot <- data.frame(
+  Type = nutrimenu$Type, 
+  Nutriscore = nutrimenu$Nutriscore,
+  row.names = nutrimenu$ID)
+```
+
+La fonction `pheatmap` va ensuite prendre comme argument cette table et ajouter l'information sous forme d'une ou plusieurs lignes de couleurs, avec une légende supplémentaire. Modifiez la commande suivante pour faire un joli graphe !
+
+```{r compoAnnot, exercise = TRUE}
+pheatmap(compo, annotation_row = annot)
+```
+
+```{r compoAnnot-solution}
+mycolz <- RColorBrewer::brewer.pal(9, "YlOrRd")
+colzRamp <- colorRampPalette(mycolz)(50)
+
+pheatmap(compo, cluster_rows = TRUE, 
+         cluster_cols = FALSE, show_rownames = FALSE,
+         cellwidth = 10, border_color = "black",
+         scale = "column", color = colzRamp,
+         annotation_row = annot)
+```
+
+## Classification ascendante hiérarchique
+
+Changez la méthode réalisant la classification ascendante hiérarchique (des lignes) en modifiant la valeur des arguments : 
+
+  * `clustering_distance_rows` : à choisir parmi `"euclidean"`, `"correlation"`, `"maximum"`, `"manhattan"`, `"canberra`", `"binary"` ou `"minkowski"`.
+  * `clustering_method` : à choisir parmi `"ward.D"`, `"ward.D2"`, `"single"`, `"complete"`, `"average"`, `"mcquitty"`, `"median"` ou `"centroid"`.
+
+```{r compoClassif, exercise = TRUE}
+pheatmap(compo, 
+         cluster_rows = TRUE, 
+         cluster_cols = FALSE, 
+         show_rownames = FALSE,
+         cellwidth = 10, 
+         border_color = "black",
+         scale = "column")
+```
+
+```{r compoClassif-solution}
+pheatmap(compo, cluster_rows = TRUE, 
+         cluster_cols = FALSE, show_rownames = FALSE,
+         cellwidth = 10, border_color = "black",
+         scale = "column", 
+         clustering_distance_rows = "correlation",
+         clustering_method = "ward.D2")
+```
+
+
+
+## Corrélogrammes
+
+La librairie `pheatmap` n'est pas la seule à pouvoir produire de jolies cartes de chaleur. La fonction `corrplot` du package éponyme (pour utiliser cette fonction il faudra donc installer préalablement le package `corrplot`).
+
+Voici un exemple dans lequel j'ai changé quelques paramètres pour rendre le graphe joli. Modifiez ces paramètres, tout en prenant bien soin d'aller consulter l'aide de la fonction `?corrplot` pour comprendre leur signification.
+
+```{r corrplot, exercise = TRUE}
+cormat <- cor(compo, use = "pairwise.complete.obs")
+corrplot(corr = cormat, method = "square", type = "upper", diag = FALSE, , order = "hclust", tl.col = "black")
+```
+
+## Diagramme de Venn
+
+Les diagrammes de Venn permettent de représenter des liens entre ensembles d'objets : combien d'objets sont communs à plusieurs ensembles, et combien sont spécifiques d'un seul ensemble.
+
+Pour les besoins de ce tutoriel, j'ai créé deux ensembles : 
+
+* l'ensemble des recettes riches en lipides (plus de 10 mg / 100 g)
+* l'ensemble des recettes riches en glucides (plus de 10 mg / 100 g)
+
+Prenez-un moment pour lire ce code et le comprendre.
+
+```{r ens, echo = TRUE}
+lip <- nutrimenu$ID[nutrimenu$Lipides > 10]
+glu <- nutrimenu$ID[nutrimenu$Glucides > 10]
+
+compolist <- list(Lipides = lip, Glucides = glu)
+```
+
+La fonction `ggvenn` du package `ggvenn` vous permettra de générer un diagramme de Venn entre *au plus* 5 ensembles. Modifiez les couleurs ! 
+
+
+```{r venn, exercise = TRUE}
+ggvenn(compolist)
+```
+
+```{r venn-solution}
+ggvenn(compolist, fill_color = c("orange", "limegreen"))
+```
+
+
+
+
+
+

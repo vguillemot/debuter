@@ -1,0 +1,24 @@
+---
+title: "Les tutoriels dans Rstudio"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Comme tout le cours est en fait un "package" R, quand vous l'aurez installé, vous pourrez accéder aux tutoriels dans l'onglet "Tutorial" dans le panneau qui se trouve en haut à droite.
+
+Ces tutoriels sont ordonnés par ordre alphabétique, c'est pour cela que nous leur avons donné des noms un peu particuliers : 
+
+  * `T00tuto` pour le tout premier
+  * `T01rstudio` pour celui que vous lisez actuellement
+  * `T02packages` pour s'entraîner avec les packages
+  * `T03objets` pour les objets de base
+  * `T04dplyr` pour `dplyr`
+  * `T05ggplot2` pour `ggplot2`
+  * `T06visu` pour la visualisation
+  * `T07tests` pour les tests d'hypothèses
+  

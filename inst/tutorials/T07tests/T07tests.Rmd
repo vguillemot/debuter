@@ -3,7 +3,7 @@ title: "Apprendre à utiliser un tutoriel"
 output: learnr::tutorial
 runtime: shiny_prerendered
 description: >
-  Plus un entraînement au clavier.
+  Tout en revoyant quelques concepts de base en R (vecteurs, matrices et data-frames).
 ---
 
 ```{r setup, include=FALSE}
@@ -122,3 +122,81 @@ quiz(
 )
 ```
 
+## Vecteurs et matrices
+
+J'ai créé pour vous un vecteur `vec` et une matrice `Mat`.
+ 
+```{r vecmat-setup}
+vec <- structure(c(2L, 1L, 2L, 1L, 1L, 2L), .Label = c("val1", "val2"), class = "factor")
+Mat <- structure(c(1.4758050122662, 0.460757577634441, 1.09787881859777, 
+-0.576514555287794, 1.7806944930363, -1.34819815347259, -0.474234033382841, 
+-0.277249593892861, 0.259424211813034, 0.802903573707708, -1.17702274849553, 
+0.532834331766421, 0.680394042312619, 0.281655088161887, -1.17112056849342, 
+-0.671549850839443, 0.873054071274946, 0.893642462873987), .Dim = c(6L, 
+3L))
+```
+
+Explorez les objets `vec` et `Mat` : 
+
+ * quelles sont leurs dimensions ?
+ * quelle est leur classe ?
+ * quel est le type d'éléments qu'ils contiennent ?
+ 
+
+```{r vecmat, exercise=TRUE}
+
+```
+
+```{r vecmat-solution}
+# La fonction str permet de répondre à toutes
+# les questions d'un seul coup
+str(vec)
+str(Mat)
+# Sinon on peut utiliser la fonction class
+class(vec)
+class(Mat)
+# Les fonctions length et dim
+length(vec)
+dim(Mat)
+```
+
+## Data-frame
+
+J'ai combiné `vec` et `Mat` dans une même data-frame `df` avec la commande suivante : 
+
+```
+df <- data.frame(vec, Mat)
+```
+
+Explorez le résultat et utilisez trois méthodes différentes pour extraire la colonne qui correspond à `vec`.
+
+
+```{r df-setup}
+vec <- structure(c(2L, 1L, 2L, 1L, 1L, 2L), .Label = c("val1", "val2"), class = "factor")
+Mat <- structure(c(1.4758050122662, 0.460757577634441, 1.09787881859777, 
+-0.576514555287794, 1.7806944930363, -1.34819815347259, -0.474234033382841, 
+-0.277249593892861, 0.259424211813034, 0.802903573707708, -1.17702274849553, 
+0.532834331766421, 0.680394042312619, 0.281655088161887, -1.17112056849342, 
+-0.671549850839443, 0.873054071274946, 0.893642462873987), .Dim = c(6L, 
+3L))
+df <- data.frame(vec, Mat)
+
+```
+
+```{r df, exercise=TRUE}
+
+```
+
+```{r df-solution}
+# On utilise str et summary pour explorer df
+str(df)
+summary(df)
+# Voici trois méthodes pour extraire une colonne
+# d'une data-frame
+df$vec
+df[,"vec"]
+df[,1]
+# Bonus
+df["vec"]
+df[["vec"]]
+```

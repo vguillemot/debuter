@@ -10,10 +10,10 @@ description: >
 library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
 library(dplyr)
-data("fruits", package = "tidyViz")
+data("nutrimenu", package = "debuter")
 ```
 
-Le package `dplyr` permet de réaliser de façon intuitives des transformations de tableaux. Dans ce tutoriel, nous allons nous entraîner avec les données "fruits". 
+Le package `dplyr` permet de réaliser de façon intuitives des transformations de tableaux. Dans ce tutoriel, nous allons nous entraîner avec les données "nutrimenu". 
 
 NB : Le jeu de données est déjà chargé en mémoire !
 
@@ -21,9 +21,9 @@ NB : Le jeu de données est déjà chargé en mémoire !
 
 Le package `dplyr` opère sur des `tibble`s : l'équivalent `tidy` des objets de classe `data.frame`, ou, autrement formulé, des structures de données rectangulaires dont chaque colonne peut contenir un type de valeurs différent.
 
-Pour les besoins du cours, j'ai fait en sorte que le jeu de données `fruits` soit une `tibble`. 
+Pour les besoins du cours, j'ai fait en sorte que le jeu de données `nutrimenu` soit une `tibble`. 
 
-"Imprimez" `fruits` dans la console et comparez avec ce que donnerait l'impression si `fruits` était de classe `data.frame` : quelles sont les différences ?
+"Imprimez" `nutrimenu` dans la console et comparez avec ce que donnerait l'impression si `nutrimenu` était de classe `data.frame` : quelles sont les différences ?
 
 ```{r tibble, exercise = TRUE, results = 'markup', render = print}
 
@@ -35,9 +35,9 @@ Pour les besoins du cours, j'ai fait en sorte que le jeu de données `fruits` so
 ```
 
 ```{r tibble-solution}
-print(fruits)
-# Si fruits était une data.frame
-print(as.data.frame(fruits))
+print(nutrimenu)
+# Si nutrimenu était une data.frame
+print(as.data.frame(nutrimenu))
 ```
 
 En résumé : vous n'avez pas besoin de vous inquiéter des différences entre `tibble`s et `data.frame`s, en tout cas pas pour le moment. Il faut juste avoir conscience que les deux existent. Si vous le souhaitez, vous pouvez décider de ne travailler qu'avec des `data.frame`s : les fonctions du `tidyverse` fonctionneront quand même. Par contre, nous verrons des fonctions que ne fonctionnent pas avec des `tibble`s, c'est pour cela que la fonction `as.data.frame` est importante.
@@ -46,7 +46,7 @@ Pour en savoir plus, [rendez-vous ici](https://r4ds.had.co.nz/tibbles.html) !
 
 ## Filtrer des lignes, sélectionner des colonnes etc..
 
-Sélectionnez les fruits contenant moins de 50% d'eau. A quel groupe appartiennent ces fruits ?
+Sélectionnez les recettes contenant moins de 10g de glucides. A quel type appartiennent ces recettes ?
 
 ```{r seleau, exercise = TRUE}
 
@@ -54,15 +54,15 @@ Sélectionnez les fruits contenant moins de 50% d'eau. A quel groupe appartienne
 
 ```{r seleau-solution}
 # Pour juste filtrer
-fruits %>%
-  filter(Eau <= 50)
+nutrimenu %>%
+  filter(Glucides < 10)
 # Pour filtrer puis sélectionner la colonne "groupe"
-fruits %>%
-  filter(Eau <= 50) %>%
-  select(groupe)
+nutrimenu %>%
+  filter(Glucides < 10) %>%
+  select(Type)
 ```
 
-Sélectionnez les colonnes `nom`, `groupe`, `Sucres` et `Fructose` avec la fonction `select`, puis triez les valeurs par ordre décroissant de teneur en sucres avec la fonction `arrange`. Quel est le fruit contenant le plus de sucres ?
+Sélectionnez les colonnes `ID`,  `Type`, `Nutriscore`, `Proteines` et `Lipides` avec la fonction `select`, puis triez les valeurs par ordre décroissant de teneur en Proteines avec la fonction `arrange`. Quel est la recette contenant le plus de protéines ?
 
 ```{r select, exercise = TRUE}
 
@@ -76,12 +76,12 @@ Sélectionnez les colonnes `nom`, `groupe`, `Sucres` et `Fructose` avec la fonct
 ```
 
 ```{r select-solution}
-fruits %>%
-  select(nom, groupe, Sucres, Fructose) %>%
-  arrange(desc(Sucres))
+nutrimenu %>%
+  select(ID, Type, Nutriscore, Proteines, Lipides) %>%
+  arrange(desc(Proteines))
 ```
 
-Utilisez la fonction `mutate` pour calculer le ratio de la teneur en sucres par la teneur en fibres et triez les valeurs obtenues par ordre croissant. Faites exactement la même chose avec la fonction `transmute` : que se passe-t-il ?
+Utilisez la fonction `mutate` pour calculer le ratio de la teneur en glucides par la teneur en fibres et triez les valeurs obtenues par ordre croissant. Faites exactement la même chose avec la fonction `transmute` : que se passe-t-il ?
 
 ```{r transmutate, exercise = TRUE}
 
@@ -89,47 +89,50 @@ Utilisez la fonction `mutate` pour calculer le ratio de la teneur en sucres par 
 
 ```{r transmutate-solution}
 # Avec mutate
-fruits %>%
-  mutate(ratioSF = Sucres / Fibres) %>%
-  arrange(ratioSF)
+nutrimenu %>%
+  mutate(ratioGF = Glucides / Fibres) %>%
+  arrange(ratioGF)
 
 # Avec transmute : on perd toutes les autres colonnes...
-fruits %>%
-  transmute(ratioSF = Sucres / Fibres) %>%
-  arrange(ratioSF)
+nutrimenu %>%
+  transmute(ratioGF = Glucides / Fibres) %>%
+  arrange(ratioGF)
 # ... mais on peut les rajouter si on veut les garder
-fruits %>%
+nutrimenu %>%
   transmute(nom, ratioSF = Sucres / Fibres) %>%
   arrange(ratioSF)
 ```
 
-Comptez le nombre de fruits par groupe à l'aide de la fonction `count`. Cette fonction s'utilise par exemple comme ceci : `fruits %>% count()`, et permet de compter toutes les lignes d'une table. Notez que la colonne contenant les comptages s'appelle `n` par défaut (voir `?count` pour plus de détails).
+Comptez le nombre de recettes par "types" à l'aide de la fonction `count`. Cette fonction s'utilise par exemple comme ceci : `nutrimenu %>% count()`, et permet de compter toutes les lignes d'une table. Notez que la colonne contenant les comptages s'appelle `n` par défaut (voir `?count` pour plus de détails).
 
 ```{r groupecount, exercise = TRUE}
-fruits %>%
+nutrimenu %>%
   count()
 ```
 
 ```{r groupecount-hint}
-# Utilisez "group_by"
+# Utilisez "group_by" ou donnez un argument à la fonction count
 ```
 
 ```{r groupecount-solution}
-fruits %>%
-  group_by(groupe) %>%
+nutrimenu %>%
+  count(Type)
+## Alternative avec group_by
+nutrimenu %>%
+  group_by(Type) %>%
   count()
 # Si on veut changer le nom de la colonne 
 # contenant les comptages :
-fruits %>%
-  group_by(groupe) %>%
+nutrimenu %>%
+  group_by(Type) %>%
   count(name = "fréquence")
 ```
 
 ## Résumer des plages de valeurs
 
-Pour cet exercice, nous allons résumer la variable `Energie` par groupe de fruits. Nous souhaitons construire la table `EnergieQuartiles` définie de la manière suivante : 
+Pour cet exercice, nous allons résumer la variable `Energie` par type de recette Nous souhaitons construire la table `EnergieQuartiles` définie de la manière suivante : 
 
-  * chaque ligne est un groupe de fruits,
+  * chaque ligne est un groupe de recettes,
   * la colonne `Q1` contient le premier quartile de la variable `Energie`,
   * la colonne `Q2` contient la médiane,
   * la colonne `Q3` contient le troisième quartile.
@@ -146,8 +149,8 @@ Utilisez la fonction `summarise` pour créer la table `EnergieQuartiles`. N'oubl
 
 
 ```{r quartiles-solution}
-EnergieQuartiles <- fruits %>%
-  group_by(groupe) %>%
+EnergieQuartiles <- nutrimenu %>%
+  group_by(Type) %>%
   summarize(
     Q1 = quantile(Energie, 0.25),
     Q2 = quantile(Energie, 0.5),
@@ -155,22 +158,23 @@ EnergieQuartiles <- fruits %>%
   )
 EnergieQuartiles
 ### NB : vous pouvez obtenir le résultat au format "long" très facilement avec summarise : 
-fruits %>%
-  group_by(groupe) %>%
+nutrimenu %>%
+  group_by(Type) %>%
   summarize(
     Value = quantile(Energie, (1:3)/4),
     Quantile = c("Q1", "Q2", "Q3")
   )
 ### ou toujours au format "wide", mais avec une 
-### fonction intermédiaire
+### fonction intermédiaire.
+### Créer des fonctions n'est pas au programme de ce cours !
 foo <- function(x) {
   return(tibble(Q1 = quantile(x, 0.25),
     Q2 = quantile(x, 0.5),
     Q3 = quantile(x, 0.75)))
 }
 
-fruits %>%
-  group_by(groupe) %>%
+nutrimenu %>%
+  group_by(Type) %>%
   summarize(foo(Energie))
 ```
 

@@ -11,11 +11,11 @@ library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
 library(ggplot2)
 library(ggpubr)
-data("fruits", package = "tidyViz")
+data("nutrimenu", package = "debuter")
 couleurs <- c("steelblue", "limegreen", "darkolivegreen", "darkorchid")
 ```
 
-Le package `ggplot2` permet de réaliser facilement des graphiques avec une syntaxe unifiée. Dans ce tutoriel, nous allons nous entraîner avec les données "fruits".
+Le package `ggplot2` permet de réaliser facilement des graphiques avec une syntaxe unifiée. Dans ce tutoriel, nous allons nous entraîner avec les données "nutrimenu".
 
 ## Commande de base
 
@@ -46,29 +46,29 @@ Fonction | Utilité
 
 Tout en faisant les exercices, familiarisez vous avec la documentation de ggplot2 : https://ggplot2.tidyverse.org/
 
-## Les données fruits
+## Les données nutrimenu
 
-Les données contenues dans la table fruits contiennent les données nutritionnelle de `r nrow(fruits)` fruits ou aliments à base de fruits. La table est reportée ci-après.
+Les données contenues dans la table nutrimenu contiennent les données nutritionnelle de `r nrow(nutrimenu)` recettes. La table est reportée ci-après.
 
 
-```{r showfruits}
-DT::datatable(fruits)
+```{r shownutrimenu}
+DT::datatable(nutrimenu)
 ```
 
-La colonne "groupe" correspond au "sous-groupes" définies dans la table Ciqual.
+La colonne "Type" correspond au type de recettes.
 
-Pour plus d'informations, rendez vous sur le site du Ciqual (https://ciqual.anses.fr/) ou sur sur la [plateforme ouverte des données publiques françaises](https://www.data.gouv.fr/fr/datasets/table-de-composition-nutritionnelle-des-aliments-ciqual/).
+Pour plus d'informations, rendez vous sur le site Nutriwi (https://www.nutriwi.com/).
 
 ## Representer une variable discrete
 
-Complétez la commande suivante pour obtenir un diagramme en bâtons des groupes de fruits.
+Complétez la commande suivante pour obtenir un diagramme en bâtons des types de recettes
 
 ```{r baton, exercise = TRUE}
 ggplot( ) + geom_
 ```
 
 ```{r baton-solution}
-ggplot(fruits, aes(groupe)) + geom_bar()
+ggplot(nutrimenu, aes(Type)) + geom_bar()
 ```
 
 Changez les couleurs et le thème du graphe en complétant la prochaine commande.
@@ -80,28 +80,28 @@ ggplot( , aes(fill = )) +
 ```
 
 ```{r baton2-solution}
-ggplot(fruits , aes(groupe, fill = groupe)) + 
+ggplot(nutrimenu , aes(Type, fill = Type)) + 
    geom_bar() + 
    theme_bw()
 ```
 
-Utilisez la fonction `cut` de la façon suivante pour transformer la variable Phosphore (continue) en une variable qualitative.
+Utilisez la fonction `cut` de la façon suivante pour transformer la variable Proteines (continue) en une variable qualitative.
 
-```{r cutPhosphore, exercise = TRUE}
-cut(fruits$Phosphore, c(0, 0.2, 2))
+```{r cutProteines, exercise = TRUE}
+cut(nutrimenu$Proteines, c(-1, 6, 14))
 ```
 
-```{r cutPhosphore-solution}
+```{r cutProteines-solution}
 # Il n'y a rien de plus à faire : exécutez juste la commande et observez son résultat
-cut(fruits$Phosphore, c(0, 0.2, 2))
+cut(nutrimenu$Proteines, c(-1, 6, 14))
 # Si vous le souhaitez, vous pouvez utiliser la fonction table sur ce résultat
-table(cut(fruits$Phosphore, c(0, 0.2, 2)))
+table(cut(nutrimenu$Proteines, c(-1, 6, 14)))
 ```
 
 Remarquez comme on peut utiliser cette astuce dans un graphe !
 
-```{r cutPhosphoreplot, exercise = TRUE}
-ggplot(fruits, aes(cut(Phosphore, c(0, 0.2, 10)))) +
+```{r cutProteinesplot, exercise = TRUE}
+ggplot(nutrimenu, aes(cut(Proteines, c(-1, 6, 14)))) +
   geom_bar() + 
   theme_bw()
 ```
@@ -113,11 +113,11 @@ Ce n'est pas très joli comme commande et un peu difficile a lire. Parfois, plut
 Complétez la fonction suivante pour réaliser un boxplot de la variable `Energie.`
 
 ```{r energiebox, exercise = TRUE}
-ggplot(fruits) + geom
+ggplot(nutrimenu) + geom
 ```
 
 ```{r energiebox-solution}
-ggplot(fruits, aes(Energie)) + 
+ggplot(nutrimenu, aes(Energie)) + 
   geom_boxplot() + 
   theme_bw()
 ```
@@ -125,11 +125,11 @@ ggplot(fruits, aes(Energie)) +
 Sur le même modèle, faites un diagramme en violon.
 
 ```{r energieviolon, exercise = TRUE}
-ggplot(fruits) + geom
+ggplot(nutrimenu) + geom
 ```
 
 ```{r energieviolon-solution}
-ggplot(fruits, aes(x = Energie, y = 0)) + 
+ggplot(nutrimenu, aes(x = Energie, y = 0)) + 
   geom_violin() + 
   theme_bw()
 ```
@@ -137,7 +137,7 @@ ggplot(fruits, aes(x = Energie, y = 0)) +
 Superposez les deux et ajustez les paramètres de largeur et de couleur pour avoir un joli graphe.
 
 ```{r energieboxviolon, exercise = TRUE}
-ggplot(fruits) + 
+ggplot(nutrimenu) + 
   geom_violin() +
   geom_boxplot()
 ```
@@ -150,27 +150,27 @@ ggplot(fruits) +
 ```
 
 ```{r energieboxviolon-solution}
-ggplot(fruits, aes(x = Energie, y = 0)) + 
+ggplot(nutrimenu, aes(x = Energie, y = 0)) + 
   geom_violin(color = NA, fill = "limegreen") + 
   geom_boxplot(width = 0.1, color = "steelblue", fill = "lightgreen", size = 1) + 
   theme_bw() + 
-  labs(x = "", y = "Energie (kJ/100 g)") +    
+  labs(x = "", y = "Energie (kCal/100 g)") +    
   theme(axis.text.y = element_blank(),
         axis.ticks.y = element_blank())
 ```
 
-Faites maintenant un histogramme de la composition en Vitamine C.
+Faites maintenant un histogramme de la composition en Lipides.
 
 ```{r vitamineChisto, exercise = TRUE}
-ggplot(fruits) + 
+ggplot(nutrimenu) + 
   geom
 ```
 
 ```{r vitamineChisto-solution}
-ggplot(fruits, aes(VitamineC)) + 
-  geom_histogram(breaks = seq(0, 90, 10), color = "white", fill = "gold") + 
+ggplot(nutrimenu, aes(Lipides)) + 
+  geom_histogram(breaks = seq(0, 30, 5), color = "white", fill = "goldenrod") + 
   theme_bw() + 
-  labs(x = "Vitamine C (mg/100 g)", y = "Nb. d'occurences")
+  labs(x = "Lipides (g/100 g)", y = "Nb. d'occurences")
 ```
 
 ## Représenter sur le même graphe une variable qualitative et une variable quantitative
@@ -178,48 +178,48 @@ ggplot(fruits, aes(VitamineC)) +
 Exécutez la commande suivante puis modifiez la pour faire en sorte que chaque boite soit d'une couleur différente.
 
 ```{r sucres, exercise = TRUE}
-ggplot(fruits, aes(groupe, Sucres)) + geom_boxplot()
+ggplot(nutrimenu, aes(Type, Glucides)) + geom_boxplot()
 ```
 
 ```{r sucres-solution}
-ggplot(fruits, aes(groupe, Sucres, color = groupe)) + 
+ggplot(nutrimenu, aes(Type, Glucides, color = Type)) + 
   geom_boxplot() + 
   theme_bw() + 
   coord_flip() +
-  labs(x = "", y = "Sucres (g/100 g)", color = "")
+  labs(x = "", y = "Glucides (g/100 g)", color = "")
 ```
 
-J'ai sélectionné 4 couleurs pour vous, et utilisé la commande suivante pour les stocker dans un vecteur s'appelant `couleurs`.
+J'ai sélectionné 3 couleurs pour vous, et utilisé la commande suivante pour les stocker dans un vecteur s'appelant `couleurs`.
 
 ```{r, eval = FALSE, echo = TRUE}
-couleurs <- c("steelblue", "limegreen", "darkolivegreen", "darkorchid")
+couleurs <- c("steelblue", "limegreen", "darkolivegreen")
 ```
 
 Ce vecteur est utilisé ci-dessous. Exécutez ce code et observez le résultat. Essayez ensuite d'autres couleurs de votre choix : utilisez des noms de couleur (voir le résultat de la fonction `colors()`) ou des codes hexadécimaux.
 
 ```{r fibres, exercise = TRUE}
-couleurs <- c("steelblue", "limegreen", "darkolivegreen", "darkorchid")
-ggplot(fruits, aes(Fibres, groupe, fill = groupe)) + 
+couleurs <- c("steelblue", "limegreen", "darkolivegreen")
+ggplot(nutrimenu, aes(Fibres, Type, fill = Type)) + 
   geom_violin() + 
   scale_fill_manual(values = couleurs)
 ```
 
 ## Representer un nuage de points
 
-Complétez la commande suivante pour représenter l'énergie en fonction de la teneur en Vitamine C des fruits.
+Complétez la commande suivante pour représenter l'énergie en fonction de la teneur en Glucides des recettes.
 
 ```{r energieVitC, exercise = TRUE}
 ggplot() + geom
 ```
 
-```{r energieVitC-solution}
-ggplot(fruits, aes(VitamineC, Energie)) +
+```{r energieGluc-solution}
+ggplot(nutrimenu, aes(Glucides, Energie)) +
   geom_point() + 
   theme_bw() + 
-  labs(x = "Energie (kJ / 100g)", y = "Vitamine C Vitamine C (mg/100 g)")
+  labs(y = "Energie (kCal / 100g)", x = "Glucides (g/100 g)")
 ```
 
-Coloriez les points, d'abord avec la variable Sucres puis avec la variable Groupes. Que Remarquez vous ?
+Coloriez les points, d'abord avec la variable Proteines puis avec la variable Type. Que Remarquez vous ?
 
 ```{r energieVitCcolor, exercise = TRUE}
 ggplot() + geom
@@ -227,15 +227,16 @@ ggplot() + geom
 
 
 ```{r energieVitCcolor-solution}
-ggplot(fruits, aes(VitamineC, Energie, color = Sucres)) +
+ggplot(nutrimenu, aes(Glucides, Energie, color = Proteines)) +
   geom_point() + 
   theme_bw() + 
-  labs(x = "Energie (kJ / 100g)", y = "Vitamine C Vitamine C (mg/100 g)")
+  labs(y = "Energie (kCal / 100g)", y = "Glucides (g/100 g)")
 
-ggplot(fruits, aes(VitamineC, Energie, color = groupe)) +
+ggplot(nutrimenu, aes(Glucides, Energie, color = Type)) +
   geom_point() + 
   theme_bw() + 
-  labs(x = "Energie (kJ / 100g)", y = "Vitamine C Vitamine C (mg/100 g)")
+  labs(y = "Energie (kCal / 100g)", y = "Glucides (g/100 g)")
+
 ```
 
 Vous pouvez changer des couleurs définies sur une variable quantitative avec la fonction `scale_color_continuous`, ou `scale_color_gradient`, ou `scale_color_gradientn`, ou des couleurs définies sur une variable discrète avec la fonction `scale_color_manual` ou `scale_colour_brewer`. Testez ces fonctions sur l'exemple précédent.
@@ -256,13 +257,13 @@ library(ggpubr)
 theme_set(theme_bw())
 
 # boxplots
-bxp <- ggplot(fruits, aes(groupe, Sucres, color = groupe)) + geom_boxplot()
+bxp <- ggplot(nutrimenu, aes(Type, Glucides, color = Type)) + geom_boxplot()
 # jitter plots
-jp <- ggplot(fruits, aes(x = groupe, y = Sucres, color = groupe)) + geom_jitter()
+jp <- ggplot(nutrimenu, aes(x = Type, y = Glucides, color = Type)) + geom_jitter()
 # violin plots
-vp <- ggplot(fruits, aes(groupe, Sucres, color = groupe, fill = groupe)) + geom_violin() 
+vp <- ggplot(nutrimenu, aes(Type, Glucides, color = Type, fill = Type)) + geom_violin() 
 # violin plots
-dens <- ggplot(fruits, aes(Sucres, fill = groupe)) + geom_density() 
+dens <- ggplot(nutrimenu, aes(Glucides, fill = Type)) + geom_density() 
 
 # Arrange
 ggarrange(bxp, jp, vp, dens, ncol = 2, nrow = 2,  common.legend = TRUE, legend = "bottom") 

@@ -1,0 +1,3 @@
+scp -r T00tuto/.Rmd vguillem@hub05.hosting.pasteur.fr:/home/vguillem/learnr/debuter/T00tuto
+scp -r T01rstudio/T01rstudio.Rmd vguillem@hub05.hosting.pasteur.fr:/home/vguillem/learnr/debuter/T01rstudio
+scp -r T02packages/T02packages.Rmd vguillem@hub05.hosting.pasteur.fr:/home/vguillem/learnr/debuter/T02packages

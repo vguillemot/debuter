@@ -5,7 +5,7 @@
 \alias{debuter}
 \alias{debuter-package}
 \title{Package pour la formation "Débuter en R"
-Contient les vignettes (les slides de cours), le jeu de données "fruits" et les tutoriels. https://vguillemot.github.io/debuter/}
+Contient les vignettes (les slides de cours), le jeu de données "fruits", le jeu de données "nutrimenu"  et les tutoriels. https://vguillemot.github.io/debuter/}
 \description{
 What the package does (one paragraph).
 }

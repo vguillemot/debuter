@@ -1,3 +1,7 @@
 scp -r T00tuto/.Rmd vguillem@hub05.hosting.pasteur.fr:/home/vguillem/learnr/debuter/T00tuto
 scp -r T01rstudio/T01rstudio.Rmd vguillem@hub05.hosting.pasteur.fr:/home/vguillem/learnr/debuter/T01rstudio
 scp -r T02packages/T02packages.Rmd vguillem@hub05.hosting.pasteur.fr:/home/vguillem/learnr/debuter/T02packages
+scp -r T03objets/T03objets.Rmd vguillem@hub05.hosting.pasteur.fr:/home/vguillem/learnr/debuter/T03objets
+scp -r T04dplyr/T04dplyr.Rmd vguillem@hub05.hosting.pasteur.fr:/home/vguillem/learnr/debuter/T04dplyr
+scp -r T05ggplot2/T05ggplot2.Rmd vguillem@hub05.hosting.pasteur.fr:/home/vguillem/learnr/debuter/T05ggplot2
+scp -r T06visu/T06visu.Rmd vguillem@hub05.hosting.pasteur.fr:/home/vguillem/learnr/debuter/T06visu

@@ -6,7 +6,7 @@ output:
   ioslides_presentation:
     css: styles.css
 vignette: >
-  %\VignetteIndexEntry{02dplyr}
+  %\VignetteIndexEntry{03objets}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 ---
@@ -137,7 +137,7 @@ data.frame(x = 0, y = 0, lab = "<-") %>%
  * Alternative : `=`
  * Exemples : `a <- 1`, `b <- 1:10`, `a <- 2` etc.
  
-## Les noms d'objets
+## Les noms d'objets {.smaller}
 
 Règles absolues : 
 
@@ -471,6 +471,46 @@ Noms | `fruits$nom` ou `fruits[,"nom"]`
 ## Exercice
 
 Lister le maximum de façons possibles d'extraire du tableau `fruits` les fruits crus sucrés riches en Vitamine C !
+
+# Construire ses propres objets
+
+## Vecteurs et facteurs
+
+ * La fonction `c()` permet de combiner des valeurs dans un vecteur. Attention, tout doit être du même "type" !
+ * La fonction `seq` permet de créer des suites.
+ * La fonction `rep` permet de créer des vecteurs en répétant des valeurs. Ex: `rep(c("a", "b"), c(3, 4))`
+ 
+Les facteurs sont une particularité de R !
+
+ * On les crée avec la fonction `factor` ou `as.factor`
+ * Par exemple : `factor(fruits$groupe)`
+
+## Matrices et tableaux
+
+ * Les fonctions `matrix`, `rbind` et `cbind` pour créer des matrices. Attention, tout doit être du même "type" !
+ * Les fonctions `data.frame` ou `as.data.frame` pour créer des 
+
+## Ajouter des noms
+
+Directement à la création de l'objet. Ex: `x <- c(a = 1, b = 2)`, `d <- data.frame(a = 1:26, b = letters)`
+ 
+Ou bien après la création de l'objet : 
+
+  * `names(obj) <- lesNoms` pour un vecteur
+  * `rownames(obj) <- lesLignes` pour les lignes d'un tableau ou d'une matrice,
+  * `colnames(obj) <- lesColonnes` pour les colonnes d'un tableau ou d'une matrice.
+
+
+## Exercice
+
+Créez un facteur à partir des groupes de fruits, puis testez la commande suivante : 
+
+```
+factor(fruits$groupe, levels = c("secs", "compote", "crus", "exotique"))
+```
+
+Que se passe-t-il ? Sauvez le résultat dans un objet et faites un diagramme en bâton avec ! Commentez !
+
 
 # Estimation ponctuelle
 

@@ -16,6 +16,7 @@
 | Ma. PM | ggplot2   | Amaury & Vincent  | [[HTML](vignettes/S05ggplot2.html) [PDF](vignettes/S05ggplot2.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T05ggplot2/)] |
 | Je. AM + PM | Visualisation  | Amaury & Vincent  | [[HTML](vignettes/S06visu.html) [PDF](vignettes/S06visu.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T06visu)] |
 | Ve. AM + PM | Analyse   | Amaury & Vincent  | [[HTML](vignettes/S07tests.html) [PDF](vignettes/S07tests.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T07tests)] |
+| Lu.-Ve. | Entrées-Sorties   | Amaury & Vincent  | [[HTML](vignettes/S08input_output.html) [PDF](vignettes/S08input_output.pdf)] |  |
 
 ****
 

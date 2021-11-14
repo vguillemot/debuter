@@ -180,7 +180,7 @@ slide:not(.current) .plotly.html-widget{
 .forceBreak { -webkit-column-break-after: always; break-after: column; }
 </style>
 
-<slide class=""><hgroup><h2>Rappels</h2></hgroup><article  class="columns-2 smaller" id="rappels">
+<slide class=""><hgroup><h2>Rappels</h2></hgroup><article  id="rappels" class="columns-2 smaller">
 
 <ul>
 <li>Hypothèse nulle \(\mathcal H_0\), c’est l’hypothèse du <em>statu quo</em></li>
@@ -257,7 +257,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>En pratique : des ratios de variance !</p>
 
-</article></slide><slide class=""><hgroup><h2>Intermède : Création d’un exemple</h2></hgroup><article  class="columns-2 smaller" id="intermède-création-dun-exemple">
+</article></slide><slide class=""><hgroup><h2>Intermède : Création d’un exemple</h2></hgroup><article  id="intermède-création-dun-exemple" class="columns-2 smaller">
 
 <pre class = 'prettyprint lang-r'>qplot(fruits$Energie)</pre>
 
@@ -291,7 +291,7 @@ slide:not(.current) .plotly.html-widget{
 #&gt;   (0,250]     0.05882353 0.45098039
 #&gt;   (250,2e+03] 0.49019608 0.00000000</pre>
 
-</article></slide><slide class=""><hgroup><h2>Profils lignes et profils colonnes</h2></hgroup><article  class="columns-2 smaller" id="profils-lignes-et-profils-colonnes">
+</article></slide><slide class=""><hgroup><h2>Profils lignes et profils colonnes</h2></hgroup><article  id="profils-lignes-et-profils-colonnes" class="columns-2 smaller">
 
 <p>Proportions conditionnellement aux lignes :</p>
 
@@ -335,7 +335,7 @@ slide:not(.current) .plotly.html-widget{
   \frac{2}{4} \neq \frac{50}{100}
 \]</p>
 
-</article></slide><slide class=""><hgroup><h2>La fonction <code>prop.test</code></h2></hgroup><article  class="smaller" id="la-fonction-prop.test">
+</article></slide><slide class=""><hgroup><h2>La fonction <code>prop.test</code></h2></hgroup><article  id="la-fonction-prop.test" class="smaller">
 
 <ul>
 <li>Accepte des tables de contingences,</li>
@@ -370,7 +370,7 @@ prop.test(smokers, patients)
 #&gt; data:  energiequal and eauqual
 #&gt; X-squared = 36.788, df = 1, p-value = 1.317e-09</pre>
 
-</article></slide><slide class=""><hgroup><h2>La fonction <code>chisq.test</code></h2></hgroup><article  class="smaller" id="la-fonction-chisq.test">
+</article></slide><slide class=""><hgroup><h2>La fonction <code>chisq.test</code></h2></hgroup><article  id="la-fonction-chisq.test" class="smaller">
 
 <ul>
 <li>Accepte deux variables qualitatives,</li>
@@ -421,7 +421,7 @@ Xsq$expected   # expected counts under the null
 #&gt; odds ratio 
 #&gt;          0</pre>
 
-</article></slide><slide class=""><hgroup><h2>La fonction <code>fisher.test</code></h2></hgroup><article  class="smaller" id="la-fonction-fisher.test">
+</article></slide><slide class=""><hgroup><h2>La fonction <code>fisher.test</code></h2></hgroup><article  id="la-fonction-fisher.test" class="smaller">
 
 <ul>
 <li>Accepte deux variables qualitatives,</li>
@@ -480,7 +480,7 @@ fisher.test(Convictions, alternative = &quot;less&quot;)
 
 <pre >  y ~ x + age + sex + SCL:disease </pre>
 
-</article></slide><slide class=""><hgroup><h2>La fonction <code>t.test</code></h2></hgroup><article  class="smaller" id="la-fonction-t.test">
+</article></slide><slide class=""><hgroup><h2>La fonction <code>t.test</code></h2></hgroup><article  id="la-fonction-t.test" class="smaller">
 
 <ul>
 <li>Accepte une formule,</li>
@@ -558,7 +558,7 @@ res[[1]]$`Pr(&gt;F)`[1]
 
 <p>Récupérer la p-valeur s’effectue de la même façon que pour un test de Student.</p>
 
-</article></slide><slide class=""><hgroup><h2>Corrélation</h2></hgroup><article  class="smaller" id="corrélation">
+</article></slide><slide class=""><hgroup><h2>Corrélation</h2></hgroup><article  id="corrélation" class="smaller">
 
 <p>Avec la fonction <code>cor.test</code>. Exemple :</p>
 
@@ -575,7 +575,7 @@ res[[1]]$`Pr(&gt;F)`[1]
 #&gt;        cor 
 #&gt; -0.9902339</pre>
 
-</article></slide><slide class=""><hgroup><h2>La fonction <code>cor.test</code></h2></hgroup><article  class="smaller" id="la-fonction-cor.test">
+</article></slide><slide class=""><hgroup><h2>La fonction <code>cor.test</code></h2></hgroup><article  id="la-fonction-cor.test" class="smaller">
 
 <ul>
 <li>Accepte deux vecteurs <code>x</code> et <code>y</code> de même longueur,</li>
@@ -598,7 +598,7 @@ cor.test(x, y, method = &quot;kendall&quot;, alternative = &quot;greater&quot;)
 #&gt;       tau 
 #&gt; 0.4444444</pre>
 
-</article></slide><slide class=""><hgroup><h2>Modèles linéaires</h2></hgroup><article  class="smaller" id="modèles-linéaires">
+</article></slide><slide class=""><hgroup><h2>Modèles linéaires</h2></hgroup><article  id="modèles-linéaires" class="smaller">
 
 <p>Avec la fonction <code>lm</code>. Exemple :</p>
 

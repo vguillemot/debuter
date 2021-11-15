@@ -142,6 +142,6 @@ print(g)
 
 ## Exercice 2
 
-### Allez dans le menu "Help" puis sélectionnez "About Rstudio". Quelle est votre version de Rstudio ? Renseignez-la dans le document partagé : LIEN
+### Allez dans le menu "Help" puis sélectionnez "About Rstudio". Quelle est votre version de Rstudio ? Renseignez-la dans [le document partagé](https://docs.google.com/document/d/1dOspKPfs2QDQwoNth7HMEfGKLAorkxImJ1J67rzV-vk/edit)
 
 

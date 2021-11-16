@@ -32,7 +32,14 @@ Les essentiels :
 
 ****
 
-Feuilles de triche [à télécharger ici](inst/extdata/cheat_sheets.pptx)
+Feuilles de triche sur les packages, les tests et les couleurs [à télécharger ici](inst/extdata/cheat_sheets.pptx). Ce document est au format `pptx`, vous pouvez donc les modifier comme vous le souhaitez !
+
+Les [feuilles de triches de Rstudio](https://www.rstudio.com/resources/cheatsheets/) : 
+
+  * Pour [dplyr](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
+  * Pour [ggplot2](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)
+
+
 
 ****
 

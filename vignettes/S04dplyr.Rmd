@@ -23,6 +23,69 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Avant toutes choses
+
+  * On crée un projet
+  * On crée un script
+  * On charge les données `fruits`
+  
+```{r fruits}
+library(dplyr)
+data("fruits", package = "debuter")
+```
+
+## Comment créer une nouvelle colonne ?
+
+Par sécurité : je crée une copie de mes données
+
+```{r fruits2}
+fruits2 <- fruits
+```
+
+On utilise le plus souvent l'opérateur `$` : 
+
+```{r addSucresRatio}
+fruits2$Sucres_ratio <- fruits2$Sucres / 100
+```
+
+## Le principe de l'ajout de colonne
+
+Sur un tableau `tab`, je souhaite ajouter la colonne `A` : 
+
+```
+tab$A <- nouvelles_valeurs
+```
+
+Attention : 
+
+  * Si la colonne `A` existe déjà, les valeurs sont écrasée
+  * Si les nouvelles valeurs ne sont pas de la bonne longueur, elles sont recyclées
+  * Sans rien dire pour les `data.frame`, avec une erreur pour les `tibble`
+  
+## Exemple d'erreur
+
+```{r fruits2mod, eval = FALSE}
+fruits2$recyclage <- c(0, 1)
+```
+
+```
+Erreur : Assigned data `c(0, 1)` must be compatible with existing data.
+x Existing data has 51 rows.
+x Assigned data has 2 rows.
+ℹ Only vectors of size 1 are recycled.
+Run `rlang::last_error()` to see where the error occurred.
+```
+
+## Exemple d'horreur !
+
+```{r mtcars recyclage}
+mtcars2 <- mtcars
+mtcars2$recyclage <- c(0, 1)
+mtcars2$recyclage
+```
+
+# Le tydiverse
+
 ## Enchaîner les commandes avec magrittr {.columns-2}
 
  * On utilise un opérateur 
@@ -38,16 +101,16 @@ knitr::opts_chunk$set(
 
 ## Exemple {.columns-2 .bigger}
 
-```{r, out.width="70%", fig.align='center'}
-set.seed(7895)
-
-hist(rnorm(10))
+```{r, out.width="70%", fig.align='center', fig.width=3, fig.height=4}
+## Histogramme
+hist(fruits$Energie)
 ```
 
-```{r, out.width="70%", fig.align='center'}
-set.seed(7895)
+<p class="forceBreak"></p>
+
+```{r, out.width="70%", fig.align='center', message=FALSE, fig.width=3, fig.height=4}
 library(magrittr)
-rnorm(10) %>% hist()
+fruits$Energie %>% hist()
 ```
 
 ## Le tidyverse {.bigger}
@@ -56,7 +119,7 @@ rnorm(10) %>% hist()
 ![Tidyverse: https://www.tidyverse.org/](img/S04dplyr/tidyverse.jpg){width=70%}
 </div>
 
-## Avant toute chose
+## Charger les packages
 
 Charger le package `dplyr`...
 
@@ -72,12 +135,6 @@ library(tidyverse)
 
 ... mais cela chargera d'autres packages en plus
 
-Et charger les données.
-
-```{r fruits}
-data("fruits", package = "debuter")
-```
-
 ## Le format "tibble" {.smaller}
 
 Les données sont au format "tibble" : c'est comme des "data-frames" mais en mieux !
@@ -92,13 +149,14 @@ Nous allons voir ensemble quelques fonctions très pratiques de la librairie `dp
 
  # | Fonction (US) | Fonction (UK) | Description
 ---|:-------------:|:-------------:|:----------
- 1 |    `mutate`   |    `mutate`   | Créer ou modifier des colonnes
- 2 |    `select`   |    `select`   | Sélectionner des colonnes
- 3 |   `arrange`   |    `arrange`  | Trier les lignes
- 4 |    `filter`   |    `filter`   | Sélectionner des lignes
- 5 |   `group_by`  |   `group_by`  | Grouper des lignes
- 6 |   `summarize` |   `summarise` | Résumer des groupes
- 7 |     `count`   |     `count`   | Compter
+ 1 |   `mutate`    |   `mutate`    | Créer ou modifier des colonnes
+ 2 |   `select`    |   `select`    | Sélectionner des colonnes
+ 3 |   `relocate`  |   `relocate`  | Ré-arranger des colonnes
+ 4 |   `arrange`   |   `arrange`   | Trier les lignes
+ 5 |   `filter`    |   `filter`    | Sélectionner des lignes
+ 6 |   `group_by`  |   `group_by`  | Grouper des lignes
+ 7 |   `summarize` |   `summarise` | Résumer des groupes
+ 8 |   `count`     |   `count`     | Compter
 
 ## 
 
@@ -156,7 +214,7 @@ la fonction `select` est très versatile !
 
 ```{r selectbis, eval = FALSE}
 fruits %>% 
-  select(Energie:Proteines, - Sucres)
+  select(Energie:Proteines, - Eau)
 ```
 
 On peut sélectionner des plages entières de colonnes sur la base de leurs noms, en enlever avec le `-`, combiner tout cela avec la fonction `c()`... ou pas !
@@ -172,6 +230,8 @@ fruits %>%
   select(Energie, Sucres, Fibres) %>%
   arrange(desc(Fibres))
 ```
+
+<p class="forceBreak"></p>
 
 Avec les fonctions classiques 
 
@@ -190,6 +250,8 @@ Avec la fonction `filter`.
 fruits %>% 
   filter(Sucres > 60)
 ```
+
+<p class="forceBreak"></p>
 
 Avec les fonctions classiques.
 

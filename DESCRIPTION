@@ -1,17 +1,24 @@
 Package: debuter
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Le package de la formation DebuteR
+Version: 0.1
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    c(person(given = "Vincent",
+           family = "Guillemot",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-Depends: R (>= 3.4.0)
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+           email = "vincent.guillemot@pasteur.fr"),
+      person(given = "Amaury",
+           family = "Vaysse",
+           role = c("aut"),
+           email = "amaury.vaysse@pasteur.fr"))  
+Description: This package contains all the slides and data-sets used during the course DebuteR.
+Depends: R (>= 3.5.0)
+Imports: learnr, dplyr, ggplot2, RColorBrewer, ggvenn, ggarrange
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

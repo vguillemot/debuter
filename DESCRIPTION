@@ -12,7 +12,7 @@ Authors@R:
            email = "amaury.vaysse@pasteur.fr"))  
 Description: This package contains all the slides and data-sets used during the course DebuteR.
 Depends: R (>= 3.5.0)
-Imports: learnr, dplyr, ggplot2, RColorBrewer, ggvenn, ggarrange
+Imports: learnr, dplyr, ggplot2, RColorBrewer, ggvenn, ggpubr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

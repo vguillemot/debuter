@@ -54,4 +54,4 @@ Liens vers les scripts que nous avons écrits ensemble pendant le cours :
   * [Vendredi matin](inst/extdata/07_vendredi_matin.zip)
   * [Vendredi après-midi](inst/extdata/08_vendredi_apresm.zip)
 
-Lien vers les tutoriels au format R Markdown : [Lien vers dossier compressé](inst/extdata/tutos.zip). Pour générer une version locale du tutoriel, ouvrez le sur Rstudio, installez les packages manquants et cliquez sur "Knit".
+Lien vers les tutoriels au format R Markdown : [Lien vers dossier compressé](inst/extdata/tutorials.zip). Pour générer une version locale du tutoriel, ouvrez le sur Rstudio, installez les packages manquants et cliquez sur "Knit".

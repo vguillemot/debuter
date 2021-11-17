@@ -1,0 +1,198 @@
+---
+title: "Les objets de base en R"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+library(debuter)
+data("nutrimenu")
+```
+
+## Vecteurs et matrices
+
+J'ai créé pour vous un vecteur `vec` et une matrice `Mat`.
+ 
+```{r vecmat-setup}
+vec <- structure(c(2L, 1L, 2L, 1L, 1L, 2L), .Label = c("val1", "val2"), class = "factor")
+Mat <- structure(c(1.4758050122662, 0.460757577634441, 1.09787881859777, 
+-0.576514555287794, 1.7806944930363, -1.34819815347259, -0.474234033382841, 
+-0.277249593892861, 0.259424211813034, 0.802903573707708, -1.17702274849553, 
+0.532834331766421, 0.680394042312619, 0.281655088161887, -1.17112056849342, 
+-0.671549850839443, 0.873054071274946, 0.893642462873987), .Dim = c(6L, 
+3L))
+```
+
+Explorez les objets `vec` et `Mat` : 
+
+ * quelles sont leurs dimensions ?
+ * quelle est leur classe ?
+ * quel est le type d'éléments qu'ils contiennent ?
+ 
+
+```{r vecmat, exercise=TRUE}
+
+```
+
+```{r vecmat-solution}
+# La fonction str permet de répondre à toutes
+# les questions d'un seul coup
+str(vec)
+str(Mat)
+# Sinon on peut utiliser la fonction class
+class(vec)
+class(Mat)
+# Les fonctions length et dim
+length(vec)
+dim(Mat)
+```
+
+## Data-frame
+
+J'ai combiné `vec` et `Mat` dans une même data-frame `df` avec la commande suivante : 
+
+```
+df <- data.frame(vec, Mat)
+```
+
+Explorez le résultat et utilisez trois méthodes différentes pour extraire la colonne qui correspond à `vec`.
+
+
+```{r df-setup}
+vec <- structure(c(2L, 1L, 2L, 1L, 1L, 2L), .Label = c("val1", "val2"), class = "factor")
+Mat <- structure(c(1.4758050122662, 0.460757577634441, 1.09787881859777, 
+-0.576514555287794, 1.7806944930363, -1.34819815347259, -0.474234033382841, 
+-0.277249593892861, 0.259424211813034, 0.802903573707708, -1.17702274849553, 
+0.532834331766421, 0.680394042312619, 0.281655088161887, -1.17112056849342, 
+-0.671549850839443, 0.873054071274946, 0.893642462873987), .Dim = c(6L, 
+3L))
+df <- data.frame(vec, Mat)
+
+```
+
+```{r df, exercise=TRUE}
+
+```
+
+```{r df-solution}
+# On utilise str et summary pour explorer df
+str(df)
+summary(df)
+# Voici trois méthodes pour extraire une colonne
+# d'une data-frame
+df$vec
+df[,"vec"]
+df[,1]
+# Bonus
+df["vec"]
+df[["vec"]]
+```
+
+## Le jeu de données `nutrimenu`, extrait de Nutriwi
+
+C'est un jeu de données inspiré du site [Nutriwi](https://www.nutriwi.com/) sur lequel on retrouve des recettes de cuisine, leur composition et leur Nutriscore.
+
+J'ai mis pour vous ce jeu de données à disposition dans le package du cours. Entrez ci-dessous la commande qui permettra de charger ce jeu de données (appelé `nutrimenu`).
+
+```{r nutrimenu, exercise=TRUE}
+
+```
+
+```{r nutrimenu-hint}
+# Utilisez la fonction "data"
+```
+
+```{r nutrimenu-solution}
+data("nutrimenu", package = "debuter")
+```
+
+Consultez la page d'aide de ce jeu de données.
+
+```{r helpnutrimenu, exercise = TRUE}
+
+```
+
+
+```{r helpnutrimenu-solution}
+?nutrimenu
+```
+
+## Extraction de données
+
+Modifiez la commande suivante pour obtenir l'Energie des desserts.
+
+```{r energie, exercise = TRUE}
+nutrimenu$***[nutrimenu$Type == "****"]
+```
+
+```{r energie-solution}
+nutrimenu$Energie[nutrimenu$Type == "Dessert"]
+
+```
+
+Faites une table de contingence des variables `Type` et `Nutriscore`.
+
+```{r table, exercise = TRUE}
+
+```
+
+```{r table-solution}
+table(nutrimenu$Type, nutrimenu$Nutriscore)
+```
+
+Calculez la moyenne de la teneur en Sucre des entrées, des plats et des desserts.
+
+```{r sucres, exercise = TRUE}
+
+```
+
+```{r sucres-solution}
+mean(nutrimenu$Sucre[nutrimenu$Type == "Entree"])
+mean(nutrimenu$Sucre[nutrimenu$Type == "Plat"])
+mean(nutrimenu$Sucre[nutrimenu$Type == "Dessert"])
+```
+
+Extraire des données `nutrimenu` la composition en Glucides, Lipides et Proteines des recettes ayant un Nutriscore égal à A ou B.
+
+
+```{r nutriAB, exercise = TRUE}
+
+```
+
+```{r nutriAB-hint}
+# Pour les lignes, utilisez un vecteur de booléens
+# Pour les colones, utilisez les noms des colonnes
+```
+
+```{r nutriAB-solution}
+# En une seule ligne : 
+nutrimenu[nutrimenu$Nutriscore %in% c("A", "B"), c("Glucides", "Lipides", "Proteines")]
+# ----------------------
+# En plusieurs lignes : 
+AouB <- nutrimenu$Nutriscore == "A" | nutrimenu$Nutriscore == "B"
+# Ecriture équivalente :
+AouB <- nutrimenu$Nutriscore %in% c("A", "B")
+# Les colonnes
+my_cols <- c("Glucides", "Lipides", "Proteines")
+nutrimenu[AouB, my_cols]
+```
+
+Calculez la corrélation entre les variables Glucides, Lipides et Proteines.
+
+```{r cor, exercise = TRUE}
+
+```
+
+```{r cor-solution}
+# En trois commandes 
+cor(nutrimenu$Glucides, nutrimenu$Lipides)
+cor(nutrimenu$Glucides, nutrimenu$Proteines)
+cor(nutrimenu$Proteines, nutrimenu$Lipides)
+# Ou bien en une seule commande : 
+cor(nutrimenu[c("Glucides", "Lipides", "Proteines")])
+```
+
+
+

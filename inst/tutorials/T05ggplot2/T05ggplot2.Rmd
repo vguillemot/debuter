@@ -1,0 +1,285 @@
+---
+title: "Graphiques avec ggplot2"
+output: learnr::tutorial
+runtime: shiny_prerendered
+description: >
+  Quelques géométries classiques, puis la fonction ggpubr::ggarrange
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+library(ggpubr)
+data("nutrimenu", package = "debuter")
+couleurs <- c("steelblue", "limegreen", "darkolivegreen", "darkorchid")
+```
+
+Le package `ggplot2` permet de réaliser facilement des graphiques avec une syntaxe unifiée. Dans ce tutoriel, nous allons nous entraîner avec les données "nutrimenu".
+
+## Commande de base
+
+La commande de base aura l'allure suivante
+
+```
+ggplot(data, aes(x, y)) + geom_****()
+```
+Où
+
+* `ggplot` dessine le canevas de base
+* `data` est une data-frame contenant toutes les informations nécessaires au dessin du graphe
+* `aes()` est une fonction qui permet de déclarer les paramètres esthétiques du graphe (les coordonnées des points, des lignes ou des barres, la façon de les colorer, les étiquettes etc...)
+* `geom_****` est une fonction qui spécifie une "couche de dessin"
+
+Dans ce tuto, nous verrons les fonctions suivantes :
+
+
+Fonction | Utilité
+---------|---------
+`geom_bar`, `geom_col` | Diagrammes en bâtons
+`geom_point`, `geom_jitter` | Nuages de points
+`geom_line` | Dessins de lignes
+`geom_histogram` | Histogrammes
+`geom_boxplot` | Boites à moustaches
+`geom_density` | Densités
+`geom_violin` | Diagrammes en violon
+
+Tout en faisant les exercices, familiarisez vous avec la documentation de ggplot2 : https://ggplot2.tidyverse.org/
+
+## Les données nutrimenu
+
+Les données contenues dans la table nutrimenu contiennent les données nutritionnelle de `r nrow(nutrimenu)` recettes. La table est reportée ci-après.
+
+
+```{r shownutrimenu}
+DT::datatable(nutrimenu)
+```
+
+La colonne "Type" correspond au type de recettes.
+
+Pour plus d'informations, rendez vous sur le site Nutriwi (https://www.nutriwi.com/).
+
+## Representer une variable discrete
+
+Complétez la commande suivante pour obtenir un diagramme en bâtons des types de recettes
+
+```{r baton, exercise = TRUE}
+ggplot( ) + geom_
+```
+
+```{r baton-solution}
+ggplot(nutrimenu, aes(Type)) + geom_bar()
+```
+
+Changez les couleurs et le thème du graphe en complétant la prochaine commande.
+
+```{r baton2, exercise = TRUE}
+ggplot( , aes(fill = )) + 
+   geom_ + 
+   theme_
+```
+
+```{r baton2-solution}
+ggplot(nutrimenu , aes(Type, fill = Type)) + 
+   geom_bar() + 
+   theme_bw()
+```
+
+Utilisez la fonction `cut` de la façon suivante pour transformer la variable Proteines (continue) en une variable qualitative.
+
+```{r cutProteines, exercise = TRUE}
+cut(nutrimenu$Proteines, c(-1, 6, 14))
+```
+
+```{r cutProteines-solution}
+# Il n'y a rien de plus à faire : exécutez juste la commande et observez son résultat
+cut(nutrimenu$Proteines, c(-1, 6, 14))
+# Si vous le souhaitez, vous pouvez utiliser la fonction table sur ce résultat
+table(cut(nutrimenu$Proteines, c(-1, 6, 14)))
+```
+
+Remarquez comme on peut utiliser cette astuce dans un graphe !
+
+```{r cutProteinesplot, exercise = TRUE}
+ggplot(nutrimenu, aes(cut(Proteines, c(-1, 6, 14)))) +
+  geom_bar() + 
+  theme_bw()
+```
+
+Ce n'est pas très joli comme commande et un peu difficile a lire. Parfois, plutôt que d'imbriquer les commandes, il vaut mieux créer une nouvelle variable et utiliser cette nouvelle variable dans la commande graphique.
+
+## Representer une variable continue
+
+Complétez la fonction suivante pour réaliser un boxplot de la variable `Energie.`
+
+```{r energiebox, exercise = TRUE}
+ggplot(nutrimenu) + geom
+```
+
+```{r energiebox-solution}
+ggplot(nutrimenu, aes(Energie)) + 
+  geom_boxplot() + 
+  theme_bw()
+```
+
+Sur le même modèle, faites un diagramme en violon.
+
+```{r energieviolon, exercise = TRUE}
+ggplot(nutrimenu) + geom
+```
+
+```{r energieviolon-solution}
+ggplot(nutrimenu, aes(x = Energie, y = 0)) + 
+  geom_violin() + 
+  theme_bw()
+```
+
+Superposez les deux et ajustez les paramètres de largeur et de couleur pour avoir un joli graphe.
+
+```{r energieboxviolon, exercise = TRUE}
+ggplot(nutrimenu) + 
+  geom_violin() +
+  geom_boxplot()
+```
+
+```{r energieboxviolon-hint}
+## Utilisez la fonction theme
+### - sur l'élément axis.text.y
+### - et sur l'élément axis.ticks.y
+### - que vous devrez transformer en element_blank()
+```
+
+```{r energieboxviolon-solution}
+ggplot(nutrimenu, aes(x = Energie, y = 0)) + 
+  geom_violin(color = NA, fill = "limegreen") + 
+  geom_boxplot(width = 0.1, color = "steelblue", fill = "lightgreen", size = 1) + 
+  theme_bw() + 
+  labs(x = "", y = "Energie (kCal/100 g)") +    
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+```
+
+Faites maintenant un histogramme de la composition en Lipides.
+
+```{r vitamineChisto, exercise = TRUE}
+ggplot(nutrimenu) + 
+  geom
+```
+
+```{r vitamineChisto-solution}
+ggplot(nutrimenu, aes(Lipides)) + 
+  geom_histogram(breaks = seq(0, 30, 5), color = "white", fill = "goldenrod") + 
+  theme_bw() + 
+  labs(x = "Lipides (g/100 g)", y = "Nb. d'occurences")
+```
+
+## Représenter sur le même graphe une variable qualitative et une variable quantitative
+
+Exécutez la commande suivante puis modifiez la pour faire en sorte que chaque boite soit d'une couleur différente.
+
+```{r sucres, exercise = TRUE}
+ggplot(nutrimenu, aes(Type, Glucides)) + geom_boxplot()
+```
+
+```{r sucres-solution}
+ggplot(nutrimenu, aes(Type, Glucides, color = Type)) + 
+  geom_boxplot() + 
+  theme_bw() + 
+  coord_flip() +
+  labs(x = "", y = "Glucides (g/100 g)", color = "")
+```
+
+J'ai sélectionné 3 couleurs pour vous, et utilisé la commande suivante pour les stocker dans un vecteur s'appelant `couleurs`.
+
+```{r, eval = FALSE, echo = TRUE}
+couleurs <- c("steelblue", "limegreen", "darkolivegreen")
+```
+
+Ce vecteur est utilisé ci-dessous. Exécutez ce code et observez le résultat. Essayez ensuite d'autres couleurs de votre choix : utilisez des noms de couleur (voir le résultat de la fonction `colors()`) ou des codes hexadécimaux.
+
+```{r fibres, exercise = TRUE}
+couleurs <- c("steelblue", "limegreen", "darkolivegreen")
+ggplot(nutrimenu, aes(Fibres, Type, fill = Type)) + 
+  geom_violin() + 
+  scale_fill_manual(values = couleurs)
+```
+
+## Representer un nuage de points
+
+Complétez la commande suivante pour représenter l'énergie en fonction de la teneur en Glucides des recettes.
+
+```{r energieVitC, exercise = TRUE}
+ggplot() + geom
+```
+
+```{r energieGluc-solution}
+ggplot(nutrimenu, aes(Glucides, Energie)) +
+  geom_point() + 
+  theme_bw() + 
+  labs(y = "Energie (kCal / 100g)", x = "Glucides (g/100 g)")
+```
+
+Coloriez les points, d'abord avec la variable Proteines puis avec la variable Type. Que Remarquez vous ?
+
+```{r energieVitCcolor, exercise = TRUE}
+ggplot() + geom
+```
+
+
+```{r energieVitCcolor-solution}
+ggplot(nutrimenu, aes(Glucides, Energie, color = Proteines)) +
+  geom_point() + 
+  theme_bw() + 
+  labs(y = "Energie (kCal / 100g)", y = "Glucides (g/100 g)")
+
+ggplot(nutrimenu, aes(Glucides, Energie, color = Type)) +
+  geom_point() + 
+  theme_bw() + 
+  labs(y = "Energie (kCal / 100g)", y = "Glucides (g/100 g)")
+
+```
+
+Vous pouvez changer des couleurs définies sur une variable quantitative avec la fonction `scale_color_continuous`, ou `scale_color_gradient`, ou `scale_color_gradientn`, ou des couleurs définies sur une variable discrète avec la fonction `scale_color_manual` ou `scale_colour_brewer`. Testez ces fonctions sur l'exemple précédent.
+
+
+
+
+## Combiner des graphes
+
+Les fonctionnalités du package `ggpubr` permettent, entre autres, de combiner des graphes à partir d'objets `ggplot`. 
+
+Remarque : d'autres package existent pour combiner des objets `ggplot` en graphes complexes, comme `cowplot`, `gridExtra` ou `patchwork`, ce qui témoigne du succès de `ggplot2`.
+
+Exécutez les commandes suivantes et observez comment elles permettent la création d'un graphe complexe en plusieurs panneaux.
+
+```{r ggarrange, exercise = TRUE}
+library(ggpubr)
+theme_set(theme_bw())
+
+# boxplots
+bxp <- ggplot(nutrimenu, aes(Type, Glucides, color = Type)) + geom_boxplot()
+# jitter plots
+jp <- ggplot(nutrimenu, aes(x = Type, y = Glucides, color = Type)) + geom_jitter()
+# violin plots
+vp <- ggplot(nutrimenu, aes(Type, Glucides, color = Type, fill = Type)) + geom_violin() 
+# violin plots
+dens <- ggplot(nutrimenu, aes(Glucides, fill = Type)) + geom_density() 
+
+# Arrange
+ggarrange(bxp, jp, vp, dens, ncol = 2, nrow = 2,  common.legend = TRUE, legend = "bottom") 
+
+```
+
+
+
+Voici les arguments clefs de la fonction `ggarrange.` N'oubliez pas que vous pouvez accéder à ces informations et bien plus en appelant le fichier d'aide de la fonction grâce à la commande `?ggarrange`.
+
+Argument | Utilité 
+----------|--------
+`ncol` | Nombre de colonnes de la grille de graphes.
+`nrow` | Nombre de lignes de la grille de graphes.
+`widths` | Vecteur des largeurs des graphes.
+`heights` | Vecteur des hauteurs des graphes.
+`legend` | Chaîne de caractère spécifiant la position de la légende (`"top"`, `"bottom"`, `"left"` ou `"right"`). Pour supprimer la légende, utilisez `"none"`.
+`common.legend` | Valeur logique. La valeur par défaut est `FALSE`. Si `TRUE`, une légende unique commune sera créée.
+

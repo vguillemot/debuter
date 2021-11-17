@@ -6,7 +6,7 @@ output:
   ioslides_presentation:
     css: styles.css
 vignette: >
-  %\VignetteIndexEntry{02dplyr}
+  %\VignetteIndexEntry{03objets}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 ---
@@ -21,6 +21,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   echo = TRUE
 )
+library(ggplot2)
+library(tidyr)
 ```
 
 ## Bien se préparer à coder
@@ -102,7 +104,7 @@ Attention à bien mettre des **parenthèses** dans le cas d'entiers négatifs!
  * `-3:-7` : les entiers de -3 à -7
  * `-(3:7)` : les entiers de -3 à -7
  
-## Mini exercices
+## Exercice
 
  1. Créez un vecteur d'entiers de 0 à 3
  2. Créez un autre vecteur d'entiers de 3 à 1
@@ -112,4 +114,516 @@ Attention à bien mettre des **parenthèses** dans le cas d'entiers négatifs!
 pander::pandoc.table(c(3:1, 0:3))
 ```
 
+## Assignation avec `<-`
 
+Comment "sauvegarder" ces objets ?
+
+En utilisant l'**opérateur d'assignation**
+
+```{r assign, echo = FALSE, fig.width = 3, fig.height = 3, fig.align='center'}
+data.frame(x = 0, y = 0, lab = "<-") %>% 
+  ggplot(aes(x, y, label = lab)) + 
+  geom_text(size = 50, family = "Courier", fontface = "bold") + 
+  theme_void() + 
+  theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
+```
+
+## Utilisation de l'opération d'assignation
+
+ * A gauche : l'objet que l'on veut créer
+ * A droite : sa définition
+ * Lecture de l'opération : "assigner à cet objet (à gauche) le résultat de cette commande (à droite)"
+ * Assigner deux fois de suite écrasera la première valeur assignée
+ * Alternative : `=`
+ * Exemples : `a <- 1`, `b <- 1:10`, `a <- 2` etc.
+ 
+## Les noms d'objets {.smaller}
+
+Règles absolues : 
+
+ * Commence par une lettre ou un point, si le premier caractère est un point, le deuxième ne peut pas être un chiffre,
+ * Pas d'espace
+ * Pas de caractères correspondant à des opérations (`+`, `-`, `*`, `/`, `^`, `**`, etc.)
+ * Les minuscules et les majuscules sont différentes !
+ * Certains "mots-clefs" sont strictement interdits (`NA`, `TRUE`, `FALSE`, `for`, `if`, `else` etc.)
+ * MAIS on peut utiliser un nom d'objet qui existe déjà !
+
+Bonnes pratiques : 
+
+ * Utiliser un nom qui a du sens
+ * Ne pas utiliser des noms  d'objets qui existent déjà et que l'on ne souhaite pas écraser !
+
+## Mini exercice
+
+ 1. Créez un vecteur d'entiers de 0 à 3, appelez le `a`
+ 2. Créez un autre vecteur d'entiers de 3 à 1, appelez le `b`
+ 3. *Combinez* ces deux vecteurs pour obtenir un vecteur `ab` selon le modèle suivant :
+ 
+```{r vecteur2, echo = FALSE, results='asis'}
+pander::pandoc.table(c(3:1, 0:3))
+```
+
+## Opérations
+
+On peut appliquer des opérations à ces "vecteurs" !
+
+```{r}
+a <- 1:5
+a + 1
+a * 2
+```
+
+Ces "vecteurs" sont des **objets**.
+
+# Les Objets
+
+## Classes d'objets
+
+Nom | Appelation officielle | Exemple
+---|---|---
+Vecteur | ??? | `1:10`
+Facteur | `factor` | `gl(2, 2)`
+Matrice | `matrix` | `matrix(1:4, 2, 2)`  
+Tableau | `data.frame` | `mtcars`  
+Liste | `list` |  `list(a = 1, b = 1:10, c = "Hello!")`
+Fonction | `function` | `sin`, `exp`, `log`
+
+
+Pour connaître la classe d'un objet : `class(objet)`.
+
+
+## Types de données
+
+Nom | Appellation officielle | Exemple
+---|---|---
+Entier ($\mathbb Z$) | `integer` | `1:10`, (ou `1L`)
+Réel ($\mathbb R$)  | `double` | `2.3`, `1/3`, etc...
+Caractères | `character` | `month.name`, `"Bonjour"`
+Booléen | `logical` | `TRUE`
+
+## Bouh les quoi ?
+
+> MATH., néol. Qui est relatif aux théories du logicien et mathématicien anglais George Boole.
+>
+> -- *Trésor de la Langue Française informatisé*
+
+ * `TRUE` (ou bien `T`) et `FALSE` (ou bien `F`)
+ * Résultat d'une comparaison : `==`, `!=`, `<`, `>`, `<=`, `>=`
+ * Opérations logiques : `!`, `&`, `|`, `xor`
+
+## Exercice
+
+ 1. Effectuez les opérations suivantes : 
+   * `1 == 2`
+   * `!(5 > -6)`
+   * `(1 <= 10) | (1 > 0)`
+ 2. Prédisez le résultat de la commande suivante : `log(1) != 0`
+
+
+## "Classification" des objets
+
+
+Les objets qui ne contiennent qu'un seul type de données : vecteurs et matrices.
+
+Les objets pouvant contenir des données mixtes : tableaux et listes.
+
+La flexibilité a un coût : on ne peut plus faire certaines opérations !
+
+Les objets ayant des "dimensions" : vecteurs, tableaux et matrices
+
+Les objets pour qui cela ne signifie rien ou presque : listes et fonctions
+
+## Petit détour par les tableaux {.smaller}
+
+```{r fruits}
+data("fruits", package = "debuter")
+fruits
+```
+
+## Importer des données en R
+
+ * Des données de *packages* : `data`
+ * Des données au format R (`RData`) : `load`
+ * Des données "tabulées" : `read.table`
+ * Des données Excel : `readxl::read_excel`
+ * Des données Stata, SPSS, images etc.
+
+## Les données "de R"
+
+ * Utiliser la commande `data()` pour avoir une liste (presque ?) exhaustive.
+ * Bonne pratique : pour charger un jeu de données, utiliser la commande complète `data("nom_des_data", package = "nom_du_package")`
+ * Mais ces alternatives fonctionnent également : 
+   + `data(mtcars)`
+   + `DNase`
+   + `library(ggplot2) ; data(diamonds)`
+   
+## Utilisation des guillemets
+
+  * Obligation : quand l'argument doit être une chaîne de caractères
+  * Oubli : `library`, `require`, `data`
+  * Guillemets simples : fonctionnent comme les guillemets doubles. Ex.: `"bonjour"` est équivalent à `'bonjour'`.
+  * Le "backtick" ou "backquote" : "`"
+
+# Bref, c'est quoi un `tibble` ?
+
+## Mise à jour de la table des classes d'objets !
+
+Nom | Appelation officielle | Exemple
+---|---|---
+Vecteur | ??? | `1:10`
+Facteur | `factor` | `gl(2, 2)`
+Matrice | `matrix` | `matrix(1:4, 2, 2)`  
+Tableau | `data.frame` | `mtcars`  
+Tableau | `tibble` | `fruits`  
+Liste | `list` |  `list(a = 1, b = 1:10, c = "Hello!")`
+Fonction | `function` | `sin`, `exp`, `log`
+
+## Explorer les données `fruits`
+
+```{r brackets, echo = FALSE, fig.width = 6, fig.height = 4, fig.align='center'}
+data.frame(x = c(0, 1, 0, 1), y = c(1, 1, 0, 0), lab = c("[ ]", "[ , ]", "[[ ]]", "$")) %>% 
+  ggplot(aes(x, y, label = lab, color = lab)) + 
+  geom_text(aes(hjust = x, vjust = y), size = 20, family = "Courier", fontface = "bold", show.legend = FALSE) + 
+  theme_void() + 
+  theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
+```
+
+## Sur quels objets les utiliser ?
+
+Opérateur | Vecteurs | Matrices | Tableaux | Listes
+----------|:--------:|:--------:|:--------:|:------:
+`[ ]`     |     x    |          |     x    |    x 
+`[ , ]`   |          |     x    |     x    |    
+`[[ ]]`   |          |          |     x    |    x 
+`$`       |          |          |     x    |    x
+
+## L'opérateur de sélection classique : `[ , ]`
+
+  * Pour sélectioner la première ligne : `fruits[1, ]`
+  * Pour sélectionner la deuxième colonne : `fruits[, 2]`
+  * Pour enlever la troisième ligne : `fruits[-3, ]`
+  * Pour enlever la quatrième colonne : `fruits[, -4]`
+  
+## Exercice
+
+Comment faire pour sélectionner les fruits numéro 1, 3 et 5 ?
+
+Je veux deux solutions : une "normale" et une "créative" !
+
+## Sélectionner plusieurs lignes / colonnes
+
+  * Pour sélectioner les lignes 1 et 3 : `fruits[c(1, 3), ]`
+  * Pour sélectionner les colonnes 2 et 4 : `fruits[, c(2, 4)]`
+  * Pour enlever les lignes 5 et 7 : `fruits[-c(5, 7), ]`
+  * Pour enlever les colonnes 6 et 8 : `fruits[, -c(6, 8)]`
+
+## De l'utilité des deux points
+
+Pour sélectionner une plage entière de lignes ou de colonnes adjacentes : 
+
+  * Pour sélectionner les lignes 11 à 17 : `fruits[11:17, ]`
+  * Pour sélectionner les colonnes 3 à 5 : `fruits[, 3:5]`
+  * Pour enlever les trois premiers fruits : `fruits[-(1:3), ]`
+  * Pour enlever les cinq premières variables : `fruits[, -(1:5)]`
+
+## Exercice
+
+Que se passe-t-il quand on oublie les parenthèses dans la commande `fruits[-(1:3), ]` ? Commentez !
+
+Faites de même avec le jeu de données `mtcars`.
+
+## Pour extraire une seule colonne : le `$`
+
+La syntaxe `donnees$cible` permet de sélectionner la colonne `cible` du tableau `donnees`.
+
+ * Par exemple : `fruits$Eau`
+ * Autre exemple : `fruits$groupe`
+ 
+## Exercice
+
+Extrayez la colonne de la teneur en sucres de la table des fruits... de deux façons différentes !
+
+Créez un objets contenant la teneur en sucres : quelle est la classe de cet objet ?
+
+## Les vecteurs...
+
+ * ... sont "unidimensionnels"
+ * ... ont une classe qui est égale au type de données qu'ils contiennent (R !!!)
+ * ... sont indexés avec des crochets simples
+ 
+Exemples : 
+
+ * `i <- 1:10`
+ * `eau <- fruits$Eau`
+ * `eau[i]`
+
+## Exercice
+
+Créez un vecteur `groupe` contenant les groupes de fruits. Donnez deux façons différentes d'extraire les dix premières valeurs de ce vecteur.
+
+## Extraction avec des Booléens
+
+Comment extraire les fruits ... 
+ * dont la teneur en eau est supérieure à 60 ?
+ * exotiques ?
+ * secs contenant moins de 40g/100g de sucres ?
+
+Réponse : en utilisant des vecteurs booléens
+
+ 1. Créer le vecteur de booléens `fruits$Eau >= 60`
+ 2. Utiliser le résultat dans les crochets carrés `fruits[fruits$Eau >= 60, ]`
+ 
+Ne pas oublier la virgule ! 
+
+## Le principe
+
+Pour un vecteur `v` : 
+
+  * `v[bool]` extrait les valeurs de `v` pour lesquelles `bool` est vrai (`TRUE`). Contrainte : `v` et `bool` doivent contenir **le même nombre d'élements**.
+
+Pour un tableau `tab` : 
+
+  * `tab[brow, ]` pour extraire les lignes
+  * `tab[, bcol]`
+  * Contrainte 1 : `brow` doit avoir autant d'éléments que `tab` de lignes
+  * Contrainte 2 : `bcol` doit avoir autant d'éléments que `tab` de colonnes
+
+## Attention
+
+Vous verrez souvent des opérations logiques à l'intérieur des crochets carrés : cela permet d'aller plus vite !
+
+Par exemple, en deux étapes : 
+
+ 1. `bool <- fruits$groupe == "secs" & fruits$Sucres < 40`
+ 2. `fruits[bool, ]`
+ 
+Devient, en une étape :
+
+  * `fruits[fruits$groupe == "secs" & fruits$Sucres < 40, ]` 
+
+## Attention bis
+
+On peut combiner deux méthodes d'extraction de données pour un tableau : une sur les lignes et une sur les colonnes !
+
+Par exemple : `tab[brow, icol]`, où `brow` est un vecteur de booléens et `icol` un vecteur d'indices.
+
+## Exercice
+
+Construisez la sous-table contenant la teneur en protéines, en glucides et en lipides des fruits secs.
+
+
+## Les objets nommés
+
+En R, on peut donner des "noms"...
+
+  * aux éléments d'un vecteur, 
+  * aux lignes d'un tableau ou d'une matrice,
+  * aux colonnes d'un tableau ou d'une matrice,
+  * aux éléments d'une liste
+
+Pourquoi ? Pour pouvoir disposer d'une nouvelle méthode d'extraction de données !
+
+## Pour un tableau
+
+On utilise :
+
+ * `rownames(tab)` pour connaître le nom des lignes
+ * `colnames(tab)` pour connaître le nom des colonnes
+
+Et, en bonus, on peut : 
+
+ * changer les noms des lignes `rownames(tab) <- new1`
+ * changer les noms des colonnes `colnames(tab) <- new2`
+
+Et, en super bonus, on peut :
+
+ * modifier quelques noms de lignes `rownames(tab)[sel1] <- new1`
+ * modifier quelques noms de colonnes `rownames(tab)[sel1] <- new2`
+
+## Modifier un objet ou son contenu
+
+La syntaxe `obj[i] <- newvalue` (et ses variations) peut être utilisée pour tous les types d'objets indiçables. Mais il faut l'utiliser avec prudence !
+
+Exemple : `fruits$Energie[1:10] <- 0`
+
+Que s'est-il passé ? 
+**Au secours !!!!**
+
+Pour revenir en arrière : `data("fruits", package = "debuter")`
+
+## Extraction avec des noms
+
+Exemple : 
+
+  * Pour extraire l'énergie : `fruits[, "Energie"]`,
+  * Pour extraire le groupe : `fruits[, "groupe"]`,
+  * Pour extraire l'énergie et le groupe : `fruits[, c("Energie", "groupe")]`,
+  * Pour enlever le groupe : `fruits[, -"groupe"]` ?
+
+## Bilan
+
+Mode d'extraction | Exemples
+---|---
+Indices | `fruits[, 2]`
+Booléens | `fruits[fruits$nom == "Abricot", ]`
+Noms | `fruits$nom` ou `fruits[,"nom"]`
+
+## Exercice
+
+Lister le maximum de façons possibles d'extraire du tableau `fruits` les fruits crus sucrés riches en Vitamine C !
+
+# Construire ses propres objets
+
+## Vecteurs et facteurs
+
+ * La fonction `c()` permet de combiner des valeurs dans un vecteur. Attention, tout doit être du même "type" !
+ * La fonction `seq` permet de créer des suites.
+ * La fonction `rep` permet de créer des vecteurs en répétant des valeurs. Ex: `rep(c("a", "b"), c(3, 4))`
+ 
+Les facteurs sont une particularité de R !
+
+ * On les crée avec la fonction `factor` ou `as.factor`
+ * Par exemple : `factor(fruits$groupe)`
+
+## Matrices et tableaux
+
+ * Les fonctions `matrix`, `rbind` et `cbind` pour créer des matrices. Attention, tout doit être du même "type" !
+ * Les fonctions `data.frame` ou `as.data.frame` pour créer des 
+
+## Ajouter des noms
+
+Directement à la création de l'objet. Ex: `x <- c(a = 1, b = 2)`, `d <- data.frame(a = 1:26, b = letters)`
+ 
+Ou bien après la création de l'objet : 
+
+  * `names(obj) <- lesNoms` pour un vecteur
+  * `rownames(obj) <- lesLignes` pour les lignes d'un tableau ou d'une matrice,
+  * `colnames(obj) <- lesColonnes` pour les colonnes d'un tableau ou d'une matrice.
+
+
+## Exercice
+
+Créez un facteur à partir des groupes de fruits, puis testez la commande suivante : 
+
+```
+factor(fruits$groupe, levels = c("secs", "compote", "crus", "exotique"))
+```
+
+Que se passe-t-il ? Sauvez le résultat dans un objet et faites un diagramme en bâton avec ! Commentez !
+
+
+# Estimation ponctuelle
+
+## Définition {.smaller}
+
+Il s'agit d'estimer un caractéristique statistique d'un ensemble de données avec une seule valeur.
+
+Paramètre | Grandeur statistique | Commande 
+---|---|---
+Position | Moyenne |  `mean`
+Position | Médiane |  `median`
+Position | Minimum |  `min`
+Position | Maximum |  `max`
+Dispersion | Variance |  `var`
+Dispersion | Ecart-type |  `sd`
+Dispersion | Intervalle inter-quartiles |  `IQR`
+Lien | Covariance |  `cov`
+Lien | Corrélation |  `cor`
+
+## Rappel : la covariance
+
+Permet de mesurer le degré de co-variation de deux variables : 
+
+\[
+  \operatorname{cov}(x, y)=\frac{1}{n-1} \sum_{i=1}^{n}\left(x_{i}-m_{x}\right)\left(y_{i}-m_{y}\right)
+\]
+
+## Rappel : corrélation de Pearson
+
+C'est une covariance normalisée entre -1 et 1 !
+
+\[
+  \operatorname{cor}(x, y)=\frac{\operatorname{cov}(x, y)}{\sqrt{\operatorname{var}(x)} \sqrt{\operatorname{var}(y)}}
+\]
+
+## Rappel : corrélation de Spearman
+
+C'est la corrélation (de Pearson) calculée sur les rangs !
+
+\[
+  \rho = \operatorname{cor}(r_x, r_y),
+\]
+avec $r_x$ le vecteur des rangs de $x$ (`rank(x)`), et $r_y$ le vecteur des rangs de $y$ (`rank(y)`).
+
+## Rappel (?) : corrélation de Kendall
+
+ * Paire concordante : $\left(x_{i}<x_{j} \text { et } y_{i}<y_{j}\right)$ OU $\left(x_{i}>x_{j} \text { et } y_{i}>y_{j}\right)$
+ * Paire discordante : $\left(x_{i}<x_{j} \text { et } y_{i}>y_{j}\right)$ OU $\left(x_{i}>x_{j} \text { et } y_{i}<y_{j}\right)$
+ 
+\[
+  \tau = \displaystyle \frac{n_C - n_D}{n_0},
+\]
+avec $n_C$ le nombre de paires concordantes, $n_D$ le nombre de paires discordantes et $n_0$ le nombre total de paires de points.
+
+## Exercice
+
+Calculez
+
+ * la médiane de la teneur en sucres
+ * la moyenne de la teneur en eau
+ * l'écart-type de la teneur en eau
+
+Appliquez la fonction `summary` aux données `fruits`.
+
+ * Calculez la corrélation de Pearson entre la teneur en eau et la teneur en sucres,
+ * Calculez la corrélation de Spearman
+ 
+
+## Les fonctions astucieuses
+
+ * `summary` pour obtenir des statistiques
+ * `str` pour la structure des données
+ * `table` pour faire des tables de comptage
+ * `seq_along` pour créer un vecteur d'indices de même longueur qu'un vecteur donné
+ 
+## D'autres fonctions très utilies
+
+ * `sum` pour calculer la somme de nombres
+ * `sort`, `order` et `rank` pour ordonner, et calculer les rangs
+ * `rowSums` et `colSums` pour calculer les sommes des lignes et colonnes d'une table,
+ * `rowMeans` et `colMeans` pour calculer les moyennes des lignes et colonnes d'une table,
+
+
+## Les graphes de base
+
+ * `barplot` : diagrammes en bâtons
+ * `hist` : histogrammes
+ * `plot` : nuages de points
+
+## La fonction `barplot`
+
+Permet de réaliser des diagrammes en bâtons : 
+
+```{r barplot}
+barplot(table(fruits$groupe))
+```
+
+## La fonction `hist`
+
+Permet de réaliser des histogrammes : 
+
+```{r hist}
+hist(fruits$Eau)
+```
+
+## La fonction `plot`
+
+Permet de tracer des nuages de points : 
+
+```{r plot}
+plot(fruits$Eau, fruits$Sucres)
+```
+
+## Exercice
+
+Faire un histogramme de la teneur en Vitamine C des fruits crus.

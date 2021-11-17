@@ -1,0 +1,351 @@
+---
+title: "Les tests d'hypothèses"
+author: "Vincent Guillemot<br/>Amaury Vaysse"
+date: "Vendredi 18/11/2021"
+output: 
+    ioslides_presentation:
+        css: styles.css
+vignette: >
+  %\VignetteIndexEntry{07tests}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<style>
+.forceBreak { -webkit-column-break-after: always; break-after: column; }
+</style>
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = TRUE
+)
+library(tidyr)
+library(ggplot2)
+data("fruits", package = "debuter")
+```
+
+## Rappels {.columns-2 .smaller}
+
+ * Hypothèse nulle $\mathcal H_0$, c'est l'hypothèse du *statu quo*
+ * Hypothèse alternative $\mathcal H_1$, c'est la situation intéressante ! (signal)
+ * $\alpha$ : risque de première espèce, rejeter $\mathcal H_0$ lorsqu'elle est vraie ("erreur de détection")
+ * $\beta$ : risque de deuxième espèce, ne pas rejeter $\mathcal H_0$ alors que $\mathcal H_1$ est vraie ("rater un signal")
+ * Puissance : $1 - \beta$
+
+<p class="forceBreak"></p>
+
+Décision / Verité | Non rejet de $\mathcal H_0$| Rejet $\mathcal H_0$
+-----------------:|:--------------------------:|:--------------------:
+$\mathcal H_0$    | Confiance                  | Erreur de 1ère esp.
+$\mathcal H_1$    | Erreur de 2ème esp.        | Puissance
+
+## Expérience de Chastaing (1958) 
+
+![Keewee ou Koowoo ?](img/S07tests/keewee.png)
+
+## Les résultats
+
+
+```{r keewee, echo = FALSE, fig.width = 8, fig.height = 5}
+data.frame(i = 0:10,
+           p = dbinom(0:10, 10, 0.5),
+           col = rep(c("A", "B"), c(9, 2))) %>%
+  ggplot(aes(i, p, fill = col)) +
+  geom_col(show.legend = FALSE) +
+  theme_minimal() +
+  scale_x_continuous(breaks = 0:10) +
+  labs(x = "", y = "")
+```
+
+
+## Rappel 1 : variable aléatoire du $\chi^2$
+
+Une variable suivant une loi du khi-deux à $k$ degrés de liberté ($\chi^2(k)$) est la somme des carrés de $k$ variable normales indépendantes :
+
+\[
+  \sum_{i = 1}^k Z_i^2 \sim \chi^2(k)
+\]
+
+Remarques : 
+
+  * parfois on note une telle variable $X^2$
+  * en pratique, ces "carrés" sont souvent des "variances"
+
+## Rappel 2 : variable aléatoire de Student
+
+Une variable obtenue en divisant un variable normale par la racine carrée d'une variable du khi-deux (indépendante de la première) elle-même normalisée par son dégré de liberté $d$ suit une loi de Student à $d$ degrés de liberté : 
+
+\[
+  \frac{Z}{\sqrt{\displaystyle \frac{1}{d} X}} \sim T(d)
+\]
+
+En pratique : 
+\[
+ \frac{\text{moyenne}}{\displaystyle \frac{1}{\sqrt{\text{taille}} } \text{ écart-type}} \sim T(\text{taille} - 1)
+\]
+
+
+## Rappel 3 : variable aléatoire de Fisher
+
+Le ratio de deux variables indépendantes du khi-deux à $d_1$ et $d_2$ degrés de liberté est une variable aléatoire de Fisher à $d_1$ et $d_2$ degrés de liberté :
+
+\[
+  \displaystyle \frac{X^2_1}{X^2_2} \sim \mathcal F(d_1, d_2)
+\]
+
+En pratique : des ratios de variance !
+
+
+## Intermède : Création d'un exemple {.columns-2 .smaller}
+
+```{r histvitC, fig.width = 3, fig.height=3, message=FALSE}
+qplot(fruits$Energie)
+energiequal <- cut(fruits$Energie, 
+                c(0, 250, 2000))
+```
+
+```{r histEau, fig.width = 3, fig.height=3, message=FALSE}
+qplot(fruits$Eau)
+eauqual <- cut(fruits$Eau, 
+               c(0, 85, 100))
+```
+
+## Table de contingence
+
+Une table de contingence, ou table de comptage, est un tableau croisé (de comptage) entre deux variables qualitatives ou plus. 
+
+```{r table}
+(tab <- table(energiequal, eauqual))
+```
+
+On peut aussi calculer les proportions
+```{r prop.table}
+prop.table(tab)
+```
+
+## Profils lignes et profils colonnes {.columns-2 .smaller}
+
+Proportions conditionnellement aux lignes :
+
+```{r prop.table1}
+prop.table(tab, margin = 1)
+```
+
+<p class="forceBreak"></p>
+
+Proportions conditionnellement aux colonnes :
+
+```{r prop.table2}
+prop.table(tab, margin = 2)
+```
+
+## Comparer des proportions
+
+Avec la fonction `prop.test` : 
+
+```{r prop.test}
+prop.test(table(energiequal, eauqual))
+```
+
+Attention, le test des proportions a besoin de données de comptage, pour lui :
+\[
+  \frac{2}{4} \neq \frac{50}{100}
+\]
+
+## La fonction `prop.test` {.smaller}
+
+  * Accepte des tables de contingences,
+  * Ou bien deux vecteurs : `x` pour les "succès", `n` pour le nombre total,
+  * Eventuellement un vecteur de proportions de référence `p`
+
+Un des exemples de la fonction (cf. `?prop.test`) :
+
+```{r propex}
+smokers  <- c( 83, 90, 129, 70 )
+patients <- c( 86, 93, 136, 82 )
+prop.test(smokers, patients)
+```
+
+
+## Test du "khi-deux"
+
+Avec la fonction `chisq.test` : 
+
+```{r chisq.test}
+chisq.test(energiequal, eauqual)
+```
+
+## La fonction `chisq.test` {.smaller}
+
+  * Accepte deux variables qualitatives,
+  * Ou une table de contingence
+  
+Un des exemples de la fonction (cf. `?chisq.test`) :
+
+```{r exchi2}
+M <- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))
+dimnames(M) <- list(gender = c("F", "M"),
+                    party = c("Democrat","Independent", "Republican"))
+(Xsq <- chisq.test(M))  # Prints test summary
+Xsq$expected   # expected counts under the null
+```
+
+## La statistique du test du $\chi^2$
+
+Elle compare les fréquences observées aux fréquences attendues. Les fréquences attendues sont calculées à partir des fréquences marginales sous hypothèse d'indépendance.
+
+\[
+ X^2 = \displaystyle \sum \frac{\left(n_{ij} - \displaystyle \frac{n_{i\cdot} n_{\cdot j}}{n} \right)^2}{\displaystyle \frac{n_{i\cdot} n_{\cdot j}}{n}},
+\]
+avec $n_{ij}$ l'effectif observé, $n_{i\cdot}$ l'effectif marginal ligne, $n_{\cdot j}$ l'effectif marginal colonne et $n$ l'effectif total.
+
+Rappel : quand $A$ et $B$ son indépendants, $P(A\cap B) = P(A)P(B)$.
+
+## Test exact de Fisher
+
+Avec la fonction `fisher.test` : 
+
+```{r fisher.test}
+fisher.test(energiequal, eauqual)
+```
+
+## La fonction `fisher.test` {.smaller}
+
+  * Accepte deux variables qualitatives,
+  * Ou une table de contingence
+  
+Un des exemples de la fonction (cf. `?fisher.test`) :
+
+```{r exfisher}
+Convictions <- matrix(
+  c(2, 10, 15, 3), 
+  nrow = 2,
+  dimnames = list(
+    c("Dizygotic", "Monozygotic"),
+    c("Convicted", "Not convicted")))
+fisher.test(Convictions, alternative = "less")
+```
+
+## Comparer des moyennes
+
+Avec la fonction `t.test` :
+
+```{r t.test}
+t.test(fruits$VitamineC ~ eauqual)
+```
+
+## Les formules
+
+Les formules permettent à l'utilisateur de décrire un modèle : 
+\[
+  Y = X_1 + X_2 + X_3 + X_2*X_3 + X_3*X_4
+\]
+deviendra
+```
+  y ~ x1 + x2 * x3 + x3:x4 
+```
+
+Repérez le tilde sur votre clavier, il est très important en R !
+
+Exemple : 
+```
+  y ~ x + age + sex + SCL:disease 
+```
+
+## La fonction `t.test` {.smaller}
+
+
+  * Accepte une formule,
+  * Ou bien deux vecteurs contenant respectivement les deux groupes de valeurs à comparer,
+  * L'argument `paired = TRUE` pour des données appariées,
+  * Ou bien un seul vecteur (pour un test sur une moyenne),
+
+  
+Un des exemples de la fonction (cf. `?t.test`) :
+
+```{r exttest}
+t.test(extra ~ group, data = sleep)
+```
+
+
+## Equivalent non-paramétrique
+
+L'équivalent non-paramétrique du test de Student est le test de Wilcoxon-Mann-Whitney : 
+
+```{r wilcox.test, warning = TRUE}
+wilcox.test(fruits$VitamineC ~ eauqual)
+```
+
+## Remarque sur ces fonctions
+
+L'objet retourné est une liste qui contient (en général) les deux éléments les plus intéressants : `statistic` et `p.value`. 
+
+Exemple de récupération de la P-value :
+
+```{r pvalrecup}
+res.ttest <- t.test(fruits$VitamineC ~ eauqual)
+pval <- res.ttest$p.value
+```
+
+## ANOVA
+
+Faire une ANOVA en R n'est pas une mince affaire !
+
+```{r aov}
+summary(aov(VitamineC ~ groupe, data = fruits))
+```
+
+Et récupérer la P-value est ridiculement difficile :
+
+```{r pvalaov}
+res <- summary(aov(VitamineC ~ groupe, data = fruits))
+res[[1]]$`Pr(>F)`[1]
+```
+
+## ANOVA non paramétrique
+
+Et la syntaxe est différente pour l'équivalent non-paramétrique : le test de Kruskal-Wallis : 
+
+```{r kruskal}
+kruskal.test(fruits$VitamineC, fruits$groupe)
+```
+
+Récupérer la p-valeur s'effectue de la même façon que pour un test de Student.
+
+
+## Corrélation {.smaller}
+
+Avec la fonction `cor.test`. Exemple : 
+
+```{r cor.test}
+cor.test(fruits$Eau, fruits$Energie)
+```
+
+## La fonction `cor.test` {.smaller}
+
+ * Accepte deux vecteurs `x` et `y` de même longueur,
+ * Permet de tester les trois types de corrélation (Pearson, Sparman et Kendall)
+
+Un des exemples de la fonction (cf. `?cor.test`) :
+
+```{r excortest}
+x <- c(44.4, 45.9, 41.9, 53.3, 44.7, 44.1, 50.7, 45.2, 60.1)
+y <- c( 2.6,  3.1,  2.5,  5.0,  3.6,  4.0,  5.2,  2.8,  3.8)
+
+cor.test(x, y, method = "kendall", alternative = "greater")
+```
+
+## Modèles linéaires {.smaller}
+
+Avec la fonction `lm`. Exemple : 
+
+```{r lm}
+res.lm <- lm(Energie ~Proteines + Sucres + Fibres + Eau, 
+             data = fruits)
+summary(res.lm)
+```
+
+

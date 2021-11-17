@@ -22,43 +22,43 @@ knitr::opts_chunk$set(
 
 ## 
 
-![](img/S01packages/fripouille.001.jpeg){width=100%}
+![](img/S02packages/fripouille.001.jpeg){width=100%}
 
 ## 
 
-![](img/S01packages/fripouille.002.jpeg){width=100%}
+![](img/S02packages/fripouille.002.jpeg){width=100%}
 
 ## 
 
-![](img/S01packages/fripouille.003.jpeg){width=100%}
+![](img/S02packages/fripouille.003.jpeg){width=100%}
 
 ## 
 
-![](img/S01packages/fripouille.004.jpeg){width=100%}
+![](img/S02packages/fripouille.004.jpeg){width=100%}
 
 ## 
 
-![](img/S01packages/fripouille.005.jpeg){width=100%}
+![](img/S02packages/fripouille.005.jpeg){width=100%}
 
 ## 
 
-![](img/S01packages/fripouille.006.jpeg){width=100%}
+![](img/S02packages/fripouille.006.jpeg){width=100%}
 
 ## 
 
-![](img/S01packages/fripouille.007.jpeg){width=100%}
+![](img/S02packages/fripouille.007.jpeg){width=100%}
 
 ## 
 
-![](img/S01packages/fripouille.008.jpeg){width=100%}
+![](img/S02packages/fripouille.008.jpeg){width=100%}
 
 ## 
 
-![](img/S01packages/fripouille.009.jpeg){width=100%}
+![](img/S02packages/fripouille.009.jpeg){width=100%}
 
 ## 
 
-![](img/S01packages/fripouille.010.jpeg){width=100%}
+![](img/S02packages/fripouille.010.jpeg){width=100%}
 
 ## Comment installer des packages depuis... {.smaller}
 

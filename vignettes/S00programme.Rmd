@@ -48,7 +48,7 @@ knitr::opts_chunk$set(
  * Mardi 16 : Manipulation de données
  * Jeudi 18 : Réprésentations graphiques
  * Vendredi 19 : Analyses statistiques de base
- * Vendredi 26 : analyse de vos propres données
+ * Vendredi 26 : Analyse de vos propres données
 
 
 ## Au programme... bis {.bigger}
@@ -72,9 +72,10 @@ Plutôt l'après-midi
 
 Entre le vendredi 19 et le vendredi 26 : 
 
- * Entraînement à la maison
+ * Entraînement à la maison (avec les tutos par exemple)
  * Première version de l'analyse de vos données
  * Préparation de questions pour le vendredi 26
+ * Discussion avec l'outil de votre choix (Slack ?)
 
 ## Déroulement du cours
 
@@ -101,16 +102,17 @@ Pour favoriser l'interactivité de ce cours, voici ce que je vous propose :
  * Les présentations au format PDF (et HTML)
  * Les exercices et leur solution
  * Des tutoriels interactifs
- * Des feuilles de triches
+ * Des [feuilles de triches](https://vguillemot.github.io/debuter/inst/extdata/cheat_sheets.pptx)
 
 ## Ressources
 
 
-  * Les [feuilles de triche](https://www.rstudio.com/resources/cheatsheets/) (EN) de
+  * Les [feuilles de triche de Rstudio](https://www.rstudio.com/resources/cheatsheets/) (EN) de
     - [dplyr](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) (EN)
     - [ggplot2](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) (EN)
   * La page STDHA sur [les couleurs](http://www.sthda.com/french/wiki/couleurs-dans-r) (FR)
   * [R pour les débutants d'Emmanuel Paradis](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_fr.pdf) (FR)
+  * L'[aide-mémoire de Julien Chiquet](https://vguillemot.github.io/debuter/inst/extdata/CommandesUsuelles.pdf)
   
 
 ## moRe ! {.columns-2 .smaller}

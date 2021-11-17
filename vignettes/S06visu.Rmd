@@ -64,7 +64,7 @@ Couleur black   indianred2 palegreen3 dodgerblue2 turquoise magenta3 darkgoldenr
 ------- ------- ---------- ---------- ----------- --------- -------- -------------- -------
 ```
 
-```{r kableextra, echo = FALSE, results='asis'}
+```{r kableextra, echo = FALSE, results='asis', message=FALSE, warning=FALSE}
 library(kableExtra)
 
 coltab <- read.table(text = 
@@ -292,6 +292,52 @@ Nous aurons besoin du package `ggpubr` :
 library(ggpubr)
 ```
 
+## Changer de palette pour un diagramme en bâtons {.columns-2 .smaller}
+
+Avec la commande `scale_fill_brewer`
+
+```{r scale_fill_brewer, eval = FALSE}
+ggplot(fruits, aes(x = groupe,
+                   fill = groupe)) + 
+  geom_bar() + 
+  scale_fill_brewer(palette = "Set1") + 
+  theme_bw()
+```
+
+<p class="forceBreak"></p>
+
+```{r scale_fill_brewer2, echo = FALSE, fig.width = 5, out.width="100%"}
+ggplot(fruits, aes(x = groupe,
+                   fill = groupe)) + 
+  geom_bar() + 
+  scale_fill_brewer(palette = "Set1") + 
+  theme_bw()
+```
+
+## Changer de palette pour un nuage de points {.columns-2 .smaller}
+
+Avec la commande `scale_color_distiller`
+
+```{r scale_color_distiller, eval = FALSE}
+ggplot(fruits, aes(x = Phosphore,
+                   y = Calcium,
+                   color = Magnesium)) + 
+  geom_point() + 
+  scale_color_distiller(palette = "PuOr") + 
+  theme_bw()
+```
+
+<p class="forceBreak"></p>
+
+```{r scale_color_distiller2, echo = FALSE, fig.width = 5, out.width="100%"}
+ggplot(fruits, aes(x = Phosphore,
+                   y = Calcium,
+                   color = Magnesium)) + 
+  geom_point() + 
+  scale_color_distiller(palette = "PuOr") + 
+  theme_bw()
+```
+
 ## Personnaliser les couleurs d'un diagramme en bâtons {.columns-2 .smaller}
 
 Avec la commande `scale_fill_manual`
@@ -322,35 +368,33 @@ ggplot(fruits, aes(groupe, fill = groupe)) +
 
 ## Personnaliser les couleurs d'un nuage de points {.columns-2 .smaller}
 
-Avec la commande `scale_color_manual`
+Avec la commande `scale_color_gradient`
 
-```{r scale_color_manual, eval = FALSE}
-ggplot(fruits, aes(x = Glucides,
-                   y = Sucres,
-                   color = groupe)) + 
+```{r scale_color_gradient, eval = FALSE}
+ggplot(fruits, aes(x = Phosphore,
+                   y = Calcium,
+                   color = Magnesium)) + 
   geom_point() + 
-  scale_fill_manual(
-    values = c(crus = "violet",
-               secs = "brown3", 
-               exotique = "limegreen",
-               compote = "skyblue")) + 
+  scale_color_gradient(
+    low = "limegreen",
+    high = "violet") + 
   theme_bw()
 ```
 
 <p class="forceBreak"></p>
 
-```{r scale_color_manual2, echo = FALSE, fig.width = 5, out.width="100%"}
-ggplot(fruits, aes(x = Glucides,
-                   y = Sucres,
-                   color = groupe)) + 
+```{r scale_color_gradient2, echo = FALSE, fig.width = 5, out.width="100%"}
+ggplot(fruits, aes(x = Phosphore,
+                   y = Calcium,
+                   color = Magnesium)) + 
   geom_point() + 
-  scale_fill_manual(
-    values = c(crus = "violet",
-               secs = "brown3", 
-               exotique = "limegreen",
-               compote = "skyblue")) + 
+  scale_color_gradient(
+    low = "limegreen",
+    high = "violet") + 
   theme_bw()
 ```
+
+
 
 ## Ajouter des p-valeurs {.smaller}
 

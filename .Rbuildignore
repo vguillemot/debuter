@@ -1,2 +1,4 @@
 ^debuter\.Rproj$
 ^\.Rproj\.user$
+^vignettes$
+^inst/extdata$

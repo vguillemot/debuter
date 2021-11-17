@@ -23,12 +23,12 @@
 Les essentiels : 
 
   * [Document partagé pour écrire du code ensemble](https://docs.google.com/document/d/1dOspKPfs2QDQwoNth7HMEfGKLAorkxImJ1J67rzV-vk/edit?usp=sharing)
-  * Kahoot : www.kahoot.it
-  * Rstudio : www.rstudio.com
-  * Comprehensive R Archive Network : https://cran.r-project.org/
-  * Bioconductor : https://www.bioconductor.org/
+  * Kahoot : [www.kahoot.it](www.kahoot.it)
+  * Rstudio : [www.rstudio.com](www.rstudio.com)
+  * Comprehensive R Archive Network : [https://cran.r-project.org/](https://cran.r-project.org/)
+  * Bioconductor : [https://www.bioconductor.org/](https://www.bioconductor.org/)
   * L'[aide-mémoire créé par Julien Chiquet](inst/extdata/CommandesUsuelles.pdf)
-  * Les données [fruits](inst/extdata/fruits.xlsx) et les données de [recettes](inst/extdata/nutriwi.xlsx)
+  * Les données [fruits](inst/extdata/fruits.xlsx) et les données de [recettes](inst/extdata/nutriwi.xlsx) (au format `xlsx`)
 
 ****
 

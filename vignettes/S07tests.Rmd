@@ -142,13 +142,15 @@ Proportions conditionnellement aux colonnes :
 prop.table(tab, margin = 2)
 ```
 
-## Comparer des proportions
+## Comparer des proportions {.columns-2}
 
 Avec la fonction `prop.test` : 
 
 ```{r prop.test}
 prop.test(table(energiequal, eauqual))
 ```
+
+<p class="forceBreak"></p>
 
 Attention, le test des proportions a besoin de données de comptage, pour lui :
 \[
@@ -348,4 +350,20 @@ res.lm <- lm(Energie ~Proteines + Sucres + Fibres + Eau,
 summary(res.lm)
 ```
 
+# Pour aller plus loin
+
+
+## Analyse en composantes principales {.columns-2}
+
+Les packages
+
+ * `FactomineR`
+ * `factoextra`
+ 
+<p class="forceBreak"></p>
+
+Les références : 
+
+  * le site de François Husson [https://husson.github.io/](https://husson.github.io/),
+  * la page sur l'ACP [https://husson.github.io/MOOC_AnaDo/ACP.html](https://husson.github.io/MOOC_AnaDo/ACP.html) 
 

@@ -9,5 +9,154 @@ description: >
 ```{r setup, include=FALSE}
 library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
+data("nutrimenu", package = "debuter")
 ```
+
+Dans ce document, nous allons appliquer des méthodes classiques aux données de recettes : 
+
+  * Test de Student
+  * ANOVA
+  * Analyse en composantes principales
+
+## Test de Student
+
+Ce test est implémenté en R dans la fonction `t.test` qui peut par exemple s'utiliser de la manière suivante : 
+
+```
+t.test(x ~ g, data = dat)
+```
+
+avec `dat` un tableau contenant au moins les deux colonnes `x` et `g`, `x` est une variable quantitative continue et `g` un vecteur décrivant l'appartenance de chaque mesure à deux groupes différents.
+
+
+Utilisez un test de Student pour comparer la teneur en Glucides entre les entrées et les desserts : 
+
+```{r ttest, exercise = TRUE}
+t.test()
+
+```
+
+```{r ttest-hint-1}
+# Attention, il y a trois types de recettes et pas deux !
+```
+
+```{r ttest-hint-2}
+# Pour sélectionner les entrées et les desserts : 
+nutrimenu %>% 
+  filter(Type == "Entree" | Type == "Dessert")
+# ou bien
+nutrimenu %>% 
+  filter(Type %in% c("Entree", "Dessert"))
+```
+
+```{r ttest-solution}
+t.test(Glucides ~ Type, nutrimenu %>% filter(Type %in% c("Entree", "Dessert")))
+```
+
+On peut bien sûr accompagner ce test d'une représentation graphique. Faites un boxplot des Glucides et ajoutez la p-valeur !
+
+
+```{r glucides1, exercise = TRUE}
+
+
+```
+
+```{r glucides1-hint}
+# Vous aurez besoin de ggpubr pour ajouter les étoiles : 
+library(ggpubr)
+```
+
+```{r glucides1-solution}
+nutrimenu %>% 
+  filter(Type %in% c("Entree", "Dessert")) %>% 
+  ggplot(aes(Type, Glucides))  +
+  geom_boxplot() + 
+  geom_point() +
+  geom_signif(
+    comparisons = list(c("Entree", "Dessert")),
+    test = "t.test") + 
+  theme_bw()
+
+```
+
+
+## ANOVA
+
+L'ANOVA est implémentée dans la fonction `aov`. Son utilisation est un peu particulière. La commande suivante réalise l'ANOVA :
+
+
+```
+aov(x ~ g, data = dat)
+```
+
+avec `dat` un tableau contenant au moins les deux colonnes `x` et `g`, `x` est une variable quantitative continue et `g` un vecteur décrivant l'appartenance aux groupes.
+
+Pour obtenir un rapport d'analyse, il faut appliquer `summary` à la commande précédente : 
+
+```
+summary(aov(x ~ g, data = dat))
+```
+
+Réalisez une ANOVA sur la teneur en Glucides entre les types de recettes.
+
+```{r anova, exercise = TRUE}
+summary(aov(x ~ g, data = dat))
+```
+
+```{r anova-solution}
+summary(aov(Glucides ~ Type, data = nutrimenu))
+```
+
+Vous pouvez également représenter graphiquement la teneur en Glucides en fonction des types de recettes et en ajoutant les p-valeurs.
+
+```{r glucides2, exercise = TRUE}
+
+```
+
+```{r glucides2-solution}
+ggplot(nutrimenu, aes(Type, Glucides, color = Type))  +
+    geom_boxplot() + 
+    geom_point() +
+    geom_signif(
+        comparisons = list(c("Entree", "Plat"),
+                           c("Plat","Dessert"),
+                           c("Entree","Dessert")),
+        test = "t.test", 
+        step_increase = 0.1,
+        color = "black") + 
+    theme_bw()
+```
+
+## ACP
+
+L'Analyse en Composantes Principales (ACP) permet de représenter l'information ("inertie") d'un jeu de données multivariées au moyen de nouvelles variables (le composantes principales) qui capturent les sources de variabilité présentes dans les données de manière optimale.
+
+La fonction `PCA` du package `FactoMineR` est une implémentation de cette méthode, elle s'applique de la façon suivante : 
+
+```
+library(FactoMineR)
+PCA(dat, quali.sup = i)
+```
+
+où `dat` est le tableau de données et `i` les indices des variables dans ce tableau qui correspond à une variable qualitative supplémentaire.
+
+
+Pour plus de détails techniques, aller sur le site de François Husson
+
+
+Appliquez une ACP aux teneurs en Glucides, Lipides, Proteines, Sucre et Fibres des recettes.
+
+```{r acp1, exercise = TRUE}
+PCA(dat)
+```
+
+```{r acp1-hint}
+# Utiliser dplyr::select pour sélectionner les variables
+```
+
+```{r acp1-solution}
+PCA(nutrimenu %>% select(Glucides:Fibres))
+```
+
+Pour aller plus loin dans la représentation des composantes principales, nous vous conseillons les fonctionnalités du package `factoextra`.
 

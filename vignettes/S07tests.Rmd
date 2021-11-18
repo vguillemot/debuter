@@ -353,17 +353,26 @@ summary(res.lm)
 # Pour aller plus loin
 
 
-## Analyse en composantes principales {.columns-2}
+## Analyse en composantes principales 
 
 Les packages
 
  * `FactomineR`
  * `factoextra`
  
-<p class="forceBreak"></p>
-
 Les références : 
 
   * le site de François Husson [https://husson.github.io/](https://husson.github.io/),
   * la page sur l'ACP [https://husson.github.io/MOOC_AnaDo/ACP.html](https://husson.github.io/MOOC_AnaDo/ACP.html) 
+  * Une référence en anglais par [Hervé Abdi](https://personal.utdallas.edu/~herve/abdi-awPCA2010.pdf)
+
+## Les modèles linéaires à effets mixte
+
+Les packages 
+
+ * `lme4`
+ * `lmerTest`
+ * `multcomp`
+
+Une référence (parmi d'autres) : [Mixed Models with R](https://m-clark.github.io/mixed-models-with-R/random_intercepts.html)
 

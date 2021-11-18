@@ -180,7 +180,7 @@ slide:not(.current) .plotly.html-widget{
 .forceBreak { -webkit-column-break-after: always; break-after: column; }
 </style>
 
-<slide class=""><hgroup><h2>Rappels</h2></hgroup><article  id="rappels" class="columns-2 smaller">
+<slide class=""><hgroup><h2>Rappels</h2></hgroup><article  class="columns-2 smaller" id="rappels">
 
 <ul>
 <li>Hypothèse nulle \(\mathcal H_0\), c’est l’hypothèse du <em>statu quo</em></li>
@@ -257,7 +257,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>En pratique : des ratios de variance !</p>
 
-</article></slide><slide class=""><hgroup><h2>Intermède : Création d’un exemple</h2></hgroup><article  id="intermède-création-dun-exemple" class="columns-2 smaller">
+</article></slide><slide class=""><hgroup><h2>Intermède : Création d’un exemple</h2></hgroup><article  class="columns-2 smaller" id="intermède-création-dun-exemple">
 
 <pre class = 'prettyprint lang-r'>qplot(fruits$Energie)</pre>
 
@@ -291,7 +291,7 @@ slide:not(.current) .plotly.html-widget{
 #&gt;   (0,250]     0.05882353 0.45098039
 #&gt;   (250,2e+03] 0.49019608 0.00000000</pre>
 
-</article></slide><slide class=""><hgroup><h2>Profils lignes et profils colonnes</h2></hgroup><article  id="profils-lignes-et-profils-colonnes" class="columns-2 smaller">
+</article></slide><slide class=""><hgroup><h2>Profils lignes et profils colonnes</h2></hgroup><article  class="columns-2 smaller" id="profils-lignes-et-profils-colonnes">
 
 <p>Proportions conditionnellement aux lignes :</p>
 
@@ -313,7 +313,7 @@ slide:not(.current) .plotly.html-widget{
 #&gt;   (0,250]     0.1071429 1.0000000
 #&gt;   (250,2e+03] 0.8928571 0.0000000</pre>
 
-</article></slide><slide class=""><hgroup><h2>Comparer des proportions</h2></hgroup><article  id="comparer-des-proportions">
+</article></slide><slide class=""><hgroup><h2>Comparer des proportions</h2></hgroup><article  class="columns-2" id="comparer-des-proportions">
 
 <p>Avec la fonction <code>prop.test</code> :</p>
 
@@ -331,11 +331,15 @@ slide:not(.current) .plotly.html-widget{
 #&gt;    prop 1    prop 2 
 #&gt; 0.1153846 1.0000000</pre>
 
+<p class="forceBreak">
+
+</p>
+
 <p>Attention, le test des proportions a besoin de données de comptage, pour lui : \[
   \frac{2}{4} \neq \frac{50}{100}
 \]</p>
 
-</article></slide><slide class=""><hgroup><h2>La fonction <code>prop.test</code></h2></hgroup><article  id="la-fonction-prop.test" class="smaller">
+</article></slide><slide class=""><hgroup><h2>La fonction <code>prop.test</code></h2></hgroup><article  class="smaller" id="la-fonction-prop.test">
 
 <ul>
 <li>Accepte des tables de contingences,</li>
@@ -370,7 +374,7 @@ prop.test(smokers, patients)
 #&gt; data:  energiequal and eauqual
 #&gt; X-squared = 36.788, df = 1, p-value = 1.317e-09</pre>
 
-</article></slide><slide class=""><hgroup><h2>La fonction <code>chisq.test</code></h2></hgroup><article  id="la-fonction-chisq.test" class="smaller">
+</article></slide><slide class=""><hgroup><h2>La fonction <code>chisq.test</code></h2></hgroup><article  class="smaller" id="la-fonction-chisq.test">
 
 <ul>
 <li>Accepte deux variables qualitatives,</li>
@@ -421,7 +425,7 @@ Xsq$expected   # expected counts under the null
 #&gt; odds ratio 
 #&gt;          0</pre>
 
-</article></slide><slide class=""><hgroup><h2>La fonction <code>fisher.test</code></h2></hgroup><article  id="la-fonction-fisher.test" class="smaller">
+</article></slide><slide class=""><hgroup><h2>La fonction <code>fisher.test</code></h2></hgroup><article  class="smaller" id="la-fonction-fisher.test">
 
 <ul>
 <li>Accepte deux variables qualitatives,</li>
@@ -480,7 +484,7 @@ fisher.test(Convictions, alternative = &quot;less&quot;)
 
 <pre >  y ~ x + age + sex + SCL:disease </pre>
 
-</article></slide><slide class=""><hgroup><h2>La fonction <code>t.test</code></h2></hgroup><article  id="la-fonction-t.test" class="smaller">
+</article></slide><slide class=""><hgroup><h2>La fonction <code>t.test</code></h2></hgroup><article  class="smaller" id="la-fonction-t.test">
 
 <ul>
 <li>Accepte une formule,</li>
@@ -558,7 +562,7 @@ res[[1]]$`Pr(&gt;F)`[1]
 
 <p>Récupérer la p-valeur s’effectue de la même façon que pour un test de Student.</p>
 
-</article></slide><slide class=""><hgroup><h2>Corrélation</h2></hgroup><article  id="corrélation" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Corrélation</h2></hgroup><article  class="smaller" id="corrélation">
 
 <p>Avec la fonction <code>cor.test</code>. Exemple :</p>
 
@@ -575,7 +579,7 @@ res[[1]]$`Pr(&gt;F)`[1]
 #&gt;        cor 
 #&gt; -0.9902339</pre>
 
-</article></slide><slide class=""><hgroup><h2>La fonction <code>cor.test</code></h2></hgroup><article  id="la-fonction-cor.test" class="smaller">
+</article></slide><slide class=""><hgroup><h2>La fonction <code>cor.test</code></h2></hgroup><article  class="smaller" id="la-fonction-cor.test">
 
 <ul>
 <li>Accepte deux vecteurs <code>x</code> et <code>y</code> de même longueur,</li>
@@ -598,7 +602,7 @@ cor.test(x, y, method = &quot;kendall&quot;, alternative = &quot;greater&quot;)
 #&gt;       tau 
 #&gt; 0.4444444</pre>
 
-</article></slide><slide class=""><hgroup><h2>Modèles linéaires</h2></hgroup><article  id="modèles-linéaires" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Modèles linéaires</h2></hgroup><article  class="smaller" id="modèles-linéaires">
 
 <p>Avec la fonction <code>lm</code>. Exemple :</p>
 
@@ -625,7 +629,38 @@ summary(res.lm)
 #&gt; 
 #&gt; Residual standard error: 38.78 on 46 degrees of freedom
 #&gt; Multiple R-squared:  0.9869, Adjusted R-squared:  0.9858 
-#&gt; F-statistic: 868.8 on 4 and 46 DF,  p-value: &lt; 2.2e-16</pre></article></slide>
+#&gt; F-statistic: 868.8 on 4 and 46 DF,  p-value: &lt; 2.2e-16</pre>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Pour aller plus loin</h2></hgroup><article  id="pour-aller-plus-loin">
+
+</article></slide><slide class=""><hgroup><h2>Analyse en composantes principales</h2></hgroup><article  id="analyse-en-composantes-principales">
+
+<p>Les packages</p>
+
+<ul>
+<li><code>FactomineR</code></li>
+<li><code>factoextra</code></li>
+</ul>
+
+<p>Les références :</p>
+
+<ul>
+<li>le site de François Husson <a href='https://husson.github.io/' title=''>https://husson.github.io/</a>,</li>
+<li>la page sur l’ACP <a href='https://husson.github.io/MOOC_AnaDo/ACP.html' title=''>https://husson.github.io/MOOC_AnaDo/ACP.html</a></li>
+<li>Une référence en anglais par <a href='https://personal.utdallas.edu/~herve/abdi-awPCA2010.pdf' title=''>Hervé Abdi</a></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Les modèles linéaires à effets mixte</h2></hgroup><article  id="les-modèles-linéaires-à-effets-mixte">
+
+<p>Les packages</p>
+
+<ul>
+<li><code>lme4</code></li>
+<li><code>lmerTest</code></li>
+<li><code>multcomp</code></li>
+</ul>
+
+<p>Une référence (parmi d’autres) : <a href='https://m-clark.github.io/mixed-models-with-R/random_intercepts.html' title=''>Mixed Models with R</a></p></article></slide>
 
 
   <slide class="backdrop"></slide>

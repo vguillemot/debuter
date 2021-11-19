@@ -142,7 +142,7 @@ Proportions conditionnellement aux colonnes :
 prop.table(tab, margin = 2)
 ```
 
-## Comparer des proportions {.columns-2}
+## Comparer des proportions {.columns-2 .smaller}
 
 Avec la fonction `prop.test` : 
 

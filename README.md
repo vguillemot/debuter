@@ -43,15 +43,4 @@ Les [feuilles de triches de Rstudio](https://www.rstudio.com/resources/cheatshee
 
 ****
 
-Liens vers les scripts que nous avons écrits ensemble pendant le cours :
-
-  * [Lundi matin](inst/extdata/01_lundi_matin.zip)
-  * [Lundi après-midi](inst/extdata/02_lundi_apresm.zip)
-  * [Mardi matin](inst/extdata/03_mardi_matin.zip)
-  * [Mardi après-midi](inst/extdata/04_mardi_apresm.zip)
-  * [Jeudi matin](inst/extdata/05_jeudi_matin.zip)
-  * [Jeudi après-midi](inst/extdata/06_jeudi_apresm.zip)
-  * [Vendredi matin](inst/extdata/07_vendredi_matin.zip)
-  * [Vendredi après-midi](inst/extdata/08_vendredi_apresm.zip)
-
 Lien vers les tutoriels au format R Markdown : [Lien vers dossier compressé](inst/extdata/tutorials.zip). Pour générer une version locale du tutoriel, ouvrez le sur Rstudio, installez les packages manquants et cliquez sur "Knit".

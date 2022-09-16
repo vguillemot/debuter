@@ -87,7 +87,7 @@ Imaginez une commande incluant le plus d'opérations et de fonctions de base et 
 Comment créer une suite d'entier ?
 
   * `c(1, 2, 3, 4)`
-  * `seq(1, 4, 1`
+  * `seq(1, 4, 1)`
   * `1:4`
 
 L'opérateur `:` est très utilisé en R. Sa syntaxe est la suivante
@@ -135,7 +135,7 @@ data.frame(x = 0, y = 0, lab = "<-") %>%
  * Lecture de l'opération : "assigner à cet objet (à gauche) le résultat de cette commande (à droite)"
  * Assigner deux fois de suite écrasera la première valeur assignée
  * Alternative : `=`
- * Exemples : `a <- 1`, `b <- 1:10`, `a <- 2` etc.
+ * Exemples : `a <- 1; b <- 1:10; a <- 2` etc.
  
 ## Les noms d'objets {.smaller}
 
@@ -237,6 +237,10 @@ Les objets pour qui cela ne signifie rien ou presque : listes et fonctions
 
 ```{r fruits}
 data("fruits", package = "debuter")
+head(fruits)
+dim(fruits)
+nrow(fruits)
+ncol(fruits)
 fruits
 ```
 
@@ -338,6 +342,8 @@ La syntaxe `donnees$cible` permet de sélectionner la colonne `cible` du tableau
 
  * Par exemple : `fruits$Eau`
  * Autre exemple : `fruits$groupe`
+
+N.B: la selection de la colonne sert soit à récupérer le contenu de cette colonne soit à créer la colonne ou remplacer son contenu. Par exemple :  `fruits$num <- 1:nrow(fruits)`
  
 ## Exercice
 

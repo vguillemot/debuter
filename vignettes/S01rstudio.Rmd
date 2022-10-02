@@ -1,7 +1,6 @@
 ---
 title: "R et Rstudio"
 author: "Vincent Guillemot<br/>Amaury Vaysse"
-date: "Lundi 15/11/2021"
 output: 
   ioslides_presentation:
     css: styles.css
@@ -25,14 +24,14 @@ library(ggplot2)
 ```
 
 
-## La différence entre R et Rstudio {.columns-2}
+## La différence entre R et Rstudio {.columns-2 .smaller}
 
 
 R est d'abord un **langage de programmation** qui a pour but principal de permettre d'analyser des données et de produire des représentations graphiques.
 
 Mais c'est également un logiciel Open Source, libre et gratuit qui peut s'installer sur tous les systèmes d'exploitation classiques (Mac, Windows et Linux).
 
-De plus la communauté des utilisateurs de R met à disposition 18261 (le 24/09/2021) packages qui permettent d'appliquer toutes les procédures statistiques imagineables, des plus classiques aux plus récentes.
+De plus la communauté des utilisateurs de R met à disposition 18653 (le 16/09/2022) packages qui permettent d'appliquer toutes les procédures statistiques imagineables, des plus classiques aux plus récentes.
 
 <p class="forceBreak"></p>
 

@@ -1,7 +1,6 @@
 ---
 title: "Visualisation"
 author: "Vincent Guillemot<br/>Amaury Vaysse"
-date: "Jeudi 18/11/2021"
 output: 
     ioslides_presentation:
         css: styles.css
@@ -20,7 +19,9 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  echo = TRUE
+  echo = TRUE,
+  dev = "svg",
+  fig.ext = "svg"
 )
 library(ggplot2)
 ```
@@ -45,7 +46,7 @@ data("fruits", package = "debuter")
 ## Au programme
 
   * Les couleurs, avec ou sans `RColorBrewer`
-  * La personnalisation avancée de ses `ggplot`favoris
+  * La personnalisation avancée de ses `ggplot` favoris
   * Les diagrammes de Venn avec `ggplot2`
   * Les cartes de chaleur avec `pheatmap`
 
@@ -433,13 +434,12 @@ library(ggvenn)
 Créons une liste d'objets :
 
 ```{r flist}
-flist <- with(fruits,
-  list(
-    Sucres = nom[Sucres > 20],
-    Fibres = nom[Fibres > 2],
-    Energie = nom[Energie > 50],
-    Potassium = nom[Potassium > 100]
-))
+flist <- list(
+    Sucres = fruits$nom[fruits$Sucres > 20],
+    Fibres = fruits$nom[fruits$Fibres > 2],
+    Energie = fruits$nom[fruits$Energie > 50],
+    Potassium = fruits$nom[fruits$Potassium > 100]
+)
 ```
 
 

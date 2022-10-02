@@ -1,7 +1,6 @@
 ---
 title: "Commandes et objets de base"
 author: "Vincent Guillemot<br/>Amaury Vaysse"
-date: "Lundi 15/11/2021"
 output: 
   ioslides_presentation:
     css: styles.css
@@ -494,7 +493,8 @@ Les facteurs sont une particularité de R !
 ## Matrices et tableaux
 
  * Les fonctions `matrix`, `rbind` et `cbind` pour créer des matrices. Attention, tout doit être du même "type" !
- * Les fonctions `data.frame` ou `as.data.frame` pour créer des 
+ * Les fonctions `data.frame` ou `as.data.frame` pour créer des tableaux, les colonnes ne contiennent pas nécessairement le même type de données.
+ * Ou bien les fonctions `tibble` et `tribble` (avancé)
 
 ## Ajouter des noms
 

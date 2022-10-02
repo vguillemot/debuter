@@ -1,7 +1,6 @@
 ---
 title: "Graphiques avec ggplot2"
 author: "Vincent Guillemot<br/>Amaury Vaysse"
-date: "Mardi 16/11/2021"
 output: 
     ioslides_presentation:
         css: styles.css
@@ -114,12 +113,13 @@ Esthétiques  `aes()`   Les paramètres esthétiques de ces formes. Par exemple 
 
 ## A vous ! {.columns-2}
 
-Comment corriger la commande suivante pour obtenir le graphe à droite ?
+ 1. Comment ajouter une colonne `SucresSup10` : `TRUE` si la teneur en sucres est supérieure à 10, `FALSE` sinon ?
+ 2. Comment corriger la commande suivante pour obtenir le graphe à droite ?
 
 ```{r acompleter, eval = FALSE}
  ggplot(***, 
      aes(***, 
-     fill = Sucres > 10)) +
+     fill = SucresSup10)) +
    geom_***()
 ```
 
@@ -154,12 +154,28 @@ Nous allons voir ensemble quelques géométries particulières qui permettent de
 
 # Diagrammes en bâtons
 
+# Intermède : la fonction cut
+
+La fonction `cut` permet de transformer un vecteur de valeurs numériques en un facteur contenant des **intervalles** : 
+
+  - `x` : le vecteur de valeurs numériques,
+  - `breaks` : les limites des intervalles.
+
+Exemple : 
+
+```{r cut}
+entiers <- 1:5
+cut(entiers, c(0, 2, 5))
+```
+
 ## Avec geom_bar
 
-On a déjà vu comment faire : 
+On a déjà vu comment faire un diagramme en bâtons. Analysons ensemble l'exemple suivant : 
 
 ```{r geom_bar_ter, fig.height = 3}
-ggplot(fruits, aes(cut(Eau, c(0, 84.2, 100)))) + 
+fruits %>%
+  mutate(EauCat = cut(Eau, c(0, 84.2, 100))) %>%
+  ggplot(aes(EauCat)) + 
   geom_bar(fill = "steelblue")
 ```
 
@@ -178,9 +194,11 @@ ggplot(data = dat.count, aes(x = groupe, y = Csup10)) +
 
 ## A vous !
 
-Comment modifier les deux commandes précédentes pour faire un diagramme en bâtons montrant des pourcentages plutôt que des comptages bruts ?
+Faites un diagramme en bâtons de la teneur en eau :
 
-(PS : il y a plus d'une solution possible)
+  1. Transformez la variable `Eau` en variable catégorielle (avec 4 catégories),
+  2. Faites un diagramme en bâtons de cette nouvelle variable.
+
 
 # Histogrammes
 
@@ -293,7 +311,7 @@ ggplot(fruits, aes(Sucres)) +
 ## Boxplot d'une variable
 
 ```{r boxplot, fig.height = 4}
-ggplot(data=fruits, aes(x = Sucres)) + 
+ggplot(data = fruits, aes(x = Sucres)) + 
   geom_boxplot()
 ```
 
@@ -307,7 +325,7 @@ ggplot(data=fruits, aes(x=groupe, y=Sucres)) +
 ## Avec des violons {.columns-2 .smaller}
 
 ```{r violinplot, fig.height = 3, fig.width = 3}
-ggplot(data=fruits, 
+ggplot(data = fruits, 
        aes(x = Sucres, y = 1)) + 
   geom_violin()
 ```
@@ -315,7 +333,7 @@ ggplot(data=fruits,
 <p class="forceBreak"></p>
 
 ```{r violinplot2, fig.height = 3, fig.width = 3}
-ggplot(data=fruits, 
+ggplot(data = fruits, 
        aes(x = groupe, y = Sucres)) + 
   geom_violin()
 ```
@@ -451,7 +469,7 @@ Lorsqu'ils sont spécifiés dans la fonction `aes()`, ces paramètres appliquent
  * `fill` : couleur de remplissage
  * `size` : taille
  * `shape` : forme
- * `alpha` : transparence
+ * `alpha` : opacité
  * `linetype` : type de ligne
  * `label` : étiquettes
 
@@ -486,7 +504,7 @@ ggplot(fruits,
            *** = Magnesium, 
            *** = ***)) + 
   geom_***() + 
-  ***(title = "Fruits",
+  ***(title = "Fruits (source : https://ciqual.anses.fr/)",
      x = "Sucres (g/100 g)", 
      y = "Protéines, N x 6.25 (g/100 g)",
      size = "Magnésium\n(mg/100 g)",
@@ -500,7 +518,7 @@ ggplot(fruits,
 
 ## Au secours, mes points se superposent! {.columns-2}
 
-Pas de panique, on peut utiliser la transparence (aka `alpha`) : 
+Pas de panique, on peut utiliser l'opacité (aka `alpha`) : 
 
 ```{r alpha, eval = FALSE, fig.height = 3}
 ggplot(fruits, 

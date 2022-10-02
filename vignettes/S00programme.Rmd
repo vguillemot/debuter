@@ -1,7 +1,6 @@
 ---
 title: "Le programme du cours"
 author: "Vincent Guillemot<br/>Amaury Vaysse"
-date: "Lundi 15/11/2021"
 output: 
     ioslides_presentation:
         css: styles.css
@@ -19,8 +18,12 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  echo = TRUE
+  echo = TRUE, 
+  dev = "svg"
 )
+library(dplyr)
+library(ggplot2)
+
 ```
 
 ## Nous nous présentons {.columns-2}
@@ -44,11 +47,11 @@ knitr::opts_chunk$set(
 
 ## Au programme {.bigger}
 
- * Lundi 15 : Bases de R
- * Mardi 16 : Manipulation de données
- * Jeudi 18 : Réprésentations graphiques
- * Vendredi 19 : Analyses statistiques de base
- * Vendredi 26 : Analyse de vos propres données
+ * Lundi : Bases de R
+ * Mardi : Manipulation de données
+ * Jeudi : Réprésentations graphiques
+ * Vendredi : Analyses statistiques de base
+ * TP : Analyse de vos propres données
 
 
 ## Au programme... bis {.bigger}
@@ -70,12 +73,26 @@ Plutôt l'après-midi
 
 ## Au programme... ter {.bigger}
 
-Entre le vendredi 19 et le vendredi 26 : 
+Entre le vendredi et le TP : 
 
  * Entraînement à la maison (avec les tutos par exemple)
  * Première version de l'analyse de vos données
- * Préparation de questions pour le vendredi 26
- * Discussion avec l'outil de votre choix (Slack ?)
+ * Préparation de questions pour le TP
+ * Discussion avec l'outil de votre choix (Slack, Teams ?)
+
+## ATTENTION
+
+```{r pas 2 stats, echo = FALSE}
+data.frame(
+  x = 1, 
+  y = 1, 
+  text = "Le but est d'apprendre R,\n pas les statistiques") %>% 
+  ggplot(aes(x, y, label = text)) + 
+  geom_text(color = "steelblue", size = 10, fontface = "bold") + 
+  theme_void()
+```
+
+Vous devez avoir une idée des analyses à réaliser sur vos données.
 
 ## Déroulement du cours
 

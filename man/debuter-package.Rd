@@ -7,10 +7,15 @@
 \title{Package pour la formation "Débuter en R"
 Contient les vignettes (les slides de cours), le jeu de données "fruits", le jeu de données "nutrimenu"  et les tutoriels. https://vguillemot.github.io/debuter/}
 \description{
-What the package does (one paragraph).
+This package contains all the slides and data-sets used during the course DebuteR.
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Vincent Guillemot \email{vincent.guillemot@pasteur.fr}
+
+Authors:
+\itemize{
+  \item Amaury Vaysse \email{amaury.vaysse@pasteur.fr}
+}
 
 }
 \keyword{internal}

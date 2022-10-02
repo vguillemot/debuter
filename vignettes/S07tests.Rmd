@@ -1,7 +1,6 @@
 ---
 title: "Les tests d'hypothèses"
 author: "Vincent Guillemot<br/>Amaury Vaysse"
-date: "Vendredi 18/11/2021"
 output: 
     ioslides_presentation:
         css: styles.css

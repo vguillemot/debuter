@@ -32,7 +32,7 @@ Les essentiels :
 
 ****
 
-Feuilles de triche sur les packages, les tests et les couleurs [à télécharger ici](inst/extdata/cheat_sheets.pptx). Ce document est au format `pptx`, vous pouvez donc les modifier comme vous le souhaitez !
+Feuilles de triche sur les packages, les tests et les couleurs [à télécharger ici](inst/extdata/cheat_sheets_2022_09_20.pptx). Ce document est au format `pptx`, vous pouvez donc les modifier comme vous le souhaitez !
 
 Les [feuilles de triches de Rstudio](https://www.rstudio.com/resources/cheatsheets/) : 
 

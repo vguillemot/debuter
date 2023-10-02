@@ -86,10 +86,7 @@ Dans le cadre de ce cours, j'ai créé un package R contenant :
 Installez ce package avec la commande
 
 ```{r install, eval = FALSE}
-remotes::install_github(
-  "vguillemot/debuter",
-  build_vignettes = TRUE
-)
+remotes::install_github("vguillemot/debuter")
 ```
 
 ## Explorez la documentation du package

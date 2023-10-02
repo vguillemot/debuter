@@ -82,17 +82,22 @@ ggplot(data = fruits, aes(x = groupe, fill = groupe)) +
  * `geom_bar` : utilisation d'une géométrie 
 
 
+## Le canevas {.center}
+
+![](img/S05ggplot2/ggplot-1.png){width=100%}
+
+
 ## Les données {.center}
 
-![](img/S05ggplot2/ggplot.001.jpeg){width=100%}
+![](img/S05ggplot2/ggplot-2.png){width=100%}
 
 ## Les paramètres esthétiques {.center}
 
-![](img/S05ggplot2/ggplot.002.jpeg){width=100%}
+![](img/S05ggplot2/ggplot-3.png){width=100%}
 
 ## Les géométries {.center}
 
-![](img/S05ggplot2/ggplot.003.jpeg){width=100%}
+![](img/S05ggplot2/ggplot-4.png){width=100%}
 
 ## L'image à retenir {.center}
 

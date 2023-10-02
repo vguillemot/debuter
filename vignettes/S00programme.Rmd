@@ -28,30 +28,36 @@ library(ggplot2)
 
 ## Nous nous présentons {.columns-2}
 
-![Vincent Guillemot](img/S00programme/vincent.jpeg){width=75%}
+Vincent Guillemot
+
+![](img/S00programme/vincent.jpeg){width=75%}
 
  * Biostatisticien
  * Intégration de données
 
 <p class="forceBreak"></p>
 
-![Amaury Vaysse](img/S00programme/amaury.jpg){width=75%}
+Amaury Vaysse
+
+![](img/S00programme/amaury.jpg){width=75%}
 
  * Bioinformaticien
  * Analyse de données de séquençage
 
 ## Quiz de bienvenue
 
-![Allez sur www.kahoot.it ou sur l'application Kahoot!](img/S00programme/Kahoot_Logo.svg){width=100%}
+Allez sur www.kahoot.it ou sur l'application Kahoot!
+
+![](img/S00programme/Kahoot_Logo.svg){width=100%}
 
 
 ## Au programme {.bigger}
 
- * Lundi : Bases de R
- * Mardi : Manipulation de données
- * Jeudi : Réprésentations graphiques
- * Vendredi : Analyses statistiques de base
- * TP : Analyse de vos propres données
+ * Jour 1 : Bases de R
+ * Jour 2 : Manipulation de données
+ * Jour 3 : Réprésentations graphiques
+ * Jour 4 : Analyses statistiques de base
+ * Jour 5 : Analyse de vos propres données
 
 
 ## Au programme... bis {.bigger}
@@ -73,7 +79,7 @@ Plutôt l'après-midi
 
 ## Au programme... ter {.bigger}
 
-Entre le vendredi et le TP : 
+Avant le TP (dernier jour) : 
 
  * Entraînement à la maison (avec les tutos par exemple)
  * Première version de l'analyse de vos données
@@ -106,12 +112,16 @@ Pour favoriser l'interactivité de ce cours, voici ce que je vous propose :
 
 ## Des données simples... pour moi
 
-![Composition de produits alimentaires (https://ciqual.anses.fr/)](img/S00programme/ciqual.jpg){width=100%}
+Composition de produits alimentaires (https://ciqual.anses.fr/)
+
+![](img/S00programme/ciqual.jpg){width=100%}
 
 
 ## Des données simples... pour moi
 
-![Nutriwi (https://www.nutriwi.com/)](img/S00programme/nutriwi.png){width=40%}
+Nutriwi (https://www.nutriwi.com/)
+
+![](img/S00programme/nutriwi.png){width=40%}
 
 ## Mais aussi...
 

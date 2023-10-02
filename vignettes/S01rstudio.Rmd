@@ -44,8 +44,9 @@ Rstudio permet de programmer en R dans un environnement fiable, riche et très c
 
 ## Comprehensive R Archive Network
 
+Le site : https://cran.r-project.org/
 
-![Le site : https://cran.r-project.org/](img/S01rstudio/Rlogo.svg){width=25%}
+![](img/S01rstudio/Rlogo.svg){width=25%}
 
 
  * Installation : https://cran.r-project.org/bin/
@@ -56,30 +57,36 @@ Rstudio permet de programmer en R dans un environnement fiable, riche et très c
 
 ### Avec un Terminal
 
-![Taper R, puis "Entrée"](img/S01rstudio/Terminal.png){width=100%}
+Ouvrir un Terminal (Shell), taper R, puis "Entrée"
+
+![](img/S01rstudio/Terminal.png){width=100%}
 
 <p class="forceBreak"></p>
 
 ### Avec le "GUI"$^\star$ {.smaller}
 
+Démarrer l'application "R"
 
-![Démarrer l'application "R"](img/S01rstudio/RGUI.png){width=90%}
+![](img/S01rstudio/RGUI.png){width=90%}
 
 > $^\star$GUI = *Graphical User Interface*
 
 
-## Rstudio 
+## Rstudio, de chez "posit"
 
+Le site : https://www.posit.co
 
-![Le site : https://www.rstudio.com/](img/S01rstudio/RStudio_Logo.png){width=25%}
+![](img/S01rstudio/RStudio_Logo.png){width=25%}
 
- * Installation : https://www.rstudio.com/products/rstudio/download/#download
- * Tutoriels : https://www.rstudio.com/collections/rstudio-essentials/
- * Feuilles de triche : https://www.rstudio.com/resources/cheatsheets/
+ * Installation : https://posit.co/download/rstudio-desktop/
+ * Tutoriels : https://posit.co/resources/videos/
+ * Feuilles de triche : https://posit.co/resources/cheatsheets/
 
 ## Explorons Rstudio
 
-![Après avoir démarré l'application](img/S01rstudio/Rstudio.png){width=80%}
+Après avoir démarré l'application
+
+![](img/S01rstudio/Rstudio.png){width=80%}
 
 ## Les 4 panneaux
 
@@ -141,6 +148,6 @@ print(g)
 
 ## Exercice 2
 
-### Allez dans le menu "Help" puis sélectionnez "About Rstudio". Quelle est votre version de Rstudio ? Renseignez-la dans [le document partagé](https://docs.google.com/document/d/1dOspKPfs2QDQwoNth7HMEfGKLAorkxImJ1J67rzV-vk/edit)
+### Allez dans le menu "Help" puis sélectionnez "About Rstudio". Quelle est votre version de Rstudio ? Renseignez-la dans [le document partagé](https://docs.google.com/document/d/1C5hFVQe3BzlMRa62c-zPDmA9UvX5aKVgHRNieieex2c/edit?usp=sharing)
 
 

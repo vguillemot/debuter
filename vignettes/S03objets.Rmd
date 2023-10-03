@@ -212,11 +212,13 @@ Booléen | `logical` | `TRUE`
 
 ## Exercice
 
- 1. Effectuez les opérations suivantes : 
-   * `1 == 2`
-   * `!(5 > -6)`
-   * `(1 <= 10) | (1 > 0)`
- 2. Prédisez le résultat de la commande suivante : `log(1) != 0`
+
+1. Effectuez les opérations suivantes : 
+  + `1 == 2`
+  + `!(5 > -6)`
+  + `(1 <= 10) | (1 > 0)`
+  
+Prédisez le résultat de la commande suivante : `log(1) != 0`
 
 
 ## "Classification" des objets
@@ -443,7 +445,7 @@ Et, en bonus, on peut :
 Et, en super bonus, on peut :
 
  * modifier quelques noms de lignes `rownames(tab)[sel1] <- new1`
- * modifier quelques noms de colonnes `rownames(tab)[sel1] <- new2`
+ * modifier quelques noms de colonnes `colnames(tab)[sel1] <- new2`
 
 ## Modifier un objet ou son contenu
 

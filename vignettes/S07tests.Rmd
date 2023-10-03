@@ -94,7 +94,7 @@ En pratique :
 Le ratio de deux variables indépendantes du khi-deux à $d_1$ et $d_2$ degrés de liberté est une variable aléatoire de Fisher à $d_1$ et $d_2$ degrés de liberté :
 
 \[
-  \displaystyle \frac{X^2_1}{X^2_2} \sim \mathcal F(d_1, d_2)
+  \displaystyle \frac{X^2_1}{X^2_2} \sim F(d_1, d_2)
 \]
 
 En pratique : des ratios de variance !

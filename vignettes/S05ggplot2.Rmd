@@ -44,7 +44,9 @@ data("fruits", package = "minidebuter")
 
 ## Bien choisir sa représentation graphique {.centered}
 
-![From Data to Viz : https://www.data-to-viz.com/](img/S05ggplot2/data-viz.png){width=50%}
+From Data to Viz : https://www.data-to-viz.com/
+
+![](img/S05ggplot2/data-viz.png){width=50%}
 
 ## Un échantillon de ce qu'il est possible de faire avec ggplot2 {.center}
 
@@ -140,8 +142,9 @@ Esthétiques  `aes()`   Les paramètres esthétiques de ces formes. Par exemple 
  
 <p class="forceBreak"></p>
 
+Hadley Wickham
 
-![Hadley Wickham](img/S05ggplot2/wickham.png){width=50%}
+![](img/S05ggplot2/wickham.png){width=50%}
  
 ## Quelques géométries
 

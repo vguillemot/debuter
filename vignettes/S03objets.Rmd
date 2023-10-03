@@ -98,7 +98,7 @@ Attention à bien mettre des **parenthèses** dans le cas d'entiers négatifs!
 ## Exemples
 
  * `3:7` : les entiers de 3 à 7
- * `7:3` : les entiers de 7 à 7
+ * `7:3` : les entiers de 7 à 3
  * `-3:7` : les entiers de -3 à 7
  * `-3:-7` : les entiers de -3 à -7
  * `-(3:7)` : les entiers de -3 à -7

@@ -114,8 +114,10 @@ fruits$Energie %>% hist()
 
 ## Le tidyverse {.bigger}
 
+Tidyverse: https://www.tidyverse.org/
+
 <div class="centered">
-![Tidyverse: https://www.tidyverse.org/](img/S04dplyr/tidyverse.jpg){width=70%}
+![](img/S04dplyr/tidyverse.jpg){width=70%}
 </div>
 
 ## Charger les packages

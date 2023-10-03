@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 )
 library(tidyr)
 library(ggplot2)
-data("fruits", package = "debuter")
+data("fruits", package = "minidebuter")
 ```
 
 ## Rappels {.columns-2 .smaller}
@@ -43,7 +43,9 @@ $\mathcal H_1$    | Erreur de 2ème esp.        | Puissance
 
 ## Expérience de Chastaing (1958) 
 
-![Keewee ou Koowoo ?](img/S07tests/keewee.png)
+Keewee ou Koowoo ?
+
+![](img/S07tests/keewee.png)
 
 ## Les résultats
 

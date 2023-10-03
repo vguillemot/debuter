@@ -28,18 +28,18 @@ data("fruits", package = "minidebuter")
 
 ## Rappels {.columns-2 .smaller}
 
- * Hypothèse nulle $\mathcal H_0$, c'est l'hypothèse du *statu quo*
- * Hypothèse alternative $\mathcal H_1$, c'est la situation intéressante ! (signal)
- * $\alpha$ : risque de première espèce, rejeter $\mathcal H_0$ lorsqu'elle est vraie ("erreur de détection")
- * $\beta$ : risque de deuxième espèce, ne pas rejeter $\mathcal H_0$ alors que $\mathcal H_1$ est vraie ("rater un signal")
+ * Hypothèse nulle $H_0$, c'est l'hypothèse du *statu quo*
+ * Hypothèse alternative $H_1$, c'est la situation intéressante ! (signal)
+ * $\alpha$ : risque de première espèce, rejeter $H_0$ lorsqu'elle est vraie ("erreur de détection")
+ * $\beta$ : risque de deuxième espèce, ne pas rejeter $H_0$ alors que $H_1$ est vraie ("rater un signal")
  * Puissance : $1 - \beta$
 
 <p class="forceBreak"></p>
 
-Décision / Verité | Non rejet de $\mathcal H_0$| Rejet $\mathcal H_0$
+Décision / Verité | Non rejet de $H_0$| Rejet $H_0$
 -----------------:|:--------------------------:|:--------------------:
-$\mathcal H_0$    | Confiance                  | Erreur de 1ère esp.
-$\mathcal H_1$    | Erreur de 2ème esp.        | Puissance
+$H_0$    | Confiance                  | Erreur de 1ère esp.
+$H_1$    | Erreur de 2ème esp.        | Puissance
 
 ## Expérience de Chastaing (1958) 
 

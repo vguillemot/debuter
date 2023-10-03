@@ -86,16 +86,15 @@ Dans le cadre de ce cours, j'ai créé un package R contenant :
 Installez ce package avec la commande
 
 ```{r install, eval = FALSE}
-remotes::install_github("vguillemot/debuter")
+remotes::install_github("vguillemot/minidebuter")
 ```
 
 ## Explorez la documentation du package
 
-  1. Charger le package :  `library(debuter)`
-  2. Regardez l'aide "générale" du package : \u0060`?debuter-package`\u0060
-  3. Explorez la première vignette : `vignette("S00programme")`
-  4. Accédez à la liste complète des vignettes : `browseVignettes("debuter")`, cette interface permet d'accéder au code source (R Markdown et R)...
-  5. ... que vous pouvez également accéder avec la commande : `edit(vignette("S00programme"))`
+  1. Charger le package :  `library(minidebuter)`
+  2. Regardez l'aide "générale" du package : \u0060`?minidebuter-package`\u0060
+  3. Regardez l'aide la fonction `bonjour`: `?bonjour`
+  4. Regardez l'aide du jeu de données `fruits`: `?fruits`
   
 # Les tutoriels !
 

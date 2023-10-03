@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
   
 ```{r fruits}
 library(dplyr)
-data("fruits", package = "debuter")
+data("fruits", package = "minidebuter")
 ```
 
 ## Comment créer une nouvelle colonne ?

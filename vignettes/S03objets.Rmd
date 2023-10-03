@@ -235,7 +235,7 @@ Les objets pour qui cela ne signifie rien ou presque : listes et fonctions
 ## Petit détour par les tableaux {.smaller}
 
 ```{r fruits}
-data("fruits", package = "debuter")
+data("fruits", package = "minidebuter")
 head(fruits)
 dim(fruits)
 nrow(fruits)
@@ -454,7 +454,7 @@ Exemple : `fruits$Energie[1:10] <- 0`
 Que s'est-il passé ? 
 **Au secours !!!!**
 
-Pour revenir en arrière : `data("fruits", package = "debuter")`
+Pour revenir en arrière : `data("fruits", package = "minidebuter")`
 
 ## Extraction avec des noms
 

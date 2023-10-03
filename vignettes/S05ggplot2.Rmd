@@ -39,7 +39,7 @@ library(ggplot2)
 Nous allons également avoir besoin des données fruits : 
 
 ```{r data}
-data("fruits", package = "debuter")
+data("fruits", package = "minidebuter")
 ```
 
 ## Bien choisir sa représentation graphique {.centered}

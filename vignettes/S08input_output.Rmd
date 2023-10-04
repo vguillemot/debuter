@@ -29,18 +29,18 @@ library(readxl)
 ![](img/S01rstudio/Rlogo.svg){width=25%} peut lire différents formats de données. Les principaux formats rencontrés sont:  
 - Fichiers textes à valeurs séparées par un caractère spécial  
 - Fichiers Excel  
-- Fichier natif de R (.Rda)
+- Fichier natif de R (`.Rda`)
 
 
 Un utilisateur peut vouloir enregister principalement des:  
 - données transformées dans R  
 - résultats d'analyses sous forme de tables  
-- sortie textes plus complexes  
+- sorties textes plus complexes  
 - graphiques.  
 
 ## Les exemples...
 
-Se trouvent dans un [dossier compressé](https://vguillemot.github.io/debuter/inst/extdata/data_io.zip) qui contient les fichiers suivants : 
+... se trouvent dans un [dossier compressé](https://vguillemot.github.io/debuter/inst/extdata/data_io.zip) qui contient les fichiers suivants : 
 
 |Nom du fichier                       | Taille|
 |:------------------------------------|------:|
@@ -66,11 +66,11 @@ Ananas  exotique        304     81.3    0.94    15.1    0.25    14.9    2.8
 fruits <- read.table(file = "data_io/1.tabular_simple.tsv", header = T, sep = "\t")
 write.table(x = fruits, file = "1.simpletabular.tsv", quote = F, sep = "\t", row.names = F)
 ```
-<font color="red"><b> Attention à ne pas ecraser un fichier </b></font>  
+<font color="red"><b> Attention à ne pas écraser un fichier </b></font>  
 
 <b>&ggg;</b> Il existe plusieurs variantes selon les fichiers de données
 
-## avec plusieurs ligne d'entete{.smaller}
+## avec plusieurs ligne d'en-tête{.smaller}
 exemple:
 ```
 # nom : nom du fruit
@@ -83,7 +83,7 @@ Ananas  exotique        304     81.3    0.94    15.1    0.25    14.9    2.8
 ```
 ```R
 fruits <- read.table(file = "2.tabular_complex_header.tsv", header = T, sep = "\t", skip=3)
-`````
+```
 
 ## avec une seule colonne{.smaller}
 exemple:
@@ -99,9 +99,9 @@ CompoteMultiFruits
 ```
 ```R
 fruit_names <- scan(file = "3.only_one_col", what=character())
-`````
+```
 
-## sans entetes{.smaller}
+## sans en-tête{.smaller}
 ```
 Abricot crus    194     87.1    0.81    9.01    0.25
 Abricot secs    1010    24.7    2.88    59.1    0.5
@@ -125,7 +125,7 @@ names(fruits) <- c("nom", "groupe", "Energie", "Eau", "Proteines", "Glucides", "
 Les fichiers utilisés pour pouvoir sauvegarder et reprendre une session R plus tard.
 
 ```R
-load(data/fruits.RData)
+load("data_io/fruits.RData")
 ```
 cela crée dans la session un ou des objets tels qu'ils ont été sauvegardés.
 
@@ -135,39 +135,63 @@ save(fruits, file = "mySave.Rdata")
 ```
 Pour sauvegarder tout une session de travail:
 ```R
-save.image(file="mySession.RData")
+save.image(file = "mySession.RData")
 ```
 ou 
 ```R
 q("yes")
 ```
 
-##  Fichier excel{.smaller}
+##  Lecture de fichier excel{.smaller}
 
-Les données peuvent aussi être transmises sous forme d'e fichier'un classeur excel.  
-Il faut alors extraire la table d'intéret dans la feuille qui le contient.
+Les données peuvent aussi être transmises sous forme d'un classeur excel.  
+Il faut alors extraire la table d'intérêt dans la feuille qui le contient.
 
-On utilise pour cela le package readxl qui fournis (entre autre) les fonctions read_excel, read_xls et read_xlsx
+On utilise pour cela le package `readxl` qui fournis (entre autres) les fonctions
 
-Par exemple le classeur data_in_excel contient 3 feuilles: 
+  * `read_excel`
+  * `read_xls`
+  * et `read_xlsx`
+
+Par exemple le classeur `data_in_excel` contient 3 feuilles: 
 ```R
-read_xlsx(path = "data_io/5.data_in_excel.xlsx", sheet = "fruits", skip=3)
+library(readxl)
+read_xlsx(path = "data_io/5.data_in_excel.xlsx", sheet = "fruits", skip = 3)
 ```
 
-##  sorties graphiques {.smaller}
-Quand nous voulons sauvegarder un graph en ligne de commande, nous avons 2 moyen principaux:
+## Ecriture de fichiers Excel
 
-### Si le graph a été généré avec les fonctions de base de R:  
-R fournis des fonctions pour enregister sous différents formats de fichier image (BMP, JPEG, PNG & TIFF ). Elles fonctionnent toutes dans le même scénario:
+
+Pour écrire un fichier sous format "Excel", 
+on utilise pour cela le package `writexl`.
+
+Par exemple, on enregistre le tableau `fruits_summary` dans un fichier `fruits_summary.xlsx` avec la suite de commandes suivantes : 
+```R
+library(dplyr)
+fruits_summary <- fruits %>%
+  group_by(groupe) %>%
+  summarize(
+    MoyenneSucres = mean(Sucres),
+    MoyenneLipides = mean(Lipides))
+
+library(writexl)
+write_xlsx(fruits_summary, path = "fruits_summary.xlsx")
+```
+
+## Sorties graphiques {.smaller}
+Quand nous voulons sauvegarder un graphe en ligne de commande, nous avons 2 moyens principaux:
+
+### Si le graphe a été généré avec les fonctions de base de R:  
+R fournit des fonctions pour enregistrer sous différents formats de fichier image (BMP, JPEG, PNG & TIFF ). Elles fonctionnent toutes dans le même scénario:
 ```R
 png(filename="monBeauGraph.png", width = 960, height = 960 ) # remplacer l'affichage
 # Code pour generer le graphique
 dev.off() # finaliser le fichier
 ```
-Attention: suivant les options "width" et "height", les textes et les points ne prendrons pas la même place dans le fichier qu'à l'écran.
+Attention: suivant les options "`width`" et "`height`", les textes et les points ne prendront pas la même place dans le fichier qu'à l'écran.
 
-### Si le graph a été généré avec les fonctions de ggplot:  
-ggplot fournis la fonction ggsave. Par exemple, pour sauvegarder un plot enregistré dans la variable "g":
+### Si le graphe a été généré avec les fonctions de ggplot:  
+`ggplot` fournit la fonction `ggsave.` Par exemple, pour sauvegarder un plot enregistré dans la variable "`g`":
 ```R
 ggsave( filename="monBeauGraph.png, plot=g, device = png)
 ```

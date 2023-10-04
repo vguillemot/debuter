@@ -162,7 +162,7 @@ Nous allons voir ensemble quelques géométries particulières qui permettent de
 
 # Diagrammes en bâtons
 
-# Intermède : la fonction cut
+## Intermède : la fonction cut
 
 La fonction `cut` permet de transformer un vecteur de valeurs numériques en un facteur contenant des **intervalles** : 
 

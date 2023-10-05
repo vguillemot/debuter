@@ -424,7 +424,7 @@ Nous aurons besoin du package `ggvenn` :
  * Vérifier que le package `ggvenn` est bien installé
  * Si non, l'installer, puis le charger
 
-```{r UpSetR, message = FALSE}
+```{r ggvenn, message = FALSE}
 library(ggvenn)
 ```
 
@@ -468,7 +468,34 @@ Voir l'aide de la fonction `?ggvenn`
   * `set_name_color`, `set_name_size` pour les noms des ensembles,
   * `text_color`, `text_size` pour le texte à l'intérieur des intersections
 
-# Cartes de chaleur avec `heatmap`
+# Upset plots avec `UpSetR`
+
+## Avant toutes choses
+
+Nous aurons besoin du package `UpSetR` :
+
+ * Vérifier que le package `UpSetR` est bien installé
+ * Si non, l'installer, puis le charger
+
+```{r UpSetR, message = FALSE}
+library(UpSetR)
+```
+
+## On reprend les 4 ensembles {.smaller}
+
+On reprend l'exemple avec la comparaison des fruits selon 4 critères.
+
+```{r upset, fig.height = 3, fig.width = 6}
+mat01 <- data.frame(
+    Sucres = fruits$Sucres > 20,
+    Fibres = fruits$Fibres > 2,
+    Energie = fruits$Energie > 50,
+    Potassium = fruits$Potassium > 100) + 0
+upset(mat01)
+```
+
+
+# Cartes de chaleur avec `pheatmap`
 
 ## Avant toutes choses
 

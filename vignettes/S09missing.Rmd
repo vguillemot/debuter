@@ -1,0 +1,127 @@
+---
+title: "Données manquantes : (petite) introduction"
+author: "Vincent Guillemot<br/>Amaury Vaysse"
+output: 
+  ioslides_presentation:
+    css: styles.css
+vignette: >
+  %\VignetteIndexEntry{09NA}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+<style>
+.forceBreak { -webkit-column-break-after: always; break-after: column; }
+</style>
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = TRUE
+)
+```
+
+## Avant de commencer
+
+Nous aurons besoin de charger les librairies suivantes : 
+
+```{r packages}
+library(dplyr)
+library(tidyr)
+```
+
+
+## D'où ça vient ?
+
+  * Questionnaire : "ne se prononce pas"
+  * "Erreur" de mesure
+  * Données perdues
+  * Opérations interdites
+
+## Comment ça se présente ? 
+
+R | Description | Exemple
+--|-------------|---------------
+`NaN`  | Le résultat impossible (e.g.) | `1 / 0`
+`NULL` | L'objet vide                  | `fruits$umami`
+`""`   | La chaîne de caractères vide  | `""`
+`NA`   | La vraie donnée manquante     | `x <- c(NA, 2, 3)`
+
+
+## Et quel effet cela a ?  {.columns-2}
+
+### Valeur manquante
+
+Opération | Résultat
+----------|------------
+`3 + NA`  | `NA`
+`NA/2`    | `NA`
+`TRUE & NA` | `NA`
+`TRUE | NA` | `TRUE`
+`x + 1`   | `[1] NA  3  4`
+`sum(x)`   | `[1] NA`
+
+<p class="forceBreak"></p>
+
+### NaN
+
+Opération | Résultat
+----------|------------
+`3 + NaN`  | `NaN`
+`NaN/2`    | `NA`
+`TRUE & NaN` | `NA`
+`TRUE | NA` | `TRUE`
+
+## Construire son exemple
+
+L'intérêt de construire un petit exemple est de tester des fonctions qui ne nous sont pas familières!
+
+```{r fruits_na}
+fruits_na <- tibble(
+  name = c("Apple", "Banana", "Cherry", "Date", "Elderberry", "Fig", "Grape"),
+  sugar = c(10.3, 17.2, NA, 63.3, 6.5, 16.2, 16.0), 
+  # sugar content in g/100g
+  water = c(86, 74, 82, 20, 80, NA, 81)
+  # water content as a percentage
+)
+```
+
+*J'ai demandé à ChatGPT de créer un petit exemple*
+
+# Comment on gère ?
+
+## Enlever les observations avec données manquantes
+
+```{r drop_na}
+fruits_na %>% drop_na()
+```
+
+## Remplacer les observations avec données manquantes
+
+```{r replace_na}
+fruits_na %>% replace_na(list(sugar = 0, water = 1))
+```
+
+## Utiliser des fonctions qui peuvent enlever les valeurs manquantes
+
+```{r summarize with na}
+fruits_na %>% summarize(
+  MeanSugar = mean(sugar, na.rm = TRUE),
+  MeanWater = mean(water, na.rm = TRUE),
+  MedianSugar = median(sugar, na.rm = TRUE),
+  MedianWater = median(water, na.rm = TRUE))
+
+cor(fruits_na$sugar, fruits_na$water, use = "complete.obs")
+```
+
+## Aller plus loin
+
+ * Visualisation des données manquantes avec [le package `naniar`](http://naniar.njtierney.com/articles/getting-started-w-naniar.html)
+ * Imputation de données manquantes avec [le package `mice`](https://www.jstatsoft.org/article/view/v045i03)
+ * La [*Task View* sur les données manquantes](https://cran.r-project.org/web/views/MissingData.html)
+
+
+
+
+

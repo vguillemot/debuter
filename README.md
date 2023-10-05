@@ -17,6 +17,7 @@
 | Jour 3 AM + PM | Visualisation  | Amaury & Vincent  | [[HTML](vignettes/S06visu.html) [PDF](vignettes/S06visu.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T06visu)] |
 | Jour 4 AM + PM | Analyse   | Amaury & Vincent  | [[HTML](vignettes/S07tests.html) [PDF](vignettes/S07tests.pdf)] | [[Lien](https://learnr.pasteur.fr/debuter/T07tests)] |
 | Jour ? | Entrées-Sorties   | Amaury & Vincent  | [[HTML](vignettes/S08input_output.html) [PDF](vignettes/S08input_output.pdf)] |  |
+| Jour ? | Données manquantes   | Amaury & Vincent  | [[HTML](vignettes/S09missing.html) [PDF](vignettes/S09missing.pdf)] |  |
 
 ****
 

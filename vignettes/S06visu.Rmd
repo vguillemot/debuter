@@ -272,7 +272,6 @@ colfun <- colorRampPalette(
 barplot(***, 
         col = colfun(100), 
         axes = F, border = NA)
-
 ```
 
 <p class="forceBreak"></p>

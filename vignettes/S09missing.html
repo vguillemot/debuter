@@ -3225,6 +3225,14 @@ color: #048;
 <p>Nous aurons besoin de charger les librairies suivantes :</p>
 
 <pre class = 'prettyprint lang-r'>library(dplyr)
+#&gt; 
+#&gt; Attaching package: &#39;dplyr&#39;
+#&gt; The following objects are masked from &#39;package:stats&#39;:
+#&gt; 
+#&gt;     filter, lag
+#&gt; The following objects are masked from &#39;package:base&#39;:
+#&gt; 
+#&gt;     intersect, setdiff, setequal, union
 library(tidyr)</pre>
 
 </article></slide><slide class=""><hgroup><h2>D’où ça vient ?</h2></hgroup><article  id="doù-ça-vient">
@@ -3318,14 +3326,14 @@ library(tidyr)</pre>
 </tr>
 <tr class="even">
 <td align="left"><code>NaN/2</code></td>
-<td align="left"><code>NA</code></td>
+<td align="left"><code>NaN</code></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>TRUE &amp; NaN</code></td>
 <td align="left"><code>NA</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>TRUE | NA</code></td>
+<td align="left"><code>TRUE | NaN</code></td>
 <td align="left"><code>TRUE</code></td>
 </tr>
 </table>

@@ -33,6 +33,27 @@ library(dplyr)
 data("fruits", package = "minidebuter")
 ```
 
+## Fruits est un fait un "tibble"
+
+```{r tibble fruits}
+fruits
+class(fruits)
+```
+
+# Bref, c'est quoi un `tibble` ?
+
+## Mise à jour de la table des classes d'objets !
+
+Nom | Appelation officielle | Exemple
+---|---|---
+Vecteur | ??? | `1:10`
+Facteur | `factor` | `gl(2, 2)`
+Matrice | `matrix` | `matrix(1:4, 2, 2)`  
+Tableau | `data.frame` | `mtcars`  
+Tableau | `tibble` | `fruits`  
+Liste | `list` |  `list(a = 1, b = 1:10, c = "Hello!")`
+Fonction | `function` | `sin`, `exp`, `log`
+
 ## Comment créer une nouvelle colonne ?
 
 Par sécurité : je crée une copie de mes données
@@ -337,6 +358,20 @@ On peut ensuite ranger les résultats par ordre décroissant :
 fruits %>%
   count(groupe) %>%
   arrange(desc(n))
+```
+
+## Intermède : la fonction cut
+
+La fonction `cut` permet de transformer un vecteur de valeurs numériques en un facteur contenant des **intervalles** : 
+
+  - `x` : le vecteur de valeurs numériques,
+  - `breaks` : les limites des intervalles.
+
+Exemple : 
+
+```{r cut}
+entiers <- 1:5
+cut(entiers, c(0, 2, 5))
 ```
 
 ## Compter deux choses à la fois

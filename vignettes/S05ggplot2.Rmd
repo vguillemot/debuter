@@ -162,18 +162,22 @@ Nous allons voir ensemble quelques géométries particulières qui permettent de
 
 # Diagrammes en bâtons
 
-## Intermède : la fonction cut
+## Rappel : la fonction cut {.columns-2}
 
 La fonction `cut` permet de transformer un vecteur de valeurs numériques en un facteur contenant des **intervalles** : 
 
   - `x` : le vecteur de valeurs numériques,
   - `breaks` : les limites des intervalles.
 
+<p class="forceBreak"></p>
+
 Exemple : 
 
 ```{r cut}
-entiers <- 1:5
-cut(entiers, c(0, 2, 5))
+randx <- rnorm(10)
+data.frame(
+  randx = randx,
+  randx_cut = cut(randx, -3:3))
 ```
 
 ## Avec geom_bar
@@ -186,6 +190,19 @@ fruits %>%
   ggplot(aes(EauCat)) + 
   geom_bar(fill = "steelblue")
 ```
+
+## Intermède : opérations sur les booléens
+
+Les booléens sont transformés en 0s ou 1s quand ils sont utilisés dans des opérations arithmétiques : 
+
+  * `TRUE + 0` est égal à `1`, `TRUE` est traité comme la valeur "1"
+  * `FALSE + 0` est égal à `0`, `FALSE` est traité comme la valeur "0"
+  
+Cela va même plus loin : 
+
+  * `TRUE + TRUE` est égal à "2",
+  * `TRUE + FALSE + TRUE + FALSE + FALSE + TRUE` est égal à ?
+
 
 ## Avec geom_col
 

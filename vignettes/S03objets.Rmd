@@ -20,8 +20,6 @@ knitr::opts_chunk$set(
   comment = "#>",
   echo = TRUE
 )
-library(ggplot2)
-library(tidyr)
 ```
 
 ## Bien se préparer à coder
@@ -119,8 +117,13 @@ Comment "sauvegarder" ces objets ?
 
 En utilisant l'**opérateur d'assignation**
 
+```{r import ggplot2, echo = FALSE}
+library(ggplot2)
+```
+
+
 ```{r assign, echo = FALSE, fig.width = 3, fig.height = 3, fig.align='center'}
-data.frame(x = 0, y = 0, lab = "<-") %>% 
+data.frame(x = 0, y = 0, lab = "<-") |>
   ggplot(aes(x, y, label = lab)) + 
   geom_text(size = 50, family = "Courier", fontface = "bold") + 
   theme_void() + 
@@ -238,12 +241,32 @@ Les objets pour qui cela ne signifie rien ou presque : listes et fonctions
 
 ```{r fruits}
 data("fruits", package = "minidebuter")
-head(fruits)
 dim(fruits)
 nrow(fruits)
 ncol(fruits)
+```
+
+
+## Juste le début de la table {.smaller}
+
+```{r head fruits, echo = TRUE, eval = FALSE}
+head(fruits)
+```
+
+```{r head fruits evluated, echo = FALSE, eval = TRUE}
+print.data.frame(head(fruits))
+```
+
+## Toute la table {.smaller}
+
+```{r toute fruits, echo = TRUE, eval = FALSE}
 fruits
 ```
+
+```{r toute fruits evluated, echo = FALSE, eval = TRUE}
+print.data.frame(fruits)
+```
+
 
 ## Importer des données en R
 
@@ -269,24 +292,11 @@ fruits
   * Guillemets simples : fonctionnent comme les guillemets doubles. Ex.: `"bonjour"` est équivalent à `'bonjour'`.
   * Le "backtick" ou "backquote" : "`"
 
-# Bref, c'est quoi un `tibble` ?
-
-## Mise à jour de la table des classes d'objets !
-
-Nom | Appelation officielle | Exemple
----|---|---
-Vecteur | ??? | `1:10`
-Facteur | `factor` | `gl(2, 2)`
-Matrice | `matrix` | `matrix(1:4, 2, 2)`  
-Tableau | `data.frame` | `mtcars`  
-Tableau | `tibble` | `fruits`  
-Liste | `list` |  `list(a = 1, b = 1:10, c = "Hello!")`
-Fonction | `function` | `sin`, `exp`, `log`
 
 ## Explorer les données `fruits`
 
 ```{r brackets, echo = FALSE, fig.width = 6, fig.height = 4, fig.align='center'}
-data.frame(x = c(0, 1, 0, 1), y = c(1, 1, 0, 0), lab = c("[ ]", "[ , ]", "[[ ]]", "$")) %>% 
+data.frame(x = c(0, 1, 0, 1), y = c(1, 1, 0, 0), lab = c("[ ]", "[ , ]", "[[ ]]", "$")) |> 
   ggplot(aes(x, y, label = lab, color = lab)) + 
   geom_text(aes(hjust = x, vjust = y), size = 20, family = "Courier", fontface = "bold", show.legend = FALSE) + 
   theme_void() + 

@@ -3545,41 +3545,199 @@ a * 2
 </article></slide><slide class=""><hgroup><h2>Petit détour par les tableaux</h2></hgroup><article  id="petit-détour-par-les-tableaux" class="smaller">
 
 <pre class = 'prettyprint lang-r'>data(&quot;fruits&quot;, package = &quot;minidebuter&quot;)
-head(fruits)
-#&gt; # A tibble: 6 × 18
-#&gt;   nom    groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose Fibres Calcium Magnesium
-#&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 Abric… crus       194  87.1      0.81     9.01    0.25    6.7      1.3    1.7    15         8.4
-#&gt; 2 Abric… secs      1010  24.7      2.88    59.1     0.5    34.3     10.6    8.3    71        41  
-#&gt; 3 Ananas exoti…     304  81.3      0.94    15.1     0.25   14.9      2.8    2.4     6.3      15  
-#&gt; 4 Banane exoti…     383  75.8      1.06    19.7     0.25   15.6      3.8    2.7     5.1      28  
-#&gt; 5 Canne… secs      1410  14.6      0.25    76.4     1      72.8     28.4    5.7     8         3.9
-#&gt; 6 Cerise crus       235  85.7      0.81    13       0.25   10        4.6    1.6     9.9       8.8
-#&gt; # ℹ 6 more variables: Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
-#&gt; #   VitamineE &lt;dbl&gt;, VitamineC &lt;dbl&gt;
 dim(fruits)
 #&gt; [1] 51 18
 nrow(fruits)
 #&gt; [1] 51
 ncol(fruits)
-#&gt; [1] 18
-fruits
-#&gt; # A tibble: 51 × 18
-#&gt;    nom   groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose Fibres Calcium Magnesium
-#&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 Abri… crus       194  87.1      0.81     9.01    0.25    6.7     1.3    1.7    15         8.4 
-#&gt;  2 Abri… secs      1010  24.7      2.88    59.1     0.5    34.3    10.6    8.3    71        41   
-#&gt;  3 Anan… exoti…     304  81.3      0.94    15.1     0.25   14.9     2.8    2.4     6.3      15   
-#&gt;  4 Bana… exoti…     383  75.8      1.06    19.7     0.25   15.6     3.8    2.7     5.1      28   
-#&gt;  5 Cann… secs      1410  14.6      0.25    76.4     1      72.8    28.4    5.7     8         3.9 
-#&gt;  6 Ceri… crus       235  85.7      0.81    13       0.25   10       4.6    1.6     9.9       8.8 
-#&gt;  7 Citr… crus       118  91.3      0.25     1.56    0.25    0.8     0.4    0.25   11         7.9 
-#&gt;  8 Clem… crus       200  87        0.81     9.17    0.25    8.6     1.5    1.7    23         9.3 
-#&gt;  9 Comp… compo…     279  82.9      0.25    15.3     0.08   14.6     6.92   1.6     6.2       5.5 
-#&gt; 10 Comp… compo…     432  72.9      0.23    24.4     0.21   20.7     7.9    1.53    4.44      5.09
-#&gt; # ℹ 41 more rows
-#&gt; # ℹ 6 more variables: Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
-#&gt; #   VitamineE &lt;dbl&gt;, VitamineC &lt;dbl&gt;</pre>
+#&gt; [1] 18</pre>
+
+</article></slide><slide class=""><hgroup><h2>Juste le début de la table</h2></hgroup><article  id="juste-le-début-de-la-table" class="smaller">
+
+<pre class = 'prettyprint lang-r'>head(fruits)</pre>
+
+<pre >#&gt;          nom   groupe Energie  Eau Proteines Glucides Lipides Sucres
+#&gt; 1    Abricot     crus     194 87.1      0.81     9.01    0.25    6.7
+#&gt; 2    Abricot     secs    1010 24.7      2.88    59.10    0.50   34.3
+#&gt; 3     Ananas exotique     304 81.3      0.94    15.10    0.25   14.9
+#&gt; 4     Banane exotique     383 75.8      1.06    19.70    0.25   15.6
+#&gt; 5 Canneberge     secs    1410 14.6      0.25    76.40    1.00   72.8
+#&gt; 6     Cerise     crus     235 85.7      0.81    13.00    0.25   10.0
+#&gt;   Fructose Fibres Calcium Magnesium Phosphore Potassium Zinc BetaCarotene
+#&gt; 1      1.3    1.7    15.0       8.4      22.0       260 0.09       2350.0
+#&gt; 2     10.6    8.3    71.0      41.0      79.0      1400 0.35       2160.0
+#&gt; 3      2.8    2.4     6.3      15.0       9.6       130 0.11         21.2
+#&gt; 4      3.8    2.7     5.1      28.0      29.0       320 0.14         28.5
+#&gt; 5     28.4    5.7     8.0       3.9       7.5        58 0.05         15.5
+#&gt; 6      4.6    1.6     9.9       8.8      19.0       190 0.06        242.0
+#&gt;   VitamineE VitamineC
+#&gt; 1      0.70      2.55
+#&gt; 2      5.52      0.25
+#&gt; 3      0.04     18.30
+#&gt; 4      0.04      7.16
+#&gt; 5      1.92      0.25
+#&gt; 6      0.04      4.09</pre>
+
+</article></slide><slide class=""><hgroup><h2>Toute la table</h2></hgroup><article  id="toute-la-table" class="smaller">
+
+<pre class = 'prettyprint lang-r'>fruits</pre>
+
+<pre >#&gt;                   nom   groupe Energie  Eau Proteines Glucides Lipides
+#&gt; 1             Abricot     crus     194 87.1      0.81     9.01    0.25
+#&gt; 2             Abricot     secs    1010 24.7      2.88    59.10    0.50
+#&gt; 3              Ananas exotique     304 81.3      0.94    15.10    0.25
+#&gt; 4              Banane exotique     383 75.8      1.06    19.70    0.25
+#&gt; 5          Canneberge     secs    1410 14.6      0.25    76.40    1.00
+#&gt; 6              Cerise     crus     235 85.7      0.81    13.00    0.25
+#&gt; 7              Citron     crus     118 91.3      0.25     1.56    0.25
+#&gt; 8          Clementine     crus     200 87.0      0.81     9.17    0.25
+#&gt; 9  CompoteMultiFruits  compote     279 82.9      0.25    15.30    0.08
+#&gt; 10       CompotePomme  compote     432 72.9      0.23    24.40    0.21
+#&gt; 11              Figue     crus     293 80.2      1.19    13.50    0.25
+#&gt; 12             Fraise     crus     162 90.3      0.63     6.03    0.25
+#&gt; 13          Framboise     crus     206 86.8      1.19     5.83    0.80
+#&gt; 14           FruitCru     crus     251 84.5      0.70    11.60    0.26
+#&gt; 15            Grenade     crus     340 79.4      1.44    14.30    1.20
+#&gt; 16          Groseille     crus     289 82.1      1.56     7.06    0.70
+#&gt; 17               Kaki exotique     290 81.8      0.88    14.30    0.25
+#&gt; 18               Kiwi exotique     255 83.5      0.88    11.00    0.60
+#&gt; 19               Lime exotique     170 86.3      1.13     3.14    0.25
+#&gt; 20             Litchi exotique     344 80.5      1.13    16.10    0.25
+#&gt; 21             Mangue exotique     376 77.1      0.75    19.30    0.50
+#&gt; 22           Maracuja exotique     425 73.6      2.13    10.90    3.00
+#&gt; 23            Melange     secs    1640 11.7      2.19    69.50   10.50
+#&gt; 24              Melon     crus     265 84.2      1.13    14.80    0.25
+#&gt; 25          Mirabelle     crus     325 78.1      0.63    18.00    0.25
+#&gt; 26               Mure     crus     198 86.1      1.13     6.53    0.70
+#&gt; 27           Myrtille     crus     244 84.2      0.87    10.60    0.33
+#&gt; 28   NectarineBlanche     crus     220 86.5      0.81    11.40    0.25
+#&gt; 29     NectarineJaune     crus     218 86.6      0.69    11.30    0.25
+#&gt; 30             Orange     crus     192 87.3      0.75     8.03    0.25
+#&gt; 31       Pamplemousse     crus     169 89.3      0.25     8.02    0.25
+#&gt; 32             Papaye exotique     178 88.8      0.75     8.53    0.25
+#&gt; 33             Papaye exotique     169 88.6      0.56     7.88    0.25
+#&gt; 34           Pasteque     crus     165 91.0      0.69     8.33    0.25
+#&gt; 35       PecheBlanche     crus     199 87.6      0.69     9.48    0.25
+#&gt; 36       PecheBlanche     crus     195 87.6      0.63     9.63    0.25
+#&gt; 37         PecheJaune     crus     196 87.8      0.69     9.80    0.25
+#&gt; 38    PoireConference     crus     223 85.3      0.25    11.40    0.25
+#&gt; 39      PoireWilliams     crus     228 84.7      0.25    11.50    0.25
+#&gt; 40        PommeGolden     crus     242 85.1      0.25    12.80    0.25
+#&gt; 41    PommeChantecler     crus     219 86.4      0.25    11.20    0.25
+#&gt; 42          PommeGala     crus     230 85.5      0.25    11.90    0.25
+#&gt; 43   PommeGrannySmith     crus     217 85.8      0.25    10.70    0.25
+#&gt; 44      PommePinklady     crus     254 83.6      0.25    12.80    0.25
+#&gt; 45              Prune     crus     301 80.1      0.94    16.40    0.25
+#&gt; 46            Pruneau     secs     969 34.9      1.63    55.40    0.40
+#&gt; 47      PureeDeFruits  compote     249 84.2      0.25    13.40    0.25
+#&gt; 48             Raisin     secs    1360 16.0      3.00    73.20    0.90
+#&gt; 49        RaisinBlanc     crus     311 80.9      0.75    16.60    0.25
+#&gt; 50    RaisinChasselas     crus     335 79.4      0.75    16.90    0.50
+#&gt; 51   RaisinNoirMuscat     crus     381 76.7      0.69    20.00    0.25
+#&gt;    Sucres Fructose Fibres Calcium Magnesium Phosphore Potassium  Zinc
+#&gt; 1    6.70     1.30   1.70   15.00      8.40      22.0       260 0.090
+#&gt; 2   34.30    10.60   8.30   71.00     41.00      79.0      1400 0.350
+#&gt; 3   14.90     2.80   2.40    6.30     15.00       9.6       130 0.110
+#&gt; 4   15.60     3.80   2.70    5.10     28.00      29.0       320 0.140
+#&gt; 5   72.80    28.40   5.70    8.00      3.90       7.5        58 0.050
+#&gt; 6   10.00     4.60   1.60    9.90      8.80      19.0       190 0.060
+#&gt; 7    0.80     0.40   0.25   11.00      7.90      12.0       140 0.330
+#&gt; 8    8.60     1.50   1.70   23.00      9.30      18.0       140 0.100
+#&gt; 9   14.60     6.92   1.60    6.20      5.50      11.0       140 0.050
+#&gt; 10  20.70     7.90   1.53    4.44      5.09       6.0       104 0.025
+#&gt; 11  12.20     6.20   4.10   57.00     22.00      21.0       230 0.160
+#&gt; 12   5.60     3.30   3.80   18.00     12.00      23.0       140 0.110
+#&gt; 13   5.40     2.80   4.30   16.00     20.00      29.0       170 0.240
+#&gt; 14   9.89     3.62   1.97   14.50     12.10      20.1       197 0.110
+#&gt; 15  13.30     7.10   2.30    9.50     12.00      27.0       230 0.220
+#&gt; 16   6.63     3.86   4.60   38.00     12.00      38.0       230 0.150
+#&gt; 17  13.90     6.40   3.40    6.90      7.20      13.0       160 0.050
+#&gt; 18   8.90     4.30   2.40   29.00     12.00      26.0       290 0.120
+#&gt; 19   2.10     0.80   4.30   57.00     14.00      24.0       190 0.150
+#&gt; 20  15.70     8.10   2.00    3.60     18.00      27.0       200 0.230
+#&gt; 21  18.40     8.65   1.80   14.00     14.00      13.0       150 0.080
+#&gt; 22   8.50     2.50   6.80    8.10     26.00      46.0       240 0.760
+#&gt; 23  59.40    19.50   3.40   43.00     39.00      67.0       530 0.320
+#&gt; 24  10.60     2.49   1.30   11.00     16.00      17.0       380 0.180
+#&gt; 25  13.30     2.20   2.20   11.00      8.20      21.0       240 0.110
+#&gt; 26   6.10     3.08   5.20   31.00     20.00      25.0       200 0.180
+#&gt; 27   9.96     4.97   2.40    6.00      6.00      12.0        77 0.160
+#&gt; 28   8.90     1.30   0.25    5.00      8.10      18.0       210 0.100
+#&gt; 29   8.80     1.20   0.60    4.80      8.00      19.0       220 0.110
+#&gt; 30   7.60     2.10   2.70   66.00     15.00      38.0       180 0.250
+#&gt; 31   6.60     1.90   0.80   14.00      7.20      17.0       140 0.070
+#&gt; 32   8.10     4.10   1.80   22.00     18.00       8.7       200 0.050
+#&gt; 33   7.70     3.60   2.20   18.00     12.00      11.0       240 0.090
+#&gt; 34   7.90     3.60   0.50    6.00     11.00       9.7       100 0.090
+#&gt; 35   8.70     0.90   2.10    4.10      7.10      18.0       180 0.110
+#&gt; 36   7.80     0.80   1.10    3.90      6.80      18.0       170 0.100
+#&gt; 37   7.60     1.10   1.00    4.20      6.70      17.0       190 0.090
+#&gt; 38   9.40     6.60   3.10    3.90      5.30       9.3        99 0.070
+#&gt; 39   9.40     7.20   3.10    6.10      5.30       9.8       120 0.090
+#&gt; 40  11.50     6.90   1.40    4.00      3.80      10.0       130 0.070
+#&gt; 41  10.80     5.40   1.90    4.00      3.60      10.0       120 0.050
+#&gt; 42  11.10     6.30   1.90    3.60      3.00       7.8        91 0.050
+#&gt; 43  10.10     5.80   2.80    3.20      2.80       7.6       110 0.050
+#&gt; 44  12.30     6.60   2.90    2.80      3.00       7.5       110 0.050
+#&gt; 45  10.40     1.80   1.70   13.00      9.50      20.0       250 0.120
+#&gt; 46  38.10    12.50   5.10   50.00     30.00      66.0       610 0.280
+#&gt; 47  11.30     7.20   1.70    6.20      6.00      11.0       140 0.050
+#&gt; 48  70.30    36.00   4.20   54.00     35.00      82.0       960 0.240
+#&gt; 49  15.50     8.50   1.00   12.00      7.60      16.0       200 0.050
+#&gt; 50  16.50     8.40   2.00   16.00      7.50      21.0       150 0.070
+#&gt; 51  19.60     9.80   2.70   13.00      7.30      20.0       210 0.060
+#&gt;    BetaCarotene VitamineE VitamineC
+#&gt; 1       2350.00      0.70      2.55
+#&gt; 2       2160.00      5.52      0.25
+#&gt; 3         21.20      0.04     18.30
+#&gt; 4         28.50      0.04      7.16
+#&gt; 5         15.50      1.92      0.25
+#&gt; 6        242.00      0.04      4.09
+#&gt; 7          2.50      0.04     45.00
+#&gt; 8        147.00      0.21     49.20
+#&gt; 9         99.30      0.53     11.50
+#&gt; 10         3.00      0.18     14.50
+#&gt; 11        73.60      0.04      0.25
+#&gt; 12         2.50      0.30     54.00
+#&gt; 13       100.00      0.88     18.70
+#&gt; 14       314.00      0.29     20.90
+#&gt; 15        12.10      0.04      9.02
+#&gt; 16        25.60      1.19     29.80
+#&gt; 17       180.00      0.12      3.41
+#&gt; 18        38.00      0.96     81.90
+#&gt; 19        12.40      0.45     29.30
+#&gt; 20         2.50      0.04     19.20
+#&gt; 21      2010.00      1.96      2.90
+#&gt; 22      1010.00      0.50     25.60
+#&gt; 23        13.60      0.69      0.69
+#&gt; 24      2500.00      0.04      8.14
+#&gt; 25       346.00      1.52      5.29
+#&gt; 26       156.00      1.28     10.10
+#&gt; 27        32.00      0.57      9.70
+#&gt; 28         2.50      1.04      3.01
+#&gt; 29       144.00      0.04      3.38
+#&gt; 30         2.50      0.19     47.50
+#&gt; 31       539.00      0.04     42.40
+#&gt; 32       351.00      0.04     65.30
+#&gt; 33      1230.00      0.22     68.00
+#&gt; 34      1220.00      0.04      4.26
+#&gt; 35         2.50      0.19      3.85
+#&gt; 36         2.50      0.28      4.09
+#&gt; 37       130.00      0.50      3.43
+#&gt; 38        19.30      0.04      1.39
+#&gt; 39         2.50      0.04      2.57
+#&gt; 40        56.00      0.04      0.25
+#&gt; 41        54.60      0.04      2.85
+#&gt; 42        11.60      0.04      1.33
+#&gt; 43        11.60      0.04      2.31
+#&gt; 44        32.30      0.04      2.13
+#&gt; 45       430.00      1.20      4.16
+#&gt; 46        14.90      0.41      0.25
+#&gt; 47        31.00      0.40     16.70
+#&gt; 48         2.50      1.67      0.25
+#&gt; 49         7.54      0.31      1.07
+#&gt; 50        27.40      0.35      4.14
+#&gt; 51        67.70      0.99      3.11</pre>
 
 </article></slide><slide class=""><hgroup><h2>Importer des données en R</h2></hgroup><article  id="importer-des-données-en-r">
 
@@ -3613,53 +3771,6 @@ fruits
 <li>Guillemets simples : fonctionnent comme les guillemets doubles. Ex.: <code>&quot;bonjour&quot;</code> est équivalent à <code>&#39;bonjour&#39;</code>.</li>
 <li>Le &ldquo;backtick&rdquo; ou &ldquo;backquote&rdquo; : &ldquo;`&rdquo;</li>
 </ul>
-
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Bref, c’est quoi un <code>tibble</code> ?</h2></hgroup><article  id="bref-cest-quoi-un-tibble">
-
-</article></slide><slide class=""><hgroup><h2>Mise à jour de la table des classes d’objets !</h2></hgroup><article  id="mise-à-jour-de-la-table-des-classes-dobjets">
-
-<table class = 'rmdtable'>
-<tr class="header">
-<th align="left">Nom</th>
-<th align="left">Appelation officielle</th>
-<th align="left">Exemple</th>
-</tr>
-<tr class="odd">
-<td align="left">Vecteur</td>
-<td align="left">???</td>
-<td align="left"><code>1:10</code></td>
-</tr>
-<tr class="even">
-<td align="left">Facteur</td>
-<td align="left"><code>factor</code></td>
-<td align="left"><code>gl(2, 2)</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Matrice</td>
-<td align="left"><code>matrix</code></td>
-<td align="left"><code>matrix(1:4, 2, 2)</code></td>
-</tr>
-<tr class="even">
-<td align="left">Tableau</td>
-<td align="left"><code>data.frame</code></td>
-<td align="left"><code>mtcars</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Tableau</td>
-<td align="left"><code>tibble</code></td>
-<td align="left"><code>fruits</code></td>
-</tr>
-<tr class="even">
-<td align="left">Liste</td>
-<td align="left"><code>list</code></td>
-<td align="left"><code>list(a = 1, b = 1:10, c = &quot;Hello!&quot;)</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Fonction</td>
-<td align="left"><code>function</code></td>
-<td align="left"><code>sin</code>, <code>exp</code>, <code>log</code></td>
-</tr>
-</table>
 
 </article></slide><slide class=""><hgroup><h2>Explorer les données <code>fruits</code></h2></hgroup><article  id="explorer-les-données-fruits">
 

@@ -3231,6 +3231,76 @@ color: #048;
 <pre class = 'prettyprint lang-r'>library(dplyr)
 data(&quot;fruits&quot;, package = &quot;minidebuter&quot;)</pre>
 
+</article></slide><slide class=""><hgroup><h2>Fruits est un fait un &ldquo;tibble&rdquo;</h2></hgroup><article  id="fruits-est-un-fait-un-tibble">
+
+<pre class = 'prettyprint lang-r'>fruits
+#&gt; # A tibble: 51 × 18
+#&gt;    nom     groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose
+#&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1 Abricot crus       194  87.1      0.81     9.01    0.25    6.7     1.3 
+#&gt;  2 Abricot secs      1010  24.7      2.88    59.1     0.5    34.3    10.6 
+#&gt;  3 Ananas  exoti…     304  81.3      0.94    15.1     0.25   14.9     2.8 
+#&gt;  4 Banane  exoti…     383  75.8      1.06    19.7     0.25   15.6     3.8 
+#&gt;  5 Canneb… secs      1410  14.6      0.25    76.4     1      72.8    28.4 
+#&gt;  6 Cerise  crus       235  85.7      0.81    13       0.25   10       4.6 
+#&gt;  7 Citron  crus       118  91.3      0.25     1.56    0.25    0.8     0.4 
+#&gt;  8 Clemen… crus       200  87        0.81     9.17    0.25    8.6     1.5 
+#&gt;  9 Compot… compo…     279  82.9      0.25    15.3     0.08   14.6     6.92
+#&gt; 10 Compot… compo…     432  72.9      0.23    24.4     0.21   20.7     7.9 
+#&gt; # ℹ 41 more rows
+#&gt; # ℹ 9 more variables: Fibres &lt;dbl&gt;, Calcium &lt;dbl&gt;, Magnesium &lt;dbl&gt;,
+#&gt; #   Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
+#&gt; #   VitamineE &lt;dbl&gt;, VitamineC &lt;dbl&gt;
+class(fruits)
+#&gt; [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</pre>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Bref, c’est quoi un <code>tibble</code> ?</h2></hgroup><article  id="bref-cest-quoi-un-tibble">
+
+</article></slide><slide class=""><hgroup><h2>Mise à jour de la table des classes d’objets !</h2></hgroup><article  id="mise-à-jour-de-la-table-des-classes-dobjets">
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Nom</th>
+<th align="left">Appelation officielle</th>
+<th align="left">Exemple</th>
+</tr>
+<tr class="odd">
+<td align="left">Vecteur</td>
+<td align="left">???</td>
+<td align="left"><code>1:10</code></td>
+</tr>
+<tr class="even">
+<td align="left">Facteur</td>
+<td align="left"><code>factor</code></td>
+<td align="left"><code>gl(2, 2)</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Matrice</td>
+<td align="left"><code>matrix</code></td>
+<td align="left"><code>matrix(1:4, 2, 2)</code></td>
+</tr>
+<tr class="even">
+<td align="left">Tableau</td>
+<td align="left"><code>data.frame</code></td>
+<td align="left"><code>mtcars</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Tableau</td>
+<td align="left"><code>tibble</code></td>
+<td align="left"><code>fruits</code></td>
+</tr>
+<tr class="even">
+<td align="left">Liste</td>
+<td align="left"><code>list</code></td>
+<td align="left"><code>list(a = 1, b = 1:10, c = &quot;Hello!&quot;)</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Fonction</td>
+<td align="left"><code>function</code></td>
+<td align="left"><code>sin</code>, <code>exp</code>, <code>log</code></td>
+</tr>
+</table>
+
 </article></slide><slide class=""><hgroup><h2>Comment créer une nouvelle colonne ?</h2></hgroup><article  id="comment-créer-une-nouvelle-colonne">
 
 <p>Par sécurité : je crée une copie de mes données</p>
@@ -3331,20 +3401,21 @@ fruits$Energie %&gt;% hist()</pre>
 
 <pre class = 'prettyprint lang-r'>fruits
 #&gt; # A tibble: 51 × 18
-#&gt;    nom   groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose Fibres Calcium Magnesium
-#&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 Abri… crus       194  87.1      0.81     9.01    0.25    6.7     1.3    1.7    15         8.4 
-#&gt;  2 Abri… secs      1010  24.7      2.88    59.1     0.5    34.3    10.6    8.3    71        41   
-#&gt;  3 Anan… exoti…     304  81.3      0.94    15.1     0.25   14.9     2.8    2.4     6.3      15   
-#&gt;  4 Bana… exoti…     383  75.8      1.06    19.7     0.25   15.6     3.8    2.7     5.1      28   
-#&gt;  5 Cann… secs      1410  14.6      0.25    76.4     1      72.8    28.4    5.7     8         3.9 
-#&gt;  6 Ceri… crus       235  85.7      0.81    13       0.25   10       4.6    1.6     9.9       8.8 
-#&gt;  7 Citr… crus       118  91.3      0.25     1.56    0.25    0.8     0.4    0.25   11         7.9 
-#&gt;  8 Clem… crus       200  87        0.81     9.17    0.25    8.6     1.5    1.7    23         9.3 
-#&gt;  9 Comp… compo…     279  82.9      0.25    15.3     0.08   14.6     6.92   1.6     6.2       5.5 
-#&gt; 10 Comp… compo…     432  72.9      0.23    24.4     0.21   20.7     7.9    1.53    4.44      5.09
+#&gt;    nom     groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose
+#&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1 Abricot crus       194  87.1      0.81     9.01    0.25    6.7     1.3 
+#&gt;  2 Abricot secs      1010  24.7      2.88    59.1     0.5    34.3    10.6 
+#&gt;  3 Ananas  exoti…     304  81.3      0.94    15.1     0.25   14.9     2.8 
+#&gt;  4 Banane  exoti…     383  75.8      1.06    19.7     0.25   15.6     3.8 
+#&gt;  5 Canneb… secs      1410  14.6      0.25    76.4     1      72.8    28.4 
+#&gt;  6 Cerise  crus       235  85.7      0.81    13       0.25   10       4.6 
+#&gt;  7 Citron  crus       118  91.3      0.25     1.56    0.25    0.8     0.4 
+#&gt;  8 Clemen… crus       200  87        0.81     9.17    0.25    8.6     1.5 
+#&gt;  9 Compot… compo…     279  82.9      0.25    15.3     0.08   14.6     6.92
+#&gt; 10 Compot… compo…     432  72.9      0.23    24.4     0.21   20.7     7.9 
 #&gt; # ℹ 41 more rows
-#&gt; # ℹ 6 more variables: Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
+#&gt; # ℹ 9 more variables: Fibres &lt;dbl&gt;, Calcium &lt;dbl&gt;, Magnesium &lt;dbl&gt;,
+#&gt; #   Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
 #&gt; #   VitamineE &lt;dbl&gt;, VitamineC &lt;dbl&gt;</pre>
 
 </article></slide><slide class=""><hgroup><h2>Les fonctions de dplyr</h2></hgroup><article  id="les-fonctions-de-dplyr" class="smaller">
@@ -3530,11 +3601,12 @@ head(fruits2[, &quot;Sucres_ratio&quot;])
 <pre class = 'prettyprint lang-r'>fruits %&gt;% 
   filter(Sucres &gt; 60)
 #&gt; # A tibble: 2 × 18
-#&gt;   nom    groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose Fibres Calcium Magnesium
-#&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 Canne… secs      1410  14.6      0.25     76.4     1     72.8     28.4    5.7       8       3.9
-#&gt; 2 Raisin secs      1360  16        3        73.2     0.9   70.3     36      4.2      54      35  
-#&gt; # ℹ 6 more variables: Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
+#&gt;   nom      groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose
+#&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 Cannebe… secs      1410  14.6      0.25     76.4     1     72.8     28.4
+#&gt; 2 Raisin   secs      1360  16        3        73.2     0.9   70.3     36  
+#&gt; # ℹ 9 more variables: Fibres &lt;dbl&gt;, Calcium &lt;dbl&gt;, Magnesium &lt;dbl&gt;,
+#&gt; #   Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
 #&gt; #   VitamineE &lt;dbl&gt;, VitamineC &lt;dbl&gt;</pre>
 
 <p class="forceBreak">
@@ -3545,11 +3617,12 @@ head(fruits2[, &quot;Sucres_ratio&quot;])
 
 <pre class = 'prettyprint lang-r'>fruits[fruits$Sucres &gt; 60, ]
 #&gt; # A tibble: 2 × 18
-#&gt;   nom    groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose Fibres Calcium Magnesium
-#&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 Canne… secs      1410  14.6      0.25     76.4     1     72.8     28.4    5.7       8       3.9
-#&gt; 2 Raisin secs      1360  16        3        73.2     0.9   70.3     36      4.2      54      35  
-#&gt; # ℹ 6 more variables: Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
+#&gt;   nom      groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose
+#&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 Cannebe… secs      1410  14.6      0.25     76.4     1     72.8     28.4
+#&gt; 2 Raisin   secs      1360  16        3        73.2     0.9   70.3     36  
+#&gt; # ℹ 9 more variables: Fibres &lt;dbl&gt;, Calcium &lt;dbl&gt;, Magnesium &lt;dbl&gt;,
+#&gt; #   Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
 #&gt; #   VitamineE &lt;dbl&gt;, VitamineC &lt;dbl&gt;</pre>
 
 </article></slide><slide class=""><hgroup><h2>Sélectionner des plages de lignes</h2></hgroup><article  id="sélectionner-des-plages-de-lignes" class="columns-2 smaller">
@@ -3559,34 +3632,36 @@ head(fruits2[, &quot;Sucres_ratio&quot;])
 <pre class = 'prettyprint lang-r'>fruits %&gt;% 
   slice(3:10)
 #&gt; # A tibble: 8 × 18
-#&gt;   nom    groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose Fibres Calcium Magnesium
-#&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 Ananas exoti…     304  81.3      0.94    15.1     0.25   14.9     2.8    2.4     6.3      15   
-#&gt; 2 Banane exoti…     383  75.8      1.06    19.7     0.25   15.6     3.8    2.7     5.1      28   
-#&gt; 3 Canne… secs      1410  14.6      0.25    76.4     1      72.8    28.4    5.7     8         3.9 
-#&gt; 4 Cerise crus       235  85.7      0.81    13       0.25   10       4.6    1.6     9.9       8.8 
-#&gt; 5 Citron crus       118  91.3      0.25     1.56    0.25    0.8     0.4    0.25   11         7.9 
-#&gt; 6 Cleme… crus       200  87        0.81     9.17    0.25    8.6     1.5    1.7    23         9.3 
-#&gt; 7 Compo… compo…     279  82.9      0.25    15.3     0.08   14.6     6.92   1.6     6.2       5.5 
-#&gt; 8 Compo… compo…     432  72.9      0.23    24.4     0.21   20.7     7.9    1.53    4.44      5.09
-#&gt; # ℹ 6 more variables: Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
+#&gt;   nom      groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose
+#&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 Ananas   exoti…     304  81.3      0.94    15.1     0.25   14.9     2.8 
+#&gt; 2 Banane   exoti…     383  75.8      1.06    19.7     0.25   15.6     3.8 
+#&gt; 3 Cannebe… secs      1410  14.6      0.25    76.4     1      72.8    28.4 
+#&gt; 4 Cerise   crus       235  85.7      0.81    13       0.25   10       4.6 
+#&gt; 5 Citron   crus       118  91.3      0.25     1.56    0.25    0.8     0.4 
+#&gt; 6 Clement… crus       200  87        0.81     9.17    0.25    8.6     1.5 
+#&gt; 7 Compote… compo…     279  82.9      0.25    15.3     0.08   14.6     6.92
+#&gt; 8 Compote… compo…     432  72.9      0.23    24.4     0.21   20.7     7.9 
+#&gt; # ℹ 9 more variables: Fibres &lt;dbl&gt;, Calcium &lt;dbl&gt;, Magnesium &lt;dbl&gt;,
+#&gt; #   Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
 #&gt; #   VitamineE &lt;dbl&gt;, VitamineC &lt;dbl&gt;</pre>
 
 <p>Avec les fonctions classiques.</p>
 
 <pre class = 'prettyprint lang-r'>fruits[3:10, ]
 #&gt; # A tibble: 8 × 18
-#&gt;   nom    groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose Fibres Calcium Magnesium
-#&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 Ananas exoti…     304  81.3      0.94    15.1     0.25   14.9     2.8    2.4     6.3      15   
-#&gt; 2 Banane exoti…     383  75.8      1.06    19.7     0.25   15.6     3.8    2.7     5.1      28   
-#&gt; 3 Canne… secs      1410  14.6      0.25    76.4     1      72.8    28.4    5.7     8         3.9 
-#&gt; 4 Cerise crus       235  85.7      0.81    13       0.25   10       4.6    1.6     9.9       8.8 
-#&gt; 5 Citron crus       118  91.3      0.25     1.56    0.25    0.8     0.4    0.25   11         7.9 
-#&gt; 6 Cleme… crus       200  87        0.81     9.17    0.25    8.6     1.5    1.7    23         9.3 
-#&gt; 7 Compo… compo…     279  82.9      0.25    15.3     0.08   14.6     6.92   1.6     6.2       5.5 
-#&gt; 8 Compo… compo…     432  72.9      0.23    24.4     0.21   20.7     7.9    1.53    4.44      5.09
-#&gt; # ℹ 6 more variables: Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
+#&gt;   nom      groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose
+#&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 Ananas   exoti…     304  81.3      0.94    15.1     0.25   14.9     2.8 
+#&gt; 2 Banane   exoti…     383  75.8      1.06    19.7     0.25   15.6     3.8 
+#&gt; 3 Cannebe… secs      1410  14.6      0.25    76.4     1      72.8    28.4 
+#&gt; 4 Cerise   crus       235  85.7      0.81    13       0.25   10       4.6 
+#&gt; 5 Citron   crus       118  91.3      0.25     1.56    0.25    0.8     0.4 
+#&gt; 6 Clement… crus       200  87        0.81     9.17    0.25    8.6     1.5 
+#&gt; 7 Compote… compo…     279  82.9      0.25    15.3     0.08   14.6     6.92
+#&gt; 8 Compote… compo…     432  72.9      0.23    24.4     0.21   20.7     7.9 
+#&gt; # ℹ 9 more variables: Fibres &lt;dbl&gt;, Calcium &lt;dbl&gt;, Magnesium &lt;dbl&gt;,
+#&gt; #   Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
 #&gt; #   VitamineE &lt;dbl&gt;, VitamineC &lt;dbl&gt;</pre>
 
 </article></slide><slide class=""><hgroup><h2>Grouper des lignes</h2></hgroup><article  id="grouper-des-lignes" class="smaller">
@@ -3596,20 +3671,21 @@ head(fruits2[, &quot;Sucres_ratio&quot;])
 <pre class = 'prettyprint lang-r'>fruits %&gt;% group_by(groupe)
 #&gt; # A tibble: 51 × 18
 #&gt; # Groups:   groupe [4]
-#&gt;    nom   groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose Fibres Calcium Magnesium
-#&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 Abri… crus       194  87.1      0.81     9.01    0.25    6.7     1.3    1.7    15         8.4 
-#&gt;  2 Abri… secs      1010  24.7      2.88    59.1     0.5    34.3    10.6    8.3    71        41   
-#&gt;  3 Anan… exoti…     304  81.3      0.94    15.1     0.25   14.9     2.8    2.4     6.3      15   
-#&gt;  4 Bana… exoti…     383  75.8      1.06    19.7     0.25   15.6     3.8    2.7     5.1      28   
-#&gt;  5 Cann… secs      1410  14.6      0.25    76.4     1      72.8    28.4    5.7     8         3.9 
-#&gt;  6 Ceri… crus       235  85.7      0.81    13       0.25   10       4.6    1.6     9.9       8.8 
-#&gt;  7 Citr… crus       118  91.3      0.25     1.56    0.25    0.8     0.4    0.25   11         7.9 
-#&gt;  8 Clem… crus       200  87        0.81     9.17    0.25    8.6     1.5    1.7    23         9.3 
-#&gt;  9 Comp… compo…     279  82.9      0.25    15.3     0.08   14.6     6.92   1.6     6.2       5.5 
-#&gt; 10 Comp… compo…     432  72.9      0.23    24.4     0.21   20.7     7.9    1.53    4.44      5.09
+#&gt;    nom     groupe Energie   Eau Proteines Glucides Lipides Sucres Fructose
+#&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1 Abricot crus       194  87.1      0.81     9.01    0.25    6.7     1.3 
+#&gt;  2 Abricot secs      1010  24.7      2.88    59.1     0.5    34.3    10.6 
+#&gt;  3 Ananas  exoti…     304  81.3      0.94    15.1     0.25   14.9     2.8 
+#&gt;  4 Banane  exoti…     383  75.8      1.06    19.7     0.25   15.6     3.8 
+#&gt;  5 Canneb… secs      1410  14.6      0.25    76.4     1      72.8    28.4 
+#&gt;  6 Cerise  crus       235  85.7      0.81    13       0.25   10       4.6 
+#&gt;  7 Citron  crus       118  91.3      0.25     1.56    0.25    0.8     0.4 
+#&gt;  8 Clemen… crus       200  87        0.81     9.17    0.25    8.6     1.5 
+#&gt;  9 Compot… compo…     279  82.9      0.25    15.3     0.08   14.6     6.92
+#&gt; 10 Compot… compo…     432  72.9      0.23    24.4     0.21   20.7     7.9 
 #&gt; # ℹ 41 more rows
-#&gt; # ℹ 6 more variables: Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
+#&gt; # ℹ 9 more variables: Fibres &lt;dbl&gt;, Calcium &lt;dbl&gt;, Magnesium &lt;dbl&gt;,
+#&gt; #   Phosphore &lt;dbl&gt;, Potassium &lt;dbl&gt;, Zinc &lt;dbl&gt;, BetaCarotene &lt;dbl&gt;,
 #&gt; #   VitamineE &lt;dbl&gt;, VitamineC &lt;dbl&gt;</pre>
 
 <p>Les données sont prêtes à être &ldquo;traitées&rdquo; groupe par groupe. PS : L’opération <code>ungroup()</code> permet d’enlever les groupes.</p>
@@ -3699,6 +3775,22 @@ head(fruits2[, &quot;Sucres_ratio&quot;])
 #&gt; 2 exotique    10
 #&gt; 3 secs         5
 #&gt; 4 compote      3</pre>
+
+</article></slide><slide class=""><hgroup><h2>Intermède : la fonction cut</h2></hgroup><article  id="intermède-la-fonction-cut">
+
+<p>La fonction <code>cut</code> permet de transformer un vecteur de valeurs numériques en un facteur contenant des <strong>intervalles</strong> :</p>
+
+<ul>
+<li><code>x</code> : le vecteur de valeurs numériques,</li>
+<li><code>breaks</code> : les limites des intervalles.</li>
+</ul>
+
+<p>Exemple :</p>
+
+<pre class = 'prettyprint lang-r'>entiers &lt;- 1:5
+cut(entiers, c(0, 2, 5))
+#&gt; [1] (0,2] (0,2] (2,5] (2,5] (2,5]
+#&gt; Levels: (0,2] (2,5]</pre>
 
 </article></slide><slide class=""><hgroup><h2>Compter deux choses à la fois</h2></hgroup><article  id="compter-deux-choses-à-la-fois">
 

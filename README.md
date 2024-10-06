@@ -23,7 +23,7 @@
 
 Les essentiels : 
 
-  * [Document partagé pour écrire du code ensemble](https://docs.google.com/document/d/1C5hFVQe3BzlMRa62c-zPDmA9UvX5aKVgHRNieieex2c/edit?usp=sharing)
+  * [Document partagé pour écrire du code ensemble](https://docs.google.com/document/d/1jZsYxeK2QH5Jd92hqbVDIQ2pKg2oB5pUHxSfPzMt5Fw/edit?usp=sharing)
   * Kahoot : [www.kahoot.it](www.kahoot.it)
   * Rstudio : [www.rstudio.com](www.rstudio.com)
   * Comprehensive R Archive Network : [https://cran.r-project.org/](https://cran.r-project.org/)

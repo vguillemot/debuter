@@ -92,7 +92,7 @@ remotes::install_github("vguillemot/minidebuter")
 ## Explorez la documentation du package
 
   1. Charger le package :  `library(minidebuter)`
-  2. Regardez l'aide "générale" du package : \u0060`?minidebuter-package`\u0060
+  2. Regardez l'aide "générale" du package : `?"minidebuter-package"`
   3. Regardez l'aide la fonction `bonjour`: `?bonjour`
   4. Regardez l'aide du jeu de données `fruits`: `?fruits`
   

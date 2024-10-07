@@ -23,6 +23,8 @@ knitr::opts_chunk$set(
   dev = "svg",
   fig.ext = "svg"
 )
+library(gt)
+library(scales)
 library(ggplot2)
 ```
 
@@ -57,34 +59,31 @@ data("fruits", package = "minidebuter")
 
 Voici trois manières de définir une couleur, qui permettent de colorier un graphe soit très rapidement (entiers), soit avec plus de possibilités (couleurs nommées) ou encore de manière très raffinée (HEX).
 
-```{r, eval = FALSE, echo = FALSE}
-------- ------- ---------- ---------- ----------- --------- -------- -------------- -------
-Entier     1        2          3          4          5         6           7           8
-HEX     #000000 #DF536B    #61D04F    #2297E6     #28E2E5   #CD0BBC  #F5C710        #9E9E9E
-Couleur black   indianred2 palegreen3 dodgerblue2 turquoise magenta3 darkgoldenrod1 gray62
-------- ------- ---------- ---------- ----------- --------- -------- -------------- -------
-```
-
 ```{r kableextra, echo = FALSE, results='asis', message=FALSE, warning=FALSE}
-library(kableExtra)
+coltab <- data.frame(
+  Entier = c(1, 2, 3, 4, 5, 6, 7, 8),
+  Nom = c("black", "indianred2", "palegreen3", "dodgerblue2", 
+          "turquoise", "magenta3", "darkgoldenrod1", "gray62"),
+  HEX = c("#000000", "#DF536B", "#61D04F", "#2297E6", 
+          "#28E2E5", "#CD0BBC", "#F5C710", "#9E9E9E")
+)
 
-coltab <- read.table(text = 
-"Entier 1 2 3 4 
-Nom black indianred2 palegreen3 dodgerblue2
-HEX #000000 #DF536B #61D04F #2297E6 
-Entier 5 6 7 8
-Nom turquoise magenta3 darkgoldenrod1 gray62
-HEX #28E2E5 #CD0BBC #F5C710 #9E9E9E", comment.char = "")
+coltab_transposed <- as.data.frame(
+  t(coltab),
+  stringsAsFactors = FALSE)
 
-coltab$V2 <- cell_spec(coltab$V2, color = rep(c("black", "turquoise"), each = 3))
-coltab$V3 <- cell_spec(coltab$V3, color = rep(c("indianred", "magenta"), each = 3))
-coltab$V4 <- cell_spec(coltab$V4, color = rep(c("palegreen", "darkgoldenrod"), each = 3))
-coltab$V5 <- cell_spec(coltab$V5, color = rep(c("dodgerblue", "gray"), each = 3))
+# Créer l'objet gt avec la table transposée
+gt(coltab_transposed) %>%
+  data_color(
+    columns = everything(),
+    fn = function(x) {
+      grep("^#", x, value = TRUE)
+    }
+  ) %>%
+  cols_align(align = "center", columns = everything()) %>%
+  cols_label(.list = setNames(rep("", ncol(coltab_transposed)), colnames(coltab_transposed)))
 
-coltab %>%
-   kable(escape = FALSE, col.names = c("", "", "", "", ""), table.attr = "style='width:100%;'", align = c("l", "c", "c", "c", "c")) %>%
-   kable_styling(full_width = TRUE) %>%
-   column_spec(1, bold = FALSE, border_right = TRUE, color = "white", background = "black")
+
 ```
 
 ## Les chiffres (rapide !)

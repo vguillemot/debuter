@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
   echo = TRUE
 )
 library(ggplot2)
+source("../inst/extdata/current_link_for_shared_script")
 ```
 
 
@@ -150,6 +151,6 @@ Créez un projet au début de chaque cours !
 
 ## Exercice 2
 
-### Allez dans le menu "Help" puis sélectionnez "About Rstudio". Quelle est votre version de Rstudio ? Renseignez-la dans [le document partagé](https://docs.google.com/document/d/1jZsYxeK2QH5Jd92hqbVDIQ2pKg2oB5pUHxSfPzMt5Fw/edit?usp=sharing)
+### Allez dans le menu "Help" puis sélectionnez "About Rstudio". Quelle est votre version de Rstudio ? Renseignez-la dans [le document partagé](`r currentlink`).
 
 

@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 )
 library(dplyr)
 library(ggplot2)
-
+source("../inst/extdata/current_link_for_shared_script")
 ```
 
 ## Nous nous présentons {.columns-2}
@@ -130,6 +130,7 @@ Nutriwi (https://www.nutriwi.com/)
  * Les exercices et leur solution
  * Des tutoriels interactifs
  * Des [feuilles de triches](https://vguillemot.github.io/debuter/inst/extdata/cheat_sheets.pptx)
+ * [Document partagé pour écrire du code ensemble](`r currentlink`)
 
 ## Ressources
 

@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 ^vignettes$
 ^inst/extdata$
+^README\.Rmd$

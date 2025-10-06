@@ -128,7 +128,8 @@ print(g)
 
 Créez un projet au début de chaque cours !
 
-![](img/S01rstudio/Projet.gif){width=80% loop=10}
+<img src="img/S01rstudio/Projet.gif" width="80%" style="display:block;margin:auto;" />
+
 
 ## Pourquoi créer un projet ?
 

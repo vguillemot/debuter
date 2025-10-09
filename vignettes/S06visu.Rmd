@@ -484,12 +484,13 @@ library(UpSetR)
 
 On reprend l'exemple avec la comparaison des fruits selon 4 critères.
 
-```{r upset, fig.height = 3, fig.width = 6}
+```{r upset, fig.height = 3, fig.width = 6, warning=FALSE}
 mat01 <- data.frame(
-    Sucres = fruits$Sucres > 20,
-    Fibres = fruits$Fibres > 2,
-    Energie = fruits$Energie > 50,
-    Potassium = fruits$Potassium > 100) + 0
+    "Sucres > 20" = fruits$Sucres > 20,
+    "Fibres > 2" = fruits$Fibres > 2,
+    "Energie > 50" = fruits$Energie > 50,
+    "Potassium > 100" = fruits$Potassium > 100, 
+    check.names = FALSE) + 0
 upset(mat01)
 ```
 
@@ -642,7 +643,7 @@ fruitsDF <- data.frame(fruits[,-1], row.names = make.unique(fruits$nom))
 annotLignes <- fruitsDF[, "groupe", drop = FALSE]
 
 pheatmap(
-  fruitsDF[, -1],
+  mat = fruitsDF[, -1],
   cluster_rows = FALSE,
   scale = "column",
   show_rownames = FALSE,
